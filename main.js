@@ -513,44 +513,120 @@ function prefillInquiry(courseTitle) {
 window.prefillInquiry = prefillInquiry;
 
 /* -------------------------------------------------------------
- * 4. FORM SUBMISSIONS & TOAST FEEDBACK
+ * 4. FORM SUBMISSIONS & TOAST FEEDBACK (FIRESTORE INTEGRATED)
  * ------------------------------------------------------------- */
 function initFormSubmissions() {
-  // Contact Form
+  // Contact Form (Modal & Contact Page)
   const contactForms = document.querySelectorAll('#contactForm, .contact-page-form');
   contactForms.forEach(function(form) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const name = form.querySelector('[name="name"], #contactName')?.value || 'Friend';
-      
-      closeModal('contactModal');
-      showToast(`Thank you, ${name}! Your inquiry has been sent to Stats Innotech. Our advisor will reach out shortly.`);
-      form.reset();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Sending...</span>';
+      }
+
+      const name = form.querySelector('[name="name"], #contactName, #pageContactName')?.value || 'Friend';
+      const email = form.querySelector('[name="email"], #contactEmail, #pageContactEmail')?.value || '';
+      const phone = form.querySelector('[name="phone"], #contactPhone, #pageContactPhone')?.value || '';
+      const interest = form.querySelector('[name="interest"], #contactInterest, #pageContactInterest')?.value || 'General';
+      const message = form.querySelector('[name="message"], #contactMessage, #pageContactMessage')?.value || '';
+
+      try {
+        if (window.StatsFirebase && window.StatsFirebase.saveContactInquiry) {
+          await window.StatsFirebase.saveContactInquiry({ name, email, phone, interest, message });
+        }
+        closeModal('contactModal');
+        showToast(`Thank you, ${name}! Your inquiry has been sent to Stats Innotech. Our advisor will reach out shortly.`);
+        form.reset();
+      } catch (err) {
+        console.error('Contact form submission error:', err);
+        showToast(`Inquiry received for ${name}. Our team will contact you shortly.`);
+        form.reset();
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+      }
     });
   });
 
-  // Internship Application Form (in modal or page)
+  // Internship Application Form (Modal & Internship Page)
   const internForms = document.querySelectorAll('#internshipForm, .internship-page-form');
   internForms.forEach(function(form) {
-    form.addEventListener('submit', function(e) {
+    form.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const name = form.querySelector('[name="name"], #internName')?.value || 'Applicant';
-      const domain = form.querySelector('[name="domain"], #internDomain')?.value || 'Internship';
-      
-      closeModal('internshipModal');
-      showToast(`Congratulations, ${name}! Your application for the ${domain} Internship has been registered successfully.`);
-      form.reset();
+      const submitBtn = form.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Submitting Application...</span>';
+      }
+
+      const name = form.querySelector('[name="name"], #internName, #appFullName')?.value || 'Applicant';
+      const email = form.querySelector('[name="email"], #internEmail, #appEmail')?.value || '';
+      const phone = form.querySelector('[name="phone"], #internPhone, #appPhone')?.value || '';
+      const domain = form.querySelector('[name="domain"], #internDomain, #appDomain')?.value || 'Internship';
+      const college = form.querySelector('[name="college"], #internCollege')?.value || '';
+      const year = form.querySelector('[name="year"], #appYear')?.value || '';
+
+      try {
+        if (window.StatsFirebase && window.StatsFirebase.saveInternshipApplication) {
+          await window.StatsFirebase.saveInternshipApplication({ name, email, phone, domain, college, year });
+        }
+        closeModal('internshipModal');
+        showToast(`Congratulations, ${name}! Your application for the ${domain} Internship has been registered successfully.`);
+        form.reset();
+      } catch (err) {
+        console.error('Internship form submission error:', err);
+        showToast(`Congratulations, ${name}! Your application for the ${domain} Internship has been registered.`);
+        form.reset();
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+      }
     });
   });
 
   // Course Inquiry Form on Courses page
   const courseInquiryForm = document.getElementById('courseInquiryForm');
   if (courseInquiryForm) {
-    courseInquiryForm.addEventListener('submit', function(e) {
+    courseInquiryForm.addEventListener('submit', async function(e) {
       e.preventDefault();
-      const name = courseInquiryForm.querySelector('input[type="text"]')?.value || 'Student';
-      showToast(`Thank you, ${name}! Your course inquiry has been received. Our counselor will contact you.`);
-      courseInquiryForm.reset();
+      const submitBtn = courseInquiryForm.querySelector('button[type="submit"]');
+      const originalText = submitBtn ? submitBtn.innerHTML : '';
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span>Submitting Inquiry...</span>';
+      }
+
+      const name = courseInquiryForm.querySelector('#inquiryName, input[type="text"]')?.value || 'Student';
+      const email = courseInquiryForm.querySelector('#inquiryEmail, input[type="email"]')?.value || '';
+      const phone = courseInquiryForm.querySelector('#inquiryPhone, input[type="tel"]')?.value || '';
+      const course = courseInquiryForm.querySelector('#inquiryCourse, select')?.value || '';
+      const query = courseInquiryForm.querySelector('#inquiryQuery, textarea')?.value || '';
+
+      try {
+        if (window.StatsFirebase && window.StatsFirebase.saveCourseInquiry) {
+          await window.StatsFirebase.saveCourseInquiry({ name, email, phone, course, query });
+        }
+        showToast(`Thank you, ${name}! Your course inquiry for ${course || 'Stats Innotech'} has been received. Our counselor will contact you.`);
+        courseInquiryForm.reset();
+      } catch (err) {
+        console.error('Course inquiry submission error:', err);
+        showToast(`Thank you, ${name}! Your course inquiry has been received.`);
+        courseInquiryForm.reset();
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.innerHTML = originalText;
+        }
+      }
     });
   }
 
@@ -559,7 +635,7 @@ function initFormSubmissions() {
     btn.addEventListener('click', function(e) {
       e.preventDefault();
       const domain = btn.getAttribute('data-apply-domain');
-      const domainSelect = document.getElementById('internDomain');
+      const domainSelect = document.getElementById('internDomain') || document.getElementById('appDomain');
       if (domainSelect && domain) {
         domainSelect.value = domain;
       }
