@@ -607,7 +607,7 @@
       width: 110px;
       height: 105px;
       pointer-events: none;
-      opacity: 0.9;
+      opacity: 0.18;
       background-repeat: no-repeat;
       background-position: right bottom;
       background-size: contain;
@@ -663,9 +663,9 @@
     .card-bullet-list {
       display: flex;
       flex-direction: column;
-      gap: 6px;
-      font-size: 12px;
-      line-height: 1.35;
+      gap: 10px;
+      font-size: 13px;
+      line-height: 1.45;
       position: relative;
       z-index: 2;
     }
@@ -673,18 +673,15 @@
     .card-bullet-list li {
       display: flex;
       align-items: flex-start;
-      gap: 6px;
+      gap: 8px;
     }
 
     .card-bullet-list li::before {
       content: '•';
       font-size: 14px;
       color: inherit;
-      line-height: 1;
-    }
-
-    .card-services .card-bullet-list {
-      max-width: 170px;
+      line-height: 1.3;
+      flex-shrink: 0;
     }
 
     .card-description {
@@ -2906,9 +2903,7 @@
                   <h3 class="card-title">Services</h3>
                 </div>
                 <ul class="card-bullet-list">
-                  <li>Engineering<br /><span style="opacity:0.9; font-size:10.5px;">( Project Guidance, Research &amp;
-                      Academic
-                      )</span></li>
+                  <li>Engineering Projects &amp; Research</li>
                   <li>Digital Marketing &amp; SEO</li>
                   <li>Commercial Website Development</li>
                 </ul>
