@@ -1,1926 +1,640 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin Portal - Stats Innotech</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
-    rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | Stats Innotech</title>
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    /* ==========================================================================
-       STATS INNOTECH - ADMIN PORTAL MODERN DESIGN SYSTEM
-       ========================================================================== */
     :root {
-      --admin-navy: #0B1F3A;
-      --admin-dark: #071527;
-      --admin-surface: #0E2444;
-      --admin-card-bg: #FFFFFF;
-      --admin-border: #E2E8F0;
-      --admin-text-main: #0F172A;
-      --admin-text-muted: #64748B;
-      --admin-blue: #155EEF;
-      --admin-cyan: #06B6D4;
-      --admin-green: #10B981;
-      --admin-amber: #F59E0B;
-      --admin-red: #EF4444;
-      --admin-radius: 14px;
-      --admin-shadow: 0 10px 30px rgba(11, 31, 58, 0.08);
-    }
-
-    body.admin-body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background: #F1F5F9;
-      color: var(--admin-text-main);
-      min-height: 100vh;
-    }
-
-    /* ----------------------------------------------------
-       ADMIN LOGIN SCREEN (MATCHES STUDENT LOGIN UI EXACTLY)
-       ---------------------------------------------------- */
-    #adminAuthScreen {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 20px;
-      background: linear-gradient(135deg, #ffffff, #eef2ff);
-    }
-
-    #adminAuthScreen .login-box {
-      width: 100%;
-      max-width: 430px;
-      background: white;
-      padding: 35px;
-      border-radius: 20px;
-      box-shadow: 0 15px 50px rgba(0, 0, 0, .10);
-    }
-
-    #adminAuthScreen .logo {
-      width: 100%;
-      height: auto;
-      border-radius: 0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto 20px;
-      background: #fff;
-    }
-
-    #adminAuthScreen .login-box h1 {
-      text-align: center;
-      margin-top: 0;
-      margin-bottom: 8px;
-      font-size: 24px;
-      font-weight: 700;
-      color: #111827;
-      font-family: 'Outfit', sans-serif;
-    }
-
-    #adminAuthScreen .login-box p {
-      text-align: center;
-      color: #6b7280;
-      margin-top: 0;
-      margin-bottom: 25px;
-      font-size: 14px;
-    }
-
-    #adminAuthScreen .form-group {
-      margin-bottom: 16px;
-    }
-
-    #adminAuthScreen label {
-      display: block;
-      margin-bottom: 7px;
-      font-weight: 600;
-      font-size: 14px;
-      color: #374151;
-    }
-
-    #adminAuthScreen input {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 12px 14px;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      outline: none;
-      background: white;
-      font-family: inherit;
-      font-size: 14px;
-      transition: border-color 0.2s, box-shadow 0.2s;
-    }
-
-    #adminAuthScreen input:focus {
-      border-color: #4f46e5;
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
-    }
-
-    #adminAuthScreen .btn {
-      border: none;
-      border-radius: 10px;
-      padding: 12px 18px;
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      display: inline-block;
-      text-align: center;
-      transition: background-color 0.2s, transform 0.15s;
-    }
-
-    #adminAuthScreen .btn-primary {
-      background: #4f46e5;
-      color: white;
-    }
-
-    #adminAuthScreen .btn-primary:hover {
-      background: #4338ca;
-    }
-
-    #adminAuthScreen .admin-quick-creds {
-      margin-top: 22px;
-      padding-top: 16px;
-      border-top: 1px solid #e5e7eb;
-      font-size: 12px;
-      color: #6b7280;
-    }
-
-    #adminAuthScreen .admin-quick-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 8px;
-    }
-
-    #adminAuthScreen .admin-quick-pill {
-      background: #f3f4f6;
-      border: 1px solid #d1d5db;
-      padding: 4px 8px;
-      border-radius: 6px;
-      font-size: 11px;
-      font-weight: 600;
-      color: #374151;
-      cursor: pointer;
-      font-family: inherit;
-      transition: all 0.2s ease;
-    }
-
-    #adminAuthScreen .admin-quick-pill:hover {
-      background: #eef2ff;
-      border-color: #4f46e5;
-      color: #4f46e5;
-    }
-
-    #adminAuthScreen .login-links {
-      display: flex;
-      justify-content: center;
-      gap: 10px;
-      margin-top: 16px;
-    }
-
-    #adminAuthScreen .login-link {
-      border: none;
-      background: none;
-      color: #4f46e5;
-      font-weight: 600;
-      font-size: 13.5px;
-      padding: 5px;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    #adminAuthScreen .login-link:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 500px) {
-      #adminAuthScreen .login-box {
-        padding: 25px 20px;
-      }
-    }
-
-    /* ----------------------------------------------------
-       ADMIN APP LAYOUT (DASHBOARD)
-       ---------------------------------------------------- */
-    #adminAppLayout {
-      display: flex;
-      min-height: 100vh;
-    }
-
-    /* Sidebar */
-    .admin-sidebar {
-      width: 270px;
-      background: var(--admin-navy);
-      color: #FFFFFF;
-      display: flex;
-      flex-direction: column;
-      flex-shrink: 0;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      z-index: 100;
-      box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
-    }
-
-    .admin-sidebar-header {
-      padding: 24px 20px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .admin-sidebar-logo {
-      width: 155px;
-      height: auto;
-      display: block;
-    }
-
-    .admin-sidebar-menu {
-      padding: 20px 14px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .admin-menu-heading {
-      font-size: 10.5px;
-      font-weight: 800;
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
-      color: #94A3B8;
-      padding: 10px 12px 4px;
-      margin: 0;
-    }
-
-    .admin-nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 11px 14px;
-      border-radius: 10px;
-      color: #CBD5E1;
-      text-decoration: none;
-      font-size: 14px;
-      font-weight: 600;
-      cursor: pointer;
-      border: none;
-      background: transparent;
-      width: 100%;
-      text-align: left;
-      transition: all 0.2s ease;
-    }
-
-    .admin-nav-item:hover {
-      background: rgba(255, 255, 255, 0.07);
-      color: #FFFFFF;
-    }
-
-    .admin-nav-item.active {
-      background: var(--admin-blue);
-      color: #FFFFFF;
-      box-shadow: 0 4px 12px rgba(21, 94, 239, 0.4);
-    }
-
-    .admin-nav-item svg {
-      flex-shrink: 0;
-    }
-
-    .admin-nav-badge {
-      margin-left: auto;
-      font-size: 11px;
-      padding: 2px 7px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.2);
-      color: #FFFFFF;
-    }
-
-    .admin-sidebar-footer {
-      padding: 18px 16px;
-      border-top: 1px solid rgba(255, 255, 255, 0.08);
-      background: rgba(0, 0, 0, 0.2);
-    }
-
-    .admin-user-card {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .admin-avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      background: linear-gradient(135deg, var(--admin-cyan), var(--admin-blue));
-      color: #FFFFFF;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 800;
-      font-size: 14px;
-      flex-shrink: 0;
-    }
-
-    .admin-user-info {
-      overflow: hidden;
-      flex: 1;
-    }
-
-    .admin-user-name {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #FFFFFF;
-      margin: 0;
-      white-space: nowrap;
-      text-overflow: ellipsis;
-      overflow: hidden;
-    }
-
-    .admin-user-role {
-      font-size: 11px;
-      color: var(--admin-cyan);
-      margin: 0;
-    }
-
-    /* Main Area */
-    .admin-main {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      overflow-x: hidden;
-    }
-
-    .admin-topbar {
-      height: 70px;
-      background: #FFFFFF;
-      border-bottom: 1px solid var(--admin-border);
-      padding: 0 32px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      position: sticky;
-      top: 0;
-      z-index: 90;
-    }
-
-    .admin-topbar-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 20px;
-      font-weight: 800;
-      color: var(--admin-navy);
-      margin: 0;
-    }
-
-    .admin-topbar-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .btn-public-site {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      color: #334155;
-      text-decoration: none;
-      background: #F1F5F9;
-      border: 1px solid #CBD5E1;
-      transition: all 0.2s;
-    }
-
-    .btn-public-site:hover {
-      background: #E2E8F0;
-      color: var(--admin-navy);
-    }
-
-    .btn-admin-action {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 9px 16px;
-      border-radius: 8px;
-      font-size: 13.5px;
-      font-weight: 700;
-      color: #FFFFFF;
-      background: var(--admin-blue);
-      border: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 10px rgba(21, 94, 239, 0.25);
-    }
-
-    .btn-admin-action:hover {
-      background: #104ECC;
-      transform: translateY(-1px);
-    }
-
-    .admin-content-view {
-      padding: 32px;
-      flex: 1;
-    }
-
-    /* Stats Overview Cards */
-    .admin-stats-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      margin-bottom: 32px;
-    }
-
-    .admin-stat-card {
-      background: #FFFFFF;
-      border: 1px solid var(--admin-border);
-      border-radius: var(--admin-radius);
-      padding: 22px 20px;
-      box-shadow: var(--admin-shadow);
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .admin-stat-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .stat-blue {
-      background: rgba(21, 94, 239, 0.1);
-      color: var(--admin-blue);
-    }
-
-    .stat-cyan {
-      background: rgba(6, 182, 212, 0.1);
-      color: var(--admin-cyan);
-    }
-
-    .stat-green {
-      background: rgba(16, 185, 129, 0.1);
-      color: var(--admin-green);
-    }
-
-    .stat-amber {
-      background: rgba(245, 158, 11, 0.1);
-      color: var(--admin-amber);
-    }
-
-    .admin-stat-number {
-      font-family: 'Outfit', sans-serif;
-      font-size: 28px;
-      font-weight: 800;
-      color: var(--admin-navy);
-      margin: 0;
-      line-height: 1.1;
-    }
-
-    .admin-stat-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--admin-text-muted);
-      margin: 4px 0 0;
-    }
-
-    /* Cards & Tables */
-    .admin-panel-card {
-      background: #FFFFFF;
-      border: 1px solid var(--admin-border);
-      border-radius: var(--admin-radius);
-      box-shadow: var(--admin-shadow);
-      padding: 24px 28px;
-      margin-bottom: 30px;
-    }
-
-    .admin-panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 22px;
-      flex-wrap: wrap;
-      gap: 14px;
-    }
-
-    .admin-panel-heading {
-      font-family: 'Outfit', sans-serif;
-      font-size: 18px;
-      font-weight: 800;
-      color: var(--admin-navy);
-      margin: 0;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .admin-panel-filter {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .admin-search-input {
-      padding: 8px 14px;
-      border-radius: 8px;
-      border: 1px solid #CBD5E1;
-      font-size: 13.5px;
-      width: 220px;
-      font-family: inherit;
-    }
-
-    .admin-select-filter {
-      padding: 8px 12px;
-      border-radius: 8px;
-      border: 1px solid #CBD5E1;
-      font-size: 13.5px;
-      font-family: inherit;
-      background: #FFFFFF;
-    }
-
-    /* Custom Admin Table */
-    .admin-table-wrap {
-      overflow-x: auto;
-    }
-
-    .admin-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-      font-size: 13.5px;
-    }
-
-    .admin-table th {
-      padding: 12px 16px;
-      font-weight: 700;
-      color: #475569;
-      background: #F8FAFC;
-      border-bottom: 1px solid var(--admin-border);
-      text-transform: uppercase;
-      font-size: 11px;
-      letter-spacing: 0.6px;
-    }
-
-    .admin-table td {
-      padding: 14px 16px;
-      border-bottom: 1px solid #F1F5F9;
-      color: #1E293B;
-      vertical-align: middle;
-    }
-
-    .admin-table tr:hover td {
-      background: #F8FAFC;
-    }
-
-    .badge-status {
-      display: inline-block;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      text-transform: uppercase;
-    }
-
-    .badge-active {
-      background: #DCFCE7;
-      color: #166534;
-    }
-
-    .badge-draft {
-      background: #FEF3C7;
-      color: #92400E;
-    }
-
-    .badge-pending {
-      background: #EFF6FF;
-      color: #1E40AF;
-    }
-
-    .badge-shortlisted {
-      background: #E0E7FF;
-      color: #3730A3;
-    }
-
-    .badge-accepted {
-      background: #DCFCE7;
-      color: #166534;
-    }
-
-    .badge-rejected {
-      background: #FEE2E2;
-      color: #991B1B;
-    }
-
-    /* Action Buttons in Table */
-    .table-actions {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .btn-tbl-action {
-      background: #F1F5F9;
-      border: 1px solid #E2E8F0;
-      color: #334155;
-      padding: 6px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 600;
-      transition: all 0.2s;
-    }
-
-    .btn-tbl-action:hover {
-      background: #E2E8F0;
-      color: var(--admin-navy);
-    }
-
-    .btn-tbl-action.delete:hover {
-      background: #FEE2E2;
-      color: #DC2626;
-      border-color: #FCA5A5;
-    }
-
-    /* Modal Overlay */
-    .admin-modal-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(11, 31, 58, 0.65);
-      backdrop-filter: blur(4px);
-      z-index: 1000;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .admin-modal-overlay.open {
-      display: flex;
-    }
-
-    .admin-modal-box {
-      background: #FFFFFF;
-      border-radius: 18px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.35);
-      width: 100%;
-      max-width: 600px;
-      max-height: 90vh;
-      display: flex;
-      flex-direction: column;
-      overflow: hidden;
-      animation: modalFadeIn 0.25s ease-out;
-    }
-
-    @keyframes modalFadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.95) translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-      }
-    }
-
-    .admin-modal-header {
-      padding: 20px 24px;
-      border-bottom: 1px solid #E2E8F0;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .admin-modal-title {
-      font-family: 'Outfit', sans-serif;
-      font-size: 19px;
-      font-weight: 800;
-      color: var(--admin-navy);
-      margin: 0;
-    }
-
-    .admin-modal-close {
-      background: transparent;
-      border: none;
-      font-size: 24px;
-      color: #64748B;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .admin-modal-body {
-      padding: 24px;
-      overflow-y: auto;
-    }
-
-    .admin-modal-footer {
-      padding: 16px 24px;
-      border-top: 1px solid #E2E8F0;
-      background: #F8FAFC;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 10px;
-    }
-
-    .form-grid-2 {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .admin-form-group {
-      margin-bottom: 16px;
-    }
-
-    .admin-form-group label {
-      display: block;
-      font-size: 12.5px;
-      font-weight: 700;
-      color: #334155;
-      margin-bottom: 6px;
-    }
-
-    .admin-form-group input,
-    .admin-form-group select,
-    .admin-form-group textarea {
-      width: 100%;
-      box-sizing: border-box;
-      padding: 10px 12px;
-      border-radius: 8px;
-      border: 1px solid #CBD5E1;
-      font-size: 13.5px;
-      font-family: inherit;
-    }
-
-    .admin-form-group textarea {
-      resize: vertical;
-      min-height: 80px;
-    }
-
-    .btn-secondary-cancel {
-      background: #FFFFFF;
-      border: 1px solid #CBD5E1;
-      color: #475569;
-      padding: 9px 18px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 13.5px;
-      cursor: pointer;
-    }
-
-    .btn-primary-save {
-      background: var(--admin-blue);
-      border: none;
-      color: #FFFFFF;
-      padding: 9px 22px;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 13.5px;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(21, 94, 239, 0.3);
-    }
-
-    @media (max-width: 1024px) {
-      .admin-stats-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
+      --navy-primary: #0B1F3A;
+      --navy-dark:    #071527;
+      --navy-light:   #11294a;
+      --navy-card:    #0e2444;
+      --sidebar-bg:   #081830;
+      --blue-primary: #155EEF;
+      --blue-hover:   #104ecc;
+      --cyan-primary: #06B6D4;
+      --green:        #10b981;
+      --amber:        #f59e0b;
+      --red:          #ef4444;
+      --purple:       #8b5cf6;
+      --white:        #FFFFFF;
+      --slate-dark:   #334155;
+      --slate-muted:  #64748B;
+      --slate-light:  #94A3B8;
+      --border:       rgba(255,255,255,0.07);
+      --font: 'Outfit', sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: var(--font); background: var(--navy-dark); color: var(--white); min-height: 100vh; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    button { font-family: var(--font); cursor: pointer; border: none; background: none; }
+    input, textarea, select { font-family: var(--font); outline: none; border: none; }
+    table { border-collapse: collapse; width: 100%; }
+    ::-webkit-scrollbar { width: 5px; height: 5px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 99px; }
+
+    /* LOGIN */
+    #loginScreen {
+      position: fixed; inset: 0;
+      background: var(--navy-dark);
+      display: flex; align-items: center; justify-content: center;
+      z-index: 999;
+    }
+    .login-bg-glow {
+      position: absolute; width: 600px; height: 600px;
+      border-radius: 50%; filter: blur(120px); pointer-events: none;
+    }
+    .login-bg-glow.left  { background: rgba(21,94,239,0.18); top: -100px; left: -100px; }
+    .login-bg-glow.right { background: rgba(6,182,212,0.12); bottom: -100px; right: -100px; }
+    .login-card {
+      position: relative; background: var(--navy-card);
+      border: 1px solid rgba(21,94,239,0.2); border-radius: 24px;
+      padding: 52px 48px; width: 420px;
+      box-shadow: 0 24px 80px rgba(0,0,0,0.5); z-index: 1;
+    }
+    .login-logo { display: flex; align-items: center; gap: 12px; margin-bottom: 36px; }
+    .login-logo img { height: 36px; }
+    .login-logo-tag {
+      background: rgba(21,94,239,0.15); border: 1px solid rgba(21,94,239,0.3);
+      border-radius: 6px; padding: 3px 10px;
+      font-size: 0.72rem; font-weight: 700; color: var(--cyan-primary);
+      letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .login-title { font-size: 1.6rem; font-weight: 800; margin-bottom: 6px; }
+    .login-sub { font-size: 0.88rem; color: var(--slate-light); margin-bottom: 32px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 0.82rem; font-weight: 600; color: var(--slate-light); margin-bottom: 8px; letter-spacing: 0.04em; text-transform: uppercase; }
+    .form-group input { width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 10px; padding: 13px 16px; color: var(--white); font-size: 0.97rem; transition: border-color 0.2s, background 0.2s; }
+    .form-group input:focus { border-color: var(--blue-primary); background: rgba(21,94,239,0.06); }
+    .form-group input::placeholder { color: var(--slate-muted); }
+    .login-btn { width: 100%; background: linear-gradient(135deg, var(--blue-primary), #1a6fff); color: white; border-radius: 10px; padding: 14px; font-size: 1rem; font-weight: 700; margin-top: 8px; transition: transform 0.15s, box-shadow 0.15s; }
+    .login-btn:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(21,94,239,0.45); }
+    .login-error { font-size: 0.84rem; color: var(--red); text-align: center; margin-top: 14px; display: none; }
+    .login-hint { font-size: 0.78rem; color: var(--slate-muted); text-align: center; margin-top: 20px; }
+    .login-hint span { color: var(--cyan-primary); font-weight: 600; }
+
+    /* SHELL */
+    #adminShell { display: none; min-height: 100vh; }
+
+    /* SIDEBAR */
+    .sidebar { position: fixed; top: 0; left: 0; width: 260px; height: 100vh; background: var(--sidebar-bg); border-right: 1px solid var(--border); display: flex; flex-direction: column; z-index: 100; transition: transform 0.3s ease; }
+    .sidebar-header { padding: 24px 20px 20px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
+    .sidebar-header img { height: 30px; }
+    .sidebar-admin-tag { background: rgba(21,94,239,0.18); border: 1px solid rgba(21,94,239,0.3); border-radius: 5px; padding: 2px 8px; font-size: 0.68rem; font-weight: 700; color: var(--cyan-primary); letter-spacing: 0.08em; text-transform: uppercase; }
+    .sidebar-nav { flex: 1; padding: 16px 12px; overflow-y: auto; }
+    .sidebar-section-label { font-size: 0.68rem; font-weight: 700; color: var(--slate-muted); letter-spacing: 0.1em; text-transform: uppercase; padding: 12px 8px 6px; }
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 11px 12px; border-radius: 10px; font-size: 0.92rem; font-weight: 500; color: var(--slate-light); cursor: pointer; transition: background 0.15s, color 0.15s; margin-bottom: 2px; }
+    .nav-item:hover { background: rgba(255,255,255,0.06); color: var(--white); }
+    .nav-item.active { background: rgba(21,94,239,0.18); color: var(--white); font-weight: 600; }
+    .nav-badge { margin-left: auto; color: white; border-radius: 99px; padding: 1px 8px; font-size: 0.72rem; font-weight: 700; }
+    .sidebar-footer { padding: 16px 12px; border-top: 1px solid var(--border); }
+    .admin-profile { display: flex; align-items: center; gap: 12px; padding: 10px 12px; border-radius: 10px; cursor: pointer; transition: background 0.15s; }
+    .admin-profile:hover { background: rgba(255,255,255,0.05); }
+    .admin-avatar { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg, var(--blue-primary), var(--cyan-primary)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; }
+    .admin-info .admin-name { font-size: 0.88rem; font-weight: 600; }
+    .admin-info .admin-role { font-size: 0.75rem; color: var(--slate-light); }
+
+    /* MAIN */
+    .main-content { margin-left: 260px; min-height: 100vh; display: flex; flex-direction: column; }
+    .topbar { height: 64px; background: rgba(7,21,39,0.9); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 28px; gap: 16px; position: sticky; top: 0; z-index: 50; }
+    .topbar-title { font-size: 1.1rem; font-weight: 700; flex: 1; }
+    .topbar-search { display: flex; align-items: center; gap: 10px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 8px 14px; width: 260px; }
+    .topbar-search input { background: none; color: var(--white); font-size: 0.88rem; width: 100%; }
+    .topbar-search input::placeholder { color: var(--slate-muted); }
+    .topbar-icon-btn { width: 36px; height: 36px; border-radius: 9px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s; position: relative; }
+    .topbar-icon-btn:hover { background: rgba(255,255,255,0.1); }
+    .notif-dot { position: absolute; top: 6px; right: 6px; width: 8px; height: 8px; background: var(--red); border-radius: 50%; border: 2px solid var(--navy-dark); }
+    .logout-btn { display: flex; align-items: center; gap: 8px; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.25); border-radius: 9px; padding: 7px 14px; font-size: 0.84rem; font-weight: 600; color: #ef4444; transition: background 0.15s; }
+    .logout-btn:hover { background: rgba(239,68,68,0.18); }
+    .page-area { flex: 1; padding: 28px; }
+
+    /* PANELS */
+    .panel { display: none; animation: fadeIn 0.3s ease; }
+    .panel.active { display: block; }
+    @keyframes fadeIn { from { opacity:0; transform: translateY(8px); } to { opacity:1; transform:translateY(0); } }
+
+    /* STAT CARDS */
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 20px; margin-bottom: 28px; }
+    .stat-card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 16px; padding: 22px 24px; transition: transform 0.2s, border-color 0.2s; }
+    .stat-card:hover { transform: translateY(-2px); border-color: rgba(21,94,239,0.3); }
+    .stat-card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .stat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .stat-badge { font-size: 0.72rem; font-weight: 700; padding: 3px 9px; border-radius: 99px; }
+    .badge-green  { background: rgba(16,185,129,0.15); color: var(--green); }
+    .badge-blue   { background: rgba(21,94,239,0.15);  color: #60a5fa; }
+    .badge-amber  { background: rgba(245,158,11,0.15); color: var(--amber); }
+    .badge-purple { background: rgba(139,92,246,0.15); color: var(--purple); }
+    .stat-value { font-size: 2rem; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .stat-label { font-size: 0.83rem; color: var(--slate-light); }
+    .stat-sub   { font-size: 0.78rem; color: var(--slate-muted); margin-top: 4px; }
+
+    /* CARD */
+    .card { background: var(--navy-card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+    .card-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+    .card-title { font-size: 1rem; font-weight: 700; }
+    .card-sub   { font-size: 0.82rem; color: var(--slate-light); margin-top: 2px; }
+    .two-col   { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px; }
+
+    /* TABLE */
+    .table-wrap { overflow-x: auto; }
+    .data-table { width: 100%; font-size: 0.88rem; }
+    .data-table thead th { text-align: left; padding: 12px 16px; font-size: 0.75rem; font-weight: 700; color: var(--slate-muted); text-transform: uppercase; letter-spacing: 0.06em; border-bottom: 1px solid var(--border); }
+    .data-table tbody tr { transition: background 0.15s; border-bottom: 1px solid var(--border); }
+    .data-table tbody tr:last-child { border-bottom: none; }
+    .data-table tbody tr:hover { background: rgba(255,255,255,0.03); }
+    .data-table tbody td { padding: 14px 16px; color: var(--slate-light); vertical-align: middle; }
+    .data-table tbody td:first-child { color: var(--white); font-weight: 600; }
+    .status-pill { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 99px; font-size: 0.75rem; font-weight: 600; }
+    .status-pill.active   { background: rgba(16,185,129,0.15); color: var(--green); }
+    .status-pill.pending  { background: rgba(245,158,11,0.15);  color: var(--amber); }
+    .status-pill.inactive { background: rgba(100,116,139,0.15); color: var(--slate-light); }
+    .status-pill.issued   { background: rgba(21,94,239,0.15);   color: #60a5fa; }
+    .status-pill.rejected { background: rgba(239,68,68,0.15);   color: var(--red); }
+    .action-btns { display: flex; gap: 8px; }
+    .action-btn { width: 30px; height: 30px; border-radius: 7px; display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); }
+    .action-btn:hover { background: rgba(255,255,255,0.12); }
+    .action-btn.danger:hover  { background: rgba(239,68,68,0.15);  border-color: rgba(239,68,68,0.3); }
+    .action-btn.success:hover { background: rgba(16,185,129,0.15); border-color: rgba(16,185,129,0.3); }
+
+    /* PAGE HEADER */
+    .page-header { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 24px; gap: 16px; }
+    .page-header-left h2 { font-size: 1.4rem; font-weight: 800; }
+    .page-header-left p  { font-size: 0.88rem; color: var(--slate-light); margin-top: 4px; }
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, var(--blue-primary), #1a6fff); color: white; border-radius: 10px; padding: 10px 20px; font-size: 0.9rem; font-weight: 600; transition: transform 0.15s, box-shadow 0.15s; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 6px 24px rgba(21,94,239,0.4); }
+    .btn-secondary { display: inline-flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: var(--white); border-radius: 10px; padding: 10px 18px; font-size: 0.9rem; font-weight: 600; transition: background 0.15s; }
+    .btn-secondary:hover { background: rgba(255,255,255,0.1); }
+
+    /* FILTER BAR */
+    .filter-bar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; flex-wrap: wrap; }
+    .filter-input { display: flex; align-items: center; gap: 8px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 9px 14px; flex: 1; min-width: 200px; }
+    .filter-input input { background: none; color: var(--white); font-size: 0.88rem; width: 100%; }
+    .filter-input input::placeholder { color: var(--slate-muted); }
+    .filter-select { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 9px 14px; color: var(--white); font-size: 0.88rem; }
+    .filter-select option { background: var(--navy-card); }
+
+    /* ANNOUNCEMENTS */
+    .announcement-list { display: flex; flex-direction: column; gap: 14px; }
+    .ann-card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start; transition: border-color 0.2s; }
+    .ann-card:hover { border-color: rgba(21,94,239,0.3); }
+    .ann-icon { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ann-body { flex: 1; }
+    .ann-title { font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; }
+    .ann-text  { font-size: 0.84rem; color: var(--slate-light); line-height: 1.6; }
+    .ann-meta  { font-size: 0.76rem; color: var(--slate-muted); margin-top: 8px; }
+    .ann-actions { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; }
+
+    /* MODAL */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); backdrop-filter: blur(4px); z-index: 200; display: none; align-items: center; justify-content: center; }
+    .modal-overlay.open { display: flex; }
+    .modal { background: var(--navy-card); border: 1px solid rgba(21,94,239,0.2); border-radius: 20px; padding: 36px; width: 540px; max-width: 95vw; max-height: 90vh; overflow-y: auto; animation: fadeIn 0.25s ease; }
+    .modal-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 28px; }
+    .modal-header h3 { font-size: 1.15rem; font-weight: 800; }
+    .modal-close { width: 32px; height: 32px; border-radius: 8px; background: rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: center; cursor: pointer; transition: background 0.15s; }
+    .modal-close:hover { background: rgba(239,68,68,0.15); color: var(--red); }
+    .modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .modal-grid .full { grid-column: 1 / -1; }
+    .field-label { font-size: 0.78rem; font-weight: 700; color: var(--slate-muted); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 7px; }
+    .field-input { width: 100%; background: rgba(255,255,255,0.05); border: 1.5px solid rgba(255,255,255,0.1); border-radius: 9px; padding: 11px 14px; color: var(--white); font-size: 0.9rem; transition: border-color 0.2s; }
+    .field-input:focus { border-color: var(--blue-primary); }
+    .field-input::placeholder { color: var(--slate-muted); }
+    textarea.field-input { resize: vertical; min-height: 90px; }
+    select.field-input { cursor: pointer; }
+    select.field-input option { background: var(--navy-card); }
+    .modal-footer { display: flex; justify-content: flex-end; gap: 12px; margin-top: 28px; }
+
+    /* ACTIVITY */
+    .activity-feed { display: flex; flex-direction: column; }
+    .activity-item { display: flex; gap: 14px; align-items: flex-start; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .activity-item:last-child { border-bottom: none; }
+    .activity-dot { width: 10px; height: 10px; border-radius: 50%; margin-top: 5px; flex-shrink: 0; }
+    .activity-body p { font-size: 0.88rem; line-height: 1.5; }
+    .activity-body p strong { color: var(--white); }
+    .activity-time { font-size: 0.76rem; color: var(--slate-muted); margin-top: 3px; }
+
+    /* CHART */
+    .chart-placeholder { height: 180px; display: flex; align-items: flex-end; gap: 10px; padding: 0 4px; }
+    .bar-group { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+    .bar-wrap { width: 100%; display: flex; gap: 3px; align-items: flex-end; height: 150px; }
+    .bar { flex: 1; border-radius: 4px 4px 0 0; transition: opacity 0.2s; }
+    .bar:hover { opacity: 0.8; }
+    .bar-label { font-size: 0.7rem; color: var(--slate-muted); }
+
+    /* ENQUIRY */
+    .enquiry-item { display: flex; gap: 16px; align-items: flex-start; padding: 16px 0; border-bottom: 1px solid var(--border); }
+    .enquiry-item:last-child { border-bottom: none; }
+    .enquiry-avatar { width: 40px; height: 40px; border-radius: 10px; background: linear-gradient(135deg, var(--blue-primary), var(--cyan-primary)); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem; flex-shrink: 0; }
+    .enquiry-body { flex: 1; }
+    .enquiry-name  { font-size: 0.92rem; font-weight: 700; }
+    .enquiry-email { font-size: 0.78rem; color: var(--slate-muted); margin-bottom: 6px; }
+    .enquiry-msg   { font-size: 0.84rem; color: var(--slate-light); line-height: 1.6; }
+    .enquiry-meta  { font-size: 0.76rem; color: var(--slate-muted); margin-top: 6px; }
+
+    /* RESPONSIVE */
+    @media (max-width: 1100px) { .stats-grid { grid-template-columns: repeat(2,1fr); } }
     @media (max-width: 768px) {
-      #adminAppLayout {
-        flex-direction: column;
-      }
-
-      .admin-sidebar {
-        width: 100%;
-        height: auto;
-        position: relative;
-      }
-
-      .admin-stats-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .admin-content-view {
-        padding: 20px;
-      }
+      .sidebar { transform: translateX(-100%); }
+      .sidebar.mobile-open { transform: translateX(0); }
+      .main-content { margin-left: 0; }
+      .stats-grid { grid-template-columns: 1fr 1fr; }
+      .two-col { grid-template-columns: 1fr; }
+      .topbar-search { display: none; }
     }
+    @media (max-width: 480px) { .stats-grid { grid-template-columns: 1fr; } .page-area { padding: 16px; } }
   </style>
 </head>
+<body>
 
-<body class="admin-body">
+<!-- LOGIN -->
+<div id="loginScreen">
+  <div class="login-bg-glow left"></div>
+  <div class="login-bg-glow right"></div>
+  <div class="login-card">
+    <div class="login-logo">
+      <img src="assets/logo_clean.png" alt="Stats Innotech">
+      <span class="login-logo-tag">Admin</span>
+    </div>
+    <h1 class="login-title">Admin Portal</h1>
+    <p class="login-sub">Sign in with your administrator credentials to continue.</p>
+    <div class="form-group">
+      <label for="adminEmail">Email Address</label>
+      <input type="email" id="adminEmail" placeholder="admin@statsinnotech.com" autocomplete="off">
+    </div>
+    <div class="form-group">
+      <label for="adminPass">Password</label>
+      <input type="password" id="adminPass" placeholder="••••••••">
+    </div>
+    <button class="login-btn" onclick="doAdminLogin()">Sign In to Dashboard</button>
+    <div class="login-error" id="loginError">Invalid credentials. Please try again.</div>
+    <p class="login-hint">Demo &mdash; email: <span>admin@statsinnotech.com</span> &middot; password: <span>admin123</span></p>
+  </div>
+</div>
 
-  <!-- ======================================================================
-       1. ADMIN AUTHENTICATION SCREEN (MATCHES STUDENT LOGIN UI)
-       ====================================================================== -->
-  <div id="adminAuthScreen">
-    <div class="login-box">
-      <div class="logo" style="background:#fff;width:100%;height:auto;border-radius:0;margin:0 auto 20px;">
-        <a href="index.html" title="Stats Innotech">
-          <img alt="Stats Innotech" src="assets/STATS monogram - colored(2).png"
-            style="width:100%;max-width:150px;height:150px;display:block;margin:auto;" />
-        </a>
+<!-- ADMIN SHELL -->
+<div id="adminShell">
+
+  <!-- Sidebar -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <img src="assets/logo_clean.png" alt="Stats Innotech">
+      <span class="sidebar-admin-tag">Admin</span>
+    </div>
+    <nav class="sidebar-nav">
+      <div class="sidebar-section-label">Main</div>
+      <div class="nav-item active" id="nav-dashboard" onclick="showPanel('dashboard')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+        Dashboard
       </div>
-      <h1>Admin Portal</h1>
-      <p>Login to continue</p>
-
-      <div id="adminLoginError"
-        style="display:none; color:#dc2626; margin-bottom:15px; text-align:center; font-size:13.5px; background:#fee2e2; padding:10px 14px; border-radius:10px;">
+      <div class="sidebar-section-label">Management</div>
+      <div class="nav-item" id="nav-students" onclick="showPanel('students')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+        Students
+        <span class="nav-badge" style="background:var(--blue-primary)">24</span>
       </div>
-
-      <form id="adminLoginForm">
-        <div class="form-group">
-          <label>Admin ID or Email</label>
-          <input type="text" id="adminIdInput" placeholder="Enter your admin ID or email" required
-            autocomplete="username" />
-        </div>
-        <div class="form-group">
-          <label>Password</label>
-          <input type="password" id="adminPasswordInput" placeholder="Enter your password" required
-            autocomplete="current-password" />
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%;">
-          Login
-        </button>
-      </form>
-
-      <div class="admin-quick-creds">
-        <strong>Authorized Admin Accounts:</strong>
-        <div class="admin-quick-pills">
-          <button type="button" class="admin-quick-pill"
-            onclick="quickFill('SIT@ADMIN.SUJAL', '@Sujal.Stats2026')">Sujal (Lead)</button>
-          <button type="button" class="admin-quick-pill"
-            onclick="quickFill('SIT@ADMIN.AYUSHI', '@Ayushi.Stats2026')">Ayushi</button>
-          <button type="button" class="admin-quick-pill"
-            onclick="quickFill('SIT@ADMIN.TANUSHREE', '@Tanushree.Stats2026')">Tanushree</button>
-          <button type="button" class="admin-quick-pill"
-            onclick="quickFill('SIT@ADMIN.SARVESH', '@Sarvesh.Stats2026')">Sarvesh</button>
-          <button type="button" class="admin-quick-pill"
-            onclick="quickFill('SIT@ADMIN.SHUBHAM', '@Shubham.Stats2026')">Shubham</button>
-          <button type="button" class="admin-quick-pill" onclick="quickFill('admin@statsinnotech.com', 'admin123')">Dev
-            Demo</button>
-        </div>
+      <div class="nav-item" id="nav-certificates" onclick="showPanel('certificates')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg>
+        Certificates
       </div>
-
-      <div class="login-links">
-        <a href="index.html" class="login-link">&larr; Back to Website</a>
+      <div class="nav-item" id="nav-courses" onclick="showPanel('courses')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg>
+        Courses
+      </div>
+      <div class="nav-item" id="nav-internships" onclick="showPanel('internships')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+        Internships
+        <span class="nav-badge" style="background:var(--amber);color:#000">7</span>
+      </div>
+      <div class="sidebar-section-label">Communication</div>
+      <div class="nav-item" id="nav-announcements" onclick="showPanel('announcements')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
+        Announcements
+      </div>
+      <div class="nav-item" id="nav-enquiries" onclick="showPanel('enquiries')">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+        Enquiry Inbox
+        <span class="nav-badge" style="background:var(--red)">3</span>
+      </div>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="admin-profile">
+        <div class="admin-avatar">A</div>
+        <div class="admin-info">
+          <div class="admin-name">Super Admin</div>
+          <div class="admin-role">Administrator</div>
+        </div>
       </div>
     </div>
-  </div>
+  </aside>
 
-  <!-- ======================================================================
-       2. ADMIN MAIN APPLICATION LAYOUT
-       ====================================================================== -->
-  <div id="adminAppLayout" style="display: none;">
-    <!-- Sidebar -->
-    <aside class="admin-sidebar">
-      <div class="admin-sidebar-header">
-        <a href="index.html">
-          <img src="assets/logo_clean.png" alt="Stats Innotech" class="admin-sidebar-logo" />
-        </a>
+  <!-- Main -->
+  <div class="main-content">
+    <div class="topbar">
+      <button onclick="toggleSidebar()" id="hamburgerBtn" class="topbar-icon-btn" style="display:none;margin-right:8px">
+        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+      <div class="topbar-title" id="topbarTitle">Dashboard</div>
+      <div class="topbar-search">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" placeholder="Search anything...">
       </div>
-
-      <nav class="admin-sidebar-menu">
-        <p class="admin-menu-heading">Main Navigation</p>
-        <button class="admin-nav-item active" onclick="showAdminTab('dashboard', this)">
-          <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2" viewBox="0 0 24 24" width="18">
-            <rect height="9" width="7" x="3" y="3"></rect>
-            <rect height="5" width="7" x="14" y="3"></rect>
-            <rect height="9" width="7" x="14" y="12"></rect>
-            <rect height="5" width="7" x="3" y="16"></rect>
-          </svg>
-          <span>Dashboard</span>
-        </button>
-        <button class="admin-nav-item" onclick="showAdminTab('courses', this)">
-          <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2" viewBox="0 0 24 24" width="18">
-            <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-            <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-          </svg>
-          <span>Manage Courses</span>
-          <span class="admin-nav-badge" id="badgeCourseCount">9</span>
-        </button>
-        <button class="admin-nav-item" onclick="showAdminTab('internships', this)">
-          <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2" viewBox="0 0 24 24" width="18">
-            <rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect>
-            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-          </svg>
-          <span>Internship Tracks</span>
-          <span class="admin-nav-badge" id="badgeTrackCount">10</span>
-        </button>
-        <button class="admin-nav-item" onclick="showAdminTab('applications', this)">
-          <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2" viewBox="0 0 24 24" width="18">
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-            <polyline points="14 2 14 8 20 8"></polyline>
-            <line x1="16" x2="8" y1="13" y2="13"></line>
-            <line x1="16" x2="8" y1="17" y2="17"></line>
-            <polyline points="10 9 9 9 8 9"></polyline>
-          </svg>
-          <span>Applications &amp; Leads</span>
-          <span class="admin-nav-badge" id="badgeAppCount">14</span>
-        </button>
-
-        <p class="admin-menu-heading" style="margin-top: 14px;">Communication &amp; Settings</p>
-        <button class="admin-nav-item" onclick="showAdminTab('announcements', this)">
-          <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2" viewBox="0 0 24 24" width="18">
-            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
-            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
-          </svg>
-          <span>Announcements</span>
-        </button>
-        <button class="admin-nav-item" onclick="showAdminTab('settings', this)">
-          <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-            stroke-width="2" viewBox="0 0 24 24" width="18">
-            <circle cx="12" cy="12" r="3"></circle>
-            <path
-              d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
-            </path>
-          </svg>
-          <span>System Settings</span>
-        </button>
-      </nav>
-
-      <div class="admin-sidebar-footer">
-        <div class="admin-user-card">
-          <div class="admin-avatar" id="adminAvatarInitials">AD</div>
-          <div class="admin-user-info">
-            <p class="admin-user-name" id="adminDisplayId">Admin User</p>
-            <p class="admin-user-role">Super Administrator</p>
-          </div>
-          <button onclick="adminLogout()" title="Logout"
-            style="background:transparent; border:none; color:#EF4444; cursor:pointer; padding:4px;">
-            <svg fill="none" height="18" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-              stroke-width="2" viewBox="0 0 24 24" width="18">
-              <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
-              <polyline points="16 17 21 12 16 7"></polyline>
-              <line x1="21" x2="9" y1="12" y2="12"></line>
-            </svg>
-          </button>
-        </div>
+      <div class="topbar-icon-btn">
+        <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg>
+        <div class="notif-dot"></div>
       </div>
-    </aside>
+      <button class="logout-btn" onclick="doLogout()">
+        <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg>
+        Logout
+      </button>
+    </div>
 
-    <!-- Main Content Area -->
-    <main class="admin-main">
-      <!-- Topbar -->
-      <header class="admin-topbar">
-        <h2 class="admin-topbar-title" id="adminPageHeaderTitle">Dashboard Overview</h2>
-        <div class="admin-topbar-actions">
-          <a href="index.html" class="btn-public-site" target="_blank">
-            <svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-              stroke-width="2" viewBox="0 0 24 24" width="14">
-              <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
-              <polyline points="15 3 21 3 21 9"></polyline>
-              <line x1="10" x2="21" y1="14" y2="3"></line>
-            </svg>
-            <span>View Public Site</span>
-          </a>
-          <button class="btn-admin-action" onclick="openAddCourseModal()">
-            <span>+ Add Course</span>
-          </button>
-          <button class="btn-admin-action" onclick="openAddTrackModal()"
-            style="background:var(--admin-cyan); color:var(--admin-navy);">
-            <span>+ Add Track</span>
-          </button>
+    <div class="page-area">
+
+      <!-- DASHBOARD -->
+      <div class="panel active" id="panel-dashboard">
+        <div class="page-header">
+          <div class="page-header-left"><h2>Welcome back, Admin &#x1F44B;</h2><p>Here's what's happening at Stats Innotech today.</p></div>
+          <div style="display:flex;gap:10px">
+            <button class="btn-secondary"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Export</button>
+            <button class="btn-primary" onclick="showPanel('students')"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Add Student</button>
+          </div>
         </div>
-      </header>
-
-      <!-- VIEW 1: DASHBOARD OVERVIEW -->
-      <div class="admin-content-view" id="viewDashboard">
-        <div class="admin-stats-grid">
-          <div class="admin-stat-card">
-            <div class="admin-stat-icon stat-blue">
-              <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" width="24">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="admin-stat-number" id="statTotalCourses">9</h3>
-              <p class="admin-stat-label">Active Courses</p>
-            </div>
-          </div>
-
-          <div class="admin-stat-card">
-            <div class="admin-stat-icon stat-cyan">
-              <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" width="24">
-                <rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="admin-stat-number" id="statTotalTracks">10</h3>
-              <p class="admin-stat-label">Internship Tracks</p>
+        <div class="stats-grid">
+          <div class="stat-card"><div class="stat-card-header"><div class="stat-icon" style="background:rgba(21,94,239,0.15)"><svg width="20" height="20" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div><span class="stat-badge badge-blue">+12%</span></div><div class="stat-value">248</div><div class="stat-label">Total Students</div><div class="stat-sub">24 enrolled this month</div></div>
+          <div class="stat-card"><div class="stat-card-header"><div class="stat-icon" style="background:rgba(16,185,129,0.15)"><svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg></div><span class="stat-badge badge-green">+8%</span></div><div class="stat-value">183</div><div class="stat-label">Certificates Issued</div><div class="stat-sub">14 issued this month</div></div>
+          <div class="stat-card"><div class="stat-card-header"><div class="stat-icon" style="background:rgba(139,92,246,0.15)"><svg width="20" height="20" fill="none" stroke="#8b5cf6" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path></svg></div><span class="stat-badge badge-purple">Active</span></div><div class="stat-value">12</div><div class="stat-label">Active Courses</div><div class="stat-sub">2 launching next week</div></div>
+          <div class="stat-card"><div class="stat-card-header"><div class="stat-icon" style="background:rgba(245,158,11,0.15)"><svg width="20" height="20" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg></div><span class="stat-badge badge-amber">7 Pending</span></div><div class="stat-value">41</div><div class="stat-label">Internship Apps</div><div class="stat-sub">7 awaiting review</div></div>
+        </div>
+        <div class="two-col">
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Enrollments by Month</div><div class="card-sub">2026 academic year</div></div></div>
+            <div class="chart-placeholder">
+              <div class="bar-group"><div class="bar-wrap"><div class="bar" style="height:60%;background:rgba(21,94,239,0.6)"></div></div><div class="bar-label">Mar</div></div>
+              <div class="bar-group"><div class="bar-wrap"><div class="bar" style="height:75%;background:rgba(21,94,239,0.6)"></div></div><div class="bar-label">Apr</div></div>
+              <div class="bar-group"><div class="bar-wrap"><div class="bar" style="height:50%;background:rgba(21,94,239,0.6)"></div></div><div class="bar-label">May</div></div>
+              <div class="bar-group"><div class="bar-wrap"><div class="bar" style="height:90%;background:rgba(21,94,239,0.6)"></div></div><div class="bar-label">Jun</div></div>
+              <div class="bar-group"><div class="bar-wrap"><div class="bar" style="height:65%;background:rgba(21,94,239,0.6)"></div></div><div class="bar-label">Jul</div></div>
+              <div class="bar-group"><div class="bar-wrap"><div class="bar" style="height:80%;background:var(--cyan-primary)"></div></div><div class="bar-label">Aug</div></div>
+              <div class="bar-group"><div class="bar-wrap"><div class="bar" style="height:100%;background:var(--blue-primary)"></div></div><div class="bar-label">Sep</div></div>
             </div>
           </div>
-
-          <div class="admin-stat-card">
-            <div class="admin-stat-icon stat-green">
-              <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" width="24">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
-            <div>
-              <h3 class="admin-stat-number" id="statTotalStudents">1,240+</h3>
-              <p class="admin-stat-label">Enrolled Learners</p>
-            </div>
-          </div>
-
-          <div class="admin-stat-card">
-            <div class="admin-stat-icon stat-amber">
-              <svg fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" width="24">
-                <circle cx="12" cy="12" r="10"></circle>
-                <polyline points="12 6 12 12 16 14"></polyline>
-              </svg>
-            </div>
-            <div>
-              <h3 class="admin-stat-number" id="statPendingApps">14</h3>
-              <p class="admin-stat-label">Applications Pending</p>
+          <div class="card">
+            <div class="card-header"><div><div class="card-title">Recent Activity</div><div class="card-sub">Latest admin actions</div></div></div>
+            <div class="activity-feed">
+              <div class="activity-item"><div class="activity-dot" style="background:var(--green)"></div><div class="activity-body"><p><strong>Aarav Sharma</strong> certificate issued for Full Stack Web Dev</p><div class="activity-time">2 hours ago</div></div></div>
+              <div class="activity-item"><div class="activity-dot" style="background:var(--blue-primary)"></div><div class="activity-body"><p>New student <strong>Priya Nair</strong> registered</p><div class="activity-time">4 hours ago</div></div></div>
+              <div class="activity-item"><div class="activity-dot" style="background:var(--amber)"></div><div class="activity-body"><p><strong>3 internship applications</strong> pending review</p><div class="activity-time">Yesterday</div></div></div>
+              <div class="activity-item"><div class="activity-dot" style="background:var(--purple)"></div><div class="activity-body"><p>New course <strong>AI &amp; Python Engineering</strong> published</p><div class="activity-time">2 days ago</div></div></div>
+              <div class="activity-item"><div class="activity-dot" style="background:var(--cyan-primary)"></div><div class="activity-body"><p>Announcement posted: <strong>Semester Results</strong></p><div class="activity-time">3 days ago</div></div></div>
             </div>
           </div>
         </div>
-
-        <div class="admin-panel-card">
-          <div class="admin-panel-header">
-            <h3 class="admin-panel-heading">
-              <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" width="20">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline>
-              </svg>
-              <span>Recent Applications &amp; Inquiries</span>
-            </h3>
-            <button class="btn-public-site" onclick="showAdminTab('applications')">View All Applications &rarr;</button>
-          </div>
-          <div class="admin-table-wrap">
-            <table class="admin-table" id="dashboardRecentTable">
-              <thead>
-                <tr>
-                  <th>Applicant Name</th>
-                  <th>Domain / Course</th>
-                  <th>Email</th>
-                  <th>College</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="dashboardRecentBody">
-                <!-- Injected via JS -->
+        <div class="card">
+          <div class="card-header"><div><div class="card-title">Recent Enrollments</div><div class="card-sub">Latest students who joined</div></div><button class="btn-secondary" onclick="showPanel('students')" style="padding:8px 14px;font-size:0.82rem">View All</button></div>
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Name</th><th>Course</th><th>Department</th><th>Enrolled</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Aarav Sharma</td><td>Full Stack Web Dev</td><td>IT</td><td>15 Aug 2026</td><td><span class="status-pill active">Active</span></td></tr>
+                <tr><td>Priya Nair</td><td>AutoCAD &amp; Civil Design</td><td>Civil</td><td>12 Aug 2026</td><td><span class="status-pill active">Active</span></td></tr>
+                <tr><td>Rohan Mehta</td><td>Data Science &amp; ML</td><td>IT</td><td>10 Aug 2026</td><td><span class="status-pill active">Active</span></td></tr>
+                <tr><td>Sneha Patel</td><td>AI &amp; Python Track</td><td>Software</td><td>8 Aug 2026</td><td><span class="status-pill pending">Pending</span></td></tr>
+                <tr><td>Dev Khanna</td><td>Civil Estimation</td><td>Civil</td><td>5 Aug 2026</td><td><span class="status-pill inactive">Inactive</span></td></tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- VIEW 2: COURSES MANAGEMENT -->
-      <div class="admin-content-view" id="viewCourses" style="display:none;">
-        <div class="admin-panel-card">
-          <div class="admin-panel-header">
-            <h3 class="admin-panel-heading">
-              <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" width="20">
-                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
-                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
-              </svg>
-              <span>Catalog Courses Directory</span>
-            </h3>
-            <div class="admin-panel-filter">
-              <input type="text" class="admin-search-input" id="searchCourseInput" placeholder="Search course name..."
-                oninput="filterCoursesTable()" />
-              <select class="admin-select-filter" id="filterCourseLevel" onchange="filterCoursesTable()">
-                <option value="ALL">All Levels</option>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-              </select>
-              <button class="btn-admin-action" onclick="openAddCourseModal()">+ Add Course</button>
-            </div>
-          </div>
-          <div class="admin-table-wrap">
-            <table class="admin-table" id="coursesAdminTable">
-              <thead>
-                <tr>
-                  <th>Course Title</th>
-                  <th>Sub-Specialization</th>
-                  <th>Duration</th>
-                  <th>Level</th>
-                  <th>Enrolled</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="coursesAdminBody">
-                <!-- Injected via JS -->
+      <!-- STUDENTS -->
+      <div class="panel" id="panel-students">
+        <div class="page-header"><div class="page-header-left"><h2>Student Management</h2><p>View, add, edit and manage all enrolled students.</p></div><button class="btn-primary" onclick="openModal('studentModal')"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Add Student</button></div>
+        <div class="filter-bar">
+          <div class="filter-input"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><input type="text" placeholder="Search students..."></div>
+          <select class="filter-select"><option>All Departments</option><option>IT</option><option>Civil</option><option>Software</option></select>
+          <select class="filter-select"><option>All Status</option><option>Active</option><option>Pending</option><option>Inactive</option></select>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Student</th><th>Email</th><th>Course</th><th>Dept</th><th>Enrolled</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>Aarav Sharma</td><td style="color:var(--slate-muted)">aarav@email.com</td><td>Full Stack Web Dev</td><td>IT</td><td>15 Aug 2026</td><td><span class="status-pill active">Active</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td>Priya Nair</td><td style="color:var(--slate-muted)">priya@email.com</td><td>AutoCAD &amp; Civil Design</td><td>Civil</td><td>12 Aug 2026</td><td><span class="status-pill active">Active</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td>Rohan Mehta</td><td style="color:var(--slate-muted)">rohan@email.com</td><td>Data Science &amp; ML</td><td>IT</td><td>10 Aug 2026</td><td><span class="status-pill active">Active</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td>Sneha Patel</td><td style="color:var(--slate-muted)">sneha@email.com</td><td>AI &amp; Python Track</td><td>Software</td><td>8 Aug 2026</td><td><span class="status-pill pending">Pending</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td>Dev Khanna</td><td style="color:var(--slate-muted)">dev@email.com</td><td>Civil Estimation</td><td>Civil</td><td>5 Aug 2026</td><td><span class="status-pill inactive">Inactive</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- VIEW 3: INTERNSHIP TRACKS MANAGEMENT -->
-      <div class="admin-content-view" id="viewInternships" style="display:none;">
-        <div class="admin-panel-card">
-          <div class="admin-panel-header">
-            <h3 class="admin-panel-heading">
-              <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" width="20">
-                <rect height="14" rx="2" ry="2" width="20" x="2" y="7"></rect>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-              </svg>
-              <span>Internship Domain Tracks</span>
-            </h3>
-            <div class="admin-panel-filter">
-              <input type="text" class="admin-search-input" id="searchTrackInput" placeholder="Search track name..."
-                oninput="filterTracksTable()" />
-              <button class="btn-admin-action" onclick="openAddTrackModal()"
-                style="background:var(--admin-cyan); color:var(--admin-navy);">+ Add Track</button>
-            </div>
-          </div>
-          <div class="admin-table-wrap">
-            <table class="admin-table" id="tracksAdminTable">
-              <thead>
-                <tr>
-                  <th>Track Title</th>
-                  <th>Badge Category</th>
-                  <th>Key Skills / Tools</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="tracksAdminBody">
-                <!-- Injected via JS -->
+      <!-- CERTIFICATES -->
+      <div class="panel" id="panel-certificates">
+        <div class="page-header"><div class="page-header-left"><h2>Certificate Management</h2><p>Issue, manage and track all student certificates.</p></div><button class="btn-primary" onclick="openModal('certModal')"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Issue Certificate</button></div>
+        <div class="filter-bar">
+          <div class="filter-input"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><input type="text" placeholder="Search by certificate ID or name..."></div>
+          <select class="filter-select"><option>All Departments</option><option>IT</option><option>Civil</option><option>Software</option></select>
+        </div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Certificate ID</th><th>Student Name</th><th>Programme</th><th>Grade</th><th>Issue Date</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td style="color:var(--cyan-primary)">SI-2026-IT-00147</td><td>Aarav Sharma</td><td>Full Stack Web Dev</td><td>A+</td><td>15 Aug 2026</td><td><span class="status-pill issued">Issued</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td style="color:var(--cyan-primary)">SI-2026-CE-00089</td><td>Priya Nair</td><td>AutoCAD &amp; Civil Design</td><td>A</td><td>20 Jul 2026</td><td><span class="status-pill issued">Issued</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td style="color:var(--cyan-primary)">SI-2025-DS-00312</td><td>Rohan Mehta</td><td>Data Science &amp; ML</td><td>A</td><td>10 Dec 2025</td><td><span class="status-pill issued">Issued</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td style="color:var(--cyan-primary)">SI-2026-FS-00201</td><td>Sneha Patel</td><td>AI &amp; Python Track</td><td>A+</td><td>5 Sep 2026</td><td><span class="status-pill pending">Pending</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- VIEW 4: APPLICATIONS & LEADS -->
-      <div class="admin-content-view" id="viewApplications" style="display:none;">
-        <div class="admin-panel-card">
-          <div class="admin-panel-header">
-            <h3 class="admin-panel-heading">
-              <svg fill="none" height="20" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                stroke-width="2" viewBox="0 0 24 24" width="20">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-                <polyline points="14 2 14 8 20 8"></polyline>
-                <line x1="16" x2="8" y1="13" y2="13"></line>
-                <line x1="16" x2="8" y1="17" y2="17"></line>
-                <polyline points="10 9 9 9 8 9"></polyline>
-              </svg>
-              <span>Student Inquiries &amp; Internship Applications</span>
-            </h3>
-            <div class="admin-panel-filter">
-              <select class="admin-select-filter" id="filterAppStatus" onchange="filterAppsTable()">
-                <option value="ALL">All Statuses</option>
-                <option value="Pending">Pending</option>
-                <option value="Shortlisted">Shortlisted</option>
-                <option value="Accepted">Accepted</option>
-                <option value="Rejected">Rejected</option>
-              </select>
-              <button class="btn-public-site" onclick="exportApplicationsToCSV()">
-                <svg fill="none" height="14" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                  stroke-width="2" viewBox="0 0 24 24" width="14">
-                  <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                  <polyline points="7 10 12 15 17 10"></polyline>
-                  <line x1="12" x2="12" y1="15" y2="3"></line>
-                </svg>
-                <span>Export CSV</span>
-              </button>
-            </div>
-          </div>
-          <div class="admin-table-wrap">
-            <table class="admin-table" id="appsAdminTable">
-              <thead>
-                <tr>
-                  <th>Date</th>
-                  <th>Applicant Name</th>
-                  <th>Email</th>
-                  <th>Phone</th>
-                  <th>Domain Track</th>
-                  <th>College &amp; Year</th>
-                  <th>Status</th>
-                  <th>Actions</th>
-                </tr>
-              </thead>
-              <tbody id="appsAdminBody">
-                <!-- Injected via JS -->
+      <!-- COURSES -->
+      <div class="panel" id="panel-courses">
+        <div class="page-header"><div class="page-header-left"><h2>Course Management</h2><p>Add, edit and publish courses offered by Stats Innotech.</p></div><button class="btn-primary" onclick="openModal('courseModal')"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>Add Course</button></div>
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Course Name</th><th>Department</th><th>Duration</th><th>Enrolled</th><th>Fee (&#x20B9;)</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>Full Stack Web Development</td><td>IT</td><td>6 months</td><td>42</td><td>18,000</td><td><span class="status-pill active">Published</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td>AutoCAD &amp; Civil Design Mastery</td><td>Civil</td><td>4 months</td><td>28</td><td>14,000</td><td><span class="status-pill active">Published</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td>Data Science &amp; Machine Learning</td><td>IT</td><td>5 months</td><td>35</td><td>22,000</td><td><span class="status-pill active">Published</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
+                <tr><td>AI &amp; Python Engineering Track</td><td>Software</td><td>3 months</td><td>18</td><td>12,000</td><td><span class="status-pill pending">Draft</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></td></tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
 
-      <!-- VIEW 5: ANNOUNCEMENTS -->
-      <div class="admin-content-view" id="viewAnnouncements" style="display:none;">
-        <div class="admin-panel-card">
-          <div class="admin-panel-header">
-            <h3 class="admin-panel-heading">Broadcast Student Announcement</h3>
-          </div>
-          <form id="announcementForm" onsubmit="handlePostAnnouncement(event)" style="max-width: 650px;">
-            <div class="admin-form-group">
-              <label for="announceTitle">Announcement Subject *</label>
-              <input type="text" id="announceTitle" placeholder="e.g. New Capstone Project Brief Released" required />
-            </div>
-            <div class="admin-form-group">
-              <label for="announceMessage">Message Content *</label>
-              <textarea id="announceMessage" placeholder="Type instructions or updates for students..." rows="4"
-                required></textarea>
-            </div>
-            <button type="submit" class="btn-admin-action">Post Announcement</button>
-          </form>
+      <!-- INTERNSHIPS -->
+      <div class="panel" id="panel-internships">
+        <div class="page-header"><div class="page-header-left"><h2>Internship Applications</h2><p>Review and manage internship applicants.</p></div></div>
+        <div class="filter-bar">
+          <div class="filter-input"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg><input type="text" placeholder="Search applicant..."></div>
+          <select class="filter-select"><option>All Status</option><option>Pending</option><option>Approved</option><option>Rejected</option></select>
         </div>
-
-        <div class="admin-panel-card">
-          <h3 class="admin-panel-heading" style="margin-bottom: 16px;">Active Announcements</h3>
-          <div id="announcementsList" style="display: flex; flex-direction: column; gap: 12px;">
-            <!-- Injected via JS -->
+        <div class="card">
+          <div class="table-wrap">
+            <table class="data-table">
+              <thead><tr><th>Applicant</th><th>Email</th><th>Track</th><th>College</th><th>Applied On</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody>
+                <tr><td>Karan Verma</td><td style="color:var(--slate-muted)">karan@college.edu</td><td>Full Stack IT Internship</td><td>MIT Pune</td><td>14 Sep 2026</td><td><span class="status-pill pending">Pending</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div></div></td></tr>
+                <tr><td>Ananya Gupta</td><td style="color:var(--slate-muted)">ananya@college.edu</td><td>Civil Design Internship</td><td>VJTI Mumbai</td><td>13 Sep 2026</td><td><span class="status-pill pending">Pending</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div></div></td></tr>
+                <tr><td>Arjun Sinha</td><td style="color:var(--slate-muted)">arjun@college.edu</td><td>AI Research Internship</td><td>SPIT Mumbai</td><td>10 Sep 2026</td><td><span class="status-pill active">Approved</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div></div></td></tr>
+                <tr><td>Meera Joshi</td><td style="color:var(--slate-muted)">meera@college.edu</td><td>Full Stack IT Internship</td><td>COEP Pune</td><td>8 Sep 2026</td><td><span class="status-pill rejected">Rejected</span></td><td><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></div></div></td></tr>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
 
-      <!-- VIEW 6: SETTINGS -->
-      <div class="admin-content-view" id="viewSettings" style="display:none;">
-        <div class="admin-panel-card" style="max-width: 700px;">
-          <h3 class="admin-panel-heading" style="margin-bottom: 14px;">Portal Configuration</h3>
-          <p style="font-size: 13.5px; color: var(--admin-text-muted); margin-bottom: 24px;">
-            Manage localized browser storage and cloud integration settings for Stats Innotech.
-          </p>
-          <div style="display: flex; flex-direction: column; gap: 14px;">
-            <div
-              style="display:flex; align-items:center; justify-content:space-between; padding:14px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px;">
-              <div>
-                <strong>Restore Demo Data</strong>
-                <p style="margin:4px 0 0; font-size:12.5px; color:#64748B;">Reset courses and internship tracks back to
-                  the official default catalog.</p>
-              </div>
-              <button class="btn-public-site" onclick="resetToDemoData()">Reset Data</button>
-            </div>
-
-            <div
-              style="display:flex; align-items:center; justify-content:space-between; padding:14px; background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px;">
-              <div>
-                <strong>Google Apps Script Backend Link</strong>
-                <p style="margin:4px 0 0; font-size:12.5px; color:#64748B;">Code.gs Spreadsheet ID:
-                  <code>1dERGNqcGt6ag7VYHWEPNMiK2H7LbaCeMWMhhFX2tIi4</code>
-                </p>
-              </div>
-              <span class="badge-status badge-active">Ready</span>
-            </div>
-          </div>
+      <!-- ANNOUNCEMENTS -->
+      <div class="panel" id="panel-announcements">
+        <div class="page-header"><div class="page-header-left"><h2>Announcements</h2><p>Post important notices and updates to all students.</p></div><button class="btn-primary" onclick="openModal('annModal')"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>New Announcement</button></div>
+        <div class="announcement-list">
+          <div class="ann-card"><div class="ann-icon" style="background:rgba(21,94,239,0.15)"><svg width="18" height="18" fill="none" stroke="#60a5fa" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0"></path></svg></div><div class="ann-body"><div class="ann-title">Semester Result Declaration</div><div class="ann-text">Results for the August 2026 batch have been declared. Students can view their grades in the Student Portal under the Results section.</div><div class="ann-meta">Posted by Admin &middot; 3 days ago &middot; Visible to all students</div></div><div class="ann-actions"><span class="status-pill active">Published</span><div class="action-btns" style="margin-top:6px"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></div></div>
+          <div class="ann-card"><div class="ann-icon" style="background:rgba(245,158,11,0.15)"><svg width="18" height="18" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div><div class="ann-body"><div class="ann-title">Holiday Notice &ndash; October 2026</div><div class="ann-text">The institute will remain closed from 2nd to 4th October 2026 on account of national holidays. Regular classes will resume on 5th October.</div><div class="ann-meta">Posted by Admin &middot; 1 week ago</div></div><div class="ann-actions"><span class="status-pill active">Published</span><div class="action-btns" style="margin-top:6px"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></div></div>
+          <div class="ann-card"><div class="ann-icon" style="background:rgba(16,185,129,0.15)"><svg width="18" height="18" fill="none" stroke="#10b981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><circle cx="12" cy="8" r="6"></circle><path d="M15.477 12.89L17 22l-5-3-5 3 1.523-9.11"></path></svg></div><div class="ann-body"><div class="ann-title">Internship Certificate Distribution</div><div class="ann-text">Students who completed their internship in July-August 2026 can collect their certificates from the admin office between 10 AM &ndash; 4 PM on working days.</div><div class="ann-meta">Posted by Admin &middot; 2 weeks ago</div></div><div class="ann-actions"><span class="status-pill pending">Draft</span><div class="action-btns" style="margin-top:6px"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></div></div>
         </div>
       </div>
-    </main>
-  </div>
 
-  <!-- ======================================================================
-       MODALS: ADD / EDIT COURSE
-       ====================================================================== -->
-  <div class="admin-modal-overlay" id="courseModalOverlay">
-    <div class="admin-modal-box">
-      <div class="admin-modal-header">
-        <h3 class="admin-modal-title" id="courseModalHeading">Add New Course</h3>
-        <button class="admin-modal-close" onclick="closeCourseModal()">&times;</button>
+      <!-- ENQUIRIES -->
+      <div class="panel" id="panel-enquiries">
+        <div class="page-header"><div class="page-header-left"><h2>Enquiry Inbox</h2><p>Contact form submissions from the public website.</p></div><button class="btn-secondary"><svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg>Clear All Read</button></div>
+        <div class="card">
+          <div class="enquiry-item"><div class="enquiry-avatar">R</div><div class="enquiry-body"><div class="enquiry-name">Rahul Desai <span style="display:inline-block;width:8px;height:8px;background:var(--red);border-radius:50%;margin-left:6px;vertical-align:middle"></span></div><div class="enquiry-email">rahul.desai@gmail.com &middot; +91 98001 22334</div><div class="enquiry-msg">I am interested in enrolling for the Full Stack Web Development course. Could you please share the fee structure, batch schedule, and whether EMI options are available?</div><div class="enquiry-meta">Received: 18 Sep 2026, 2:30 PM &middot; <span style="color:var(--cyan-primary)">Unread</span></div></div><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></div>
+          <div class="enquiry-item"><div class="enquiry-avatar">N</div><div class="enquiry-body"><div class="enquiry-name">Nikita Bose <span style="display:inline-block;width:8px;height:8px;background:var(--red);border-radius:50%;margin-left:6px;vertical-align:middle"></span></div><div class="enquiry-email">nikita.bose@yahoo.com &middot; +91 90045 78901</div><div class="enquiry-msg">Hi, I want to know more about internship opportunities for final year civil engineering students. What is the process to apply and what documents are required?</div><div class="enquiry-meta">Received: 17 Sep 2026, 10:15 AM &middot; <span style="color:var(--cyan-primary)">Unread</span></div></div><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></div>
+          <div class="enquiry-item"><div class="enquiry-avatar">P</div><div class="enquiry-body"><div class="enquiry-name">Prakash Iyer</div><div class="enquiry-email">prakash.iyer@outlook.com &middot; +91 77889 00123</div><div class="enquiry-msg">Requesting a callback to discuss the AutoCAD course. I have 5 years of experience in architecture and want to upskill. Please let me know the timing options.</div><div class="enquiry-meta">Received: 15 Sep 2026, 4:45 PM &middot; Read</div></div><div class="action-btns"><div class="action-btn success"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg></div><div class="action-btn danger"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6l-1 14H6L5 6"></path><path d="M10 11v6"></path><path d="M14 11v6"></path><path d="M9 6V4h6v2"></path></svg></div></div></div>
+        </div>
       </div>
-      <form id="courseForm" onsubmit="handleSaveCourse(event)">
-        <input type="hidden" id="courseEditId" value="" />
-        <div class="admin-modal-body">
-          <div class="form-grid-2">
-            <div class="admin-form-group">
-              <label for="inputCourseName">Course Title *</label>
-              <input type="text" id="inputCourseName" placeholder="e.g. Java Full Stack" required />
-            </div>
-            <div class="admin-form-group">
-              <label for="inputCourseSubname">Sub-Specialization *</label>
-              <input type="text" id="inputCourseSubname" placeholder="e.g. Enterprise Systems" required />
-            </div>
-          </div>
-          <div class="form-grid-2">
-            <div class="admin-form-group">
-              <label for="inputCourseDuration">Duration *</label>
-              <input type="text" id="inputCourseDuration" placeholder="e.g. 3 Months" required />
-            </div>
-            <div class="admin-form-group">
-              <label for="inputCourseLevel">Level *</label>
-              <select id="inputCourseLevel" required>
-                <option value="Beginner">Beginner</option>
-                <option value="Intermediate">Intermediate</option>
-                <option value="Advanced">Advanced</option>
-                <option value="All Levels">All Levels</option>
-              </select>
-            </div>
-          </div>
-          <div class="form-grid-2">
-            <div class="admin-form-group">
-              <label for="inputCourseStudents">Estimated Students</label>
-              <input type="text" id="inputCourseStudents" placeholder="e.g. 1.2k+ Students" />
-            </div>
-            <div class="admin-form-group">
-              <label for="inputCourseStatus">Status</label>
-              <select id="inputCourseStatus">
-                <option value="Active">Active</option>
-                <option value="Draft">Draft</option>
-              </select>
-            </div>
-          </div>
-          <div class="admin-form-group">
-            <label for="inputCourseDesc">Description</label>
-            <textarea id="inputCourseDesc" placeholder="Brief summary of what students will master..."
-              rows="3"></textarea>
-          </div>
-        </div>
-        <div class="admin-modal-footer">
-          <button type="button" class="btn-secondary-cancel" onclick="closeCourseModal()">Cancel</button>
-          <button type="submit" class="btn-primary-save">Save Course</button>
-        </div>
-      </form>
+
     </div>
   </div>
+</div>
 
-  <!-- ======================================================================
-       MODALS: ADD / EDIT INTERNSHIP TRACK
-       ====================================================================== -->
-  <div class="admin-modal-overlay" id="trackModalOverlay">
-    <div class="admin-modal-box">
-      <div class="admin-modal-header">
-        <h3 class="admin-modal-title" id="trackModalHeading">Add Internship Track</h3>
-        <button class="admin-modal-close" onclick="closeTrackModal()">&times;</button>
-      </div>
-      <form id="trackForm" onsubmit="handleSaveTrack(event)">
-        <input type="hidden" id="trackEditId" value="" />
-        <div class="admin-modal-body">
-          <div class="form-grid-2">
-            <div class="admin-form-group">
-              <label for="inputTrackTitle">Track Title *</label>
-              <input type="text" id="inputTrackTitle" placeholder="e.g. Linux & Systems Admin" required />
-            </div>
-            <div class="admin-form-group">
-              <label for="inputTrackBadge">Badge Category *</label>
-              <input type="text" id="inputTrackBadge" placeholder="e.g. DEVOPS / SYS" required />
-            </div>
-          </div>
-          <div class="admin-form-group">
-            <label for="inputTrackSkills">Core Skills (comma separated) *</label>
-            <input type="text" id="inputTrackSkills" placeholder="e.g. Linux CLI, Bash, SSH, Systemd" required />
-          </div>
-          <div class="admin-form-group">
-            <label for="inputTrackDesc">Track Overview *</label>
-            <textarea id="inputTrackDesc" placeholder="Describe the hands-on project deliverables..." rows="3"
-              required></textarea>
-          </div>
-          <div class="admin-form-group">
-            <label for="inputTrackStatus">Status</label>
-            <select id="inputTrackStatus">
-              <option value="Active">Active</option>
-              <option value="Archived">Archived</option>
-            </select>
-          </div>
-        </div>
-        <div class="admin-modal-footer">
-          <button type="button" class="btn-secondary-cancel" onclick="closeTrackModal()">Cancel</button>
-          <button type="submit" class="btn-primary-save">Save Track</button>
-        </div>
-      </form>
+<!-- MODALS -->
+<div class="modal-overlay" id="studentModal">
+  <div class="modal">
+    <div class="modal-header"><h3>Add New Student</h3><div class="modal-close" onclick="closeModal('studentModal')">&#x2715;</div></div>
+    <div class="modal-grid">
+      <div><div class="field-label">First Name</div><input class="field-input" placeholder="e.g. Aarav" type="text"></div>
+      <div><div class="field-label">Last Name</div><input class="field-input" placeholder="e.g. Sharma" type="text"></div>
+      <div class="full"><div class="field-label">Email Address</div><input class="field-input" placeholder="student@email.com" type="email"></div>
+      <div><div class="field-label">Phone Number</div><input class="field-input" placeholder="+91 XXXXX XXXXX" type="tel"></div>
+      <div><div class="field-label">Department</div><select class="field-input"><option value="">Select Department</option><option>Information Technology</option><option>Civil Engineering</option><option>Software Engineering</option></select></div>
+      <div class="full"><div class="field-label">Course Enrolled</div><select class="field-input"><option value="">Select Course</option><option>Full Stack Web Development</option><option>AutoCAD &amp; Civil Design Mastery</option><option>Data Science &amp; Machine Learning</option><option>AI &amp; Python Engineering Track</option></select></div>
+      <div><div class="field-label">Enrolment Date</div><input class="field-input" type="date"></div>
+      <div><div class="field-label">Status</div><select class="field-input"><option>Active</option><option>Pending</option><option>Inactive</option></select></div>
     </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('studentModal')">Cancel</button><button class="btn-primary">Add Student</button></div>
   </div>
+</div>
 
-  <!-- ======================================================================
-       ADMIN JAVASCRIPT ENGINE
-       ====================================================================== -->
-  <script>
-    // ----------------------------------------------------
-    // DATA SEEDS
-    // ----------------------------------------------------
-    const DEFAULT_COURSES = [
-      { id: 'c1', name: 'Java', subname: 'Core Programming', duration: '3 Months', level: 'Beginner', students: '1.2k+ Students', status: 'Active', desc: 'Master OOP, collections, exception handling, and real-world project building.' },
-      { id: 'c2', name: 'Python', subname: 'Programming Language', duration: '2 Months', level: 'Beginner', students: '980+ Students', status: 'Active', desc: 'From syntax to scripting — learn Python for automation, data analysis, and backend development.' },
-      { id: 'c3', name: 'C & C++', subname: 'Systems Programming', duration: '3 Months', level: 'Intermediate', students: '750+ Students', status: 'Active', desc: 'Deep-dive into low-level programming, memory management, pointers, and performance-critical coding.' },
-      { id: 'c4', name: 'Web Development', subname: 'Full Stack', duration: '4 Months', level: 'Beginner', students: '1.8k+ Students', status: 'Active', desc: 'HTML5, CSS3, JavaScript, React, Node.js and RESTful API backend development.' },
-      { id: 'c5', name: 'Data Analytics', subname: 'Business Intelligence', duration: '4 Months', level: 'Beginner', students: '1.5k+ Students', status: 'Active', desc: 'Turn raw data into insights using Excel, SQL, Power BI and statistical analysis.' },
-      { id: 'c6', name: 'DSA with Java', subname: 'Algorithms & Structures', duration: '4 Months', level: 'Intermediate', students: '890+ Students', status: 'Active', desc: 'Arrays, linked lists, trees, graphs, dynamic programming for interview readiness.' },
-      { id: 'c7', name: 'DSA with Python', subname: 'Algorithms & Structures', duration: '4 Months', level: 'Intermediate', students: '720+ Students', status: 'Active', desc: 'Master data structures and algorithms using Python for competitive programming.' },
-      { id: 'c8', name: 'Linux', subname: 'System Administration', duration: '2 Months', level: 'Beginner', students: '600+ Students', status: 'Active', desc: 'Terminal navigation, process control, systemd services, and automation in Linux environments.' },
-      { id: 'c9', name: 'Cloud Computing', subname: 'AWS & DevOps', duration: '5 Months', level: 'Advanced', students: '540+ Students', status: 'Active', desc: 'Deploy, scale, and manage cloud infrastructure on AWS — EC2, S3, IAM, and CI/CD pipelines.' }
-    ];
+<div class="modal-overlay" id="certModal">
+  <div class="modal">
+    <div class="modal-header"><h3>Issue Certificate</h3><div class="modal-close" onclick="closeModal('certModal')">&#x2715;</div></div>
+    <div class="modal-grid">
+      <div class="full"><div class="field-label">Student Name</div><select class="field-input"><option value="">Select Student</option><option>Aarav Sharma</option><option>Priya Nair</option><option>Rohan Mehta</option><option>Sneha Patel</option></select></div>
+      <div class="full"><div class="field-label">Programme / Course</div><input class="field-input" placeholder="e.g. Full Stack Web Development" type="text"></div>
+      <div><div class="field-label">Department</div><select class="field-input"><option>Information Technology</option><option>Civil Engineering</option><option>Software Engineering</option></select></div>
+      <div><div class="field-label">Grade</div><select class="field-input"><option>A+ (Distinction)</option><option>A (First Class)</option><option>B+ (Second Class)</option><option>B (Pass)</option></select></div>
+      <div><div class="field-label">Issue Date</div><input class="field-input" type="date"></div>
+      <div><div class="field-label">Certificate ID</div><input class="field-input" placeholder="Auto-generated" readonly style="opacity:0.6" type="text"></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('certModal')">Cancel</button><button class="btn-primary">Issue Certificate</button></div>
+  </div>
+</div>
 
-    const DEFAULT_TRACKS = [
-      { id: 't1', title: 'Data Analytics & BI', badge: 'HOT TRACK', skills: ['Power BI', 'Python Pandas', 'SQL Analysis', 'Tableau'], status: 'Active', desc: 'Clean, transform, and analyze enterprise datasets. Build interactive KPI dashboards.' },
-      { id: 't2', title: 'Full Stack Web Dev', badge: 'POPULAR', skills: ['React.js', 'Node / Express', 'REST APIs', 'PostgreSQL'], status: 'Active', desc: 'Design and deploy high-performance web applications using modern React frameworks.' },
-      { id: 't3', title: 'Software Testing & QA', badge: 'IN DEMAND', skills: ['Selenium', 'Manual QA', 'Postman API', 'JIRA'], status: 'Active', desc: 'Perform manual test design, automated Selenium scripts, API testing with Postman.' },
-      { id: 't4', title: 'Java Software Systems', badge: 'ENTERPRISE', skills: ['Spring Boot', 'Core Java', 'Hibernate', 'Maven'], status: 'Active', desc: 'Build robust backend services, controllers, database persistence, and clean architectures.' },
-      { id: 't5', title: 'Python & Machine Learning', badge: 'AI/DATA', skills: ['Python 3', 'Scikit-Learn', 'NumPy/Pandas', 'FastAPI'], status: 'Active', desc: 'Develop data pipelines, feature engineering workflows, and machine learning models.' },
-      { id: 't6', title: 'Cloud Solutions & DevOps', badge: 'INFRASTRUCTURE', skills: ['AWS EC2 / S3', 'Docker', 'IAM Security', 'CI/CD'], status: 'Active', desc: 'Deploy cloud compute resources, configure VPC subnets, automate backups and pipelines.' },
-      { id: 't7', title: 'Database Administration', badge: 'CORE BACKEND', skills: ['PostgreSQL', 'SQL Tuning', 'ER Diagrams', 'Replication'], status: 'Active', desc: 'Design normalized schemas, optimize indexing strategies, and manage stored procedures.' },
-      { id: 't8', title: 'IoT & Embedded Systems', badge: 'HARDWARE', skills: ['ESP32', 'MQTT Broker', 'Telemetry', 'Arduino C++'], status: 'Active', desc: 'Connect sensors to microcontrollers, stream telemetry over MQTT, and create dashboards.' },
-      { id: 't9', title: 'Civil Engineering & CAD', badge: 'ENGINEERING', skills: ['AutoCAD', 'Structural Plans', 'BIM Basics', 'Cost Estimates'], status: 'Active', desc: 'Work on real structural drafting, 2D/3D building plans, and quantity takeoffs.' },
-      { id: 't10', title: 'Linux & Systems Admin', badge: 'DEVOPS / SYS', skills: ['Linux CLI', 'Bash Scripting', 'SSH & Security', 'Systemd / Cron'], status: 'Active', desc: 'Master Linux CLI commands, user permission security, Bash shell scripting, and network configuration.' }
-    ];
+<div class="modal-overlay" id="courseModal">
+  <div class="modal">
+    <div class="modal-header"><h3>Add New Course</h3><div class="modal-close" onclick="closeModal('courseModal')">&#x2715;</div></div>
+    <div class="modal-grid">
+      <div class="full"><div class="field-label">Course Name</div><input class="field-input" placeholder="e.g. Full Stack Web Development" type="text"></div>
+      <div><div class="field-label">Department</div><select class="field-input"><option>Information Technology</option><option>Civil Engineering</option><option>Software Engineering</option></select></div>
+      <div><div class="field-label">Duration</div><input class="field-input" placeholder="e.g. 6 months" type="text"></div>
+      <div><div class="field-label">Course Fee (&#x20B9;)</div><input class="field-input" placeholder="e.g. 18000" type="number"></div>
+      <div><div class="field-label">Max Seats</div><input class="field-input" placeholder="e.g. 50" type="number"></div>
+      <div class="full"><div class="field-label">Description</div><textarea class="field-input" placeholder="Short course description..."></textarea></div>
+      <div class="full"><div class="field-label">Status</div><select class="field-input"><option>Draft</option><option>Published</option></select></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('courseModal')">Cancel</button><button class="btn-primary">Add Course</button></div>
+  </div>
+</div>
 
-    const DEFAULT_APPLICATIONS = [
-      { id: 'a1', date: '2026-09-15', name: 'Rahul Sharma', email: 'rahul.s@gmail.com', phone: '+91 98765 43210', domain: 'Full Stack Web Dev', college: 'VIT Pune (3rd Year)', status: 'Pending' },
-      { id: 'a2', date: '2026-09-15', name: 'Pooja Verma', email: 'pooja.v@outlook.com', phone: '+91 98112 34567', domain: 'Data Analytics & BI', college: 'COEP Tech (4th Year)', status: 'Shortlisted' },
-      { id: 'a3', date: '2026-09-14', name: 'Amit Kulkarni', email: 'amit.k@gmail.com', phone: '+91 97654 32109', domain: 'Linux & Systems Admin', college: 'MIT World Peace Univ', status: 'Accepted' },
-      { id: 'a4', date: '2026-09-14', name: 'Neha Joshi', email: 'neha.j@yahoo.com', phone: '+91 98901 23456', domain: 'Java Software Systems', college: 'DY Patil COE', status: 'Pending' },
-      { id: 'a5', date: '2026-09-13', name: 'Rohan Deshmukh', email: 'rohan.d@gmail.com', phone: '+91 99223 44556', domain: 'Cloud Solutions & DevOps', college: 'Cummins COE', status: 'Shortlisted' }
-    ];
+<div class="modal-overlay" id="annModal">
+  <div class="modal">
+    <div class="modal-header"><h3>New Announcement</h3><div class="modal-close" onclick="closeModal('annModal')">&#x2715;</div></div>
+    <div class="modal-grid">
+      <div class="full"><div class="field-label">Title</div><input class="field-input" placeholder="Announcement title..." type="text"></div>
+      <div class="full"><div class="field-label">Message</div><textarea class="field-input" style="min-height:120px" placeholder="Write your announcement here..."></textarea></div>
+      <div><div class="field-label">Visible To</div><select class="field-input"><option>All Students</option><option>IT Students</option><option>Civil Students</option><option>Software Students</option></select></div>
+      <div><div class="field-label">Status</div><select class="field-input"><option>Published</option><option>Draft</option></select></div>
+    </div>
+    <div class="modal-footer"><button class="btn-secondary" onclick="closeModal('annModal')">Cancel</button><button class="btn-primary">Post Announcement</button></div>
+  </div>
+</div>
 
-    const DEFAULT_ANNOUNCEMENTS = [
-      { id: 'ann1', title: 'Q3 Internship Cohort Orientation', date: 'Sep 15, 2026', author: 'Admin Sujal', message: 'Orientation call for all admitted internship candidates will be conducted this Friday at 5:00 PM IST via Google Meet.' },
-      { id: 'ann2', title: 'New Linux Administration Track Live', date: 'Sep 16, 2026', author: 'Admin Team', message: 'We have officially launched the Linux & Systems Administration track with dedicated hands-on server labs!' }
-    ];
+<script>
+  var ADMIN_CREDS = { email: 'admin@statsinnotech.com', password: 'admin123' };
+  var PANELS = ['dashboard','students','certificates','courses','internships','announcements','enquiries'];
+  var TITLES = { dashboard:'Dashboard', students:'Student Management', certificates:'Certificate Management', courses:'Course Management', internships:'Internship Applications', announcements:'Announcements', enquiries:'Enquiry Inbox' };
 
-    // Initialize LocalStorage Data
-    function getStoredData(key, fallback) {
-      const stored = localStorage.getItem('sit_admin_' + key);
-      if (stored) {
-        try { return JSON.parse(stored); } catch (e) { }
-      }
-      localStorage.setItem('sit_admin_' + key, JSON.stringify(fallback));
-      return fallback;
-    }
+  function doAdminLogin() {
+    var email = document.getElementById('adminEmail').value.trim();
+    var pass  = document.getElementById('adminPass').value;
+    var err   = document.getElementById('loginError');
+    if (email === ADMIN_CREDS.email && pass === ADMIN_CREDS.password) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('adminShell').style.display = 'block';
+      err.style.display = 'none';
+    } else { err.style.display = 'block'; }
+  }
 
-    function setStoredData(key, value) {
-      localStorage.setItem('sit_admin_' + key, JSON.stringify(value));
-    }
+  function doLogout() {
+    document.getElementById('adminShell').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('adminEmail').value = '';
+    document.getElementById('adminPass').value = '';
+  }
 
-    let courses = getStoredData('courses', DEFAULT_COURSES);
-    let tracks = getStoredData('tracks', DEFAULT_TRACKS);
-    let applications = getStoredData('applications', DEFAULT_APPLICATIONS);
-    let announcements = getStoredData('announcements', DEFAULT_ANNOUNCEMENTS);
-
-    // ----------------------------------------------------
-    // AUTHENTICATION & LOGIN
-    // ----------------------------------------------------
-    const VALID_ADMINS = {
-      "SIT@ADMIN.SUJAL": "@Sujal.Stats2026",
-      "SIT@ADMIN.AYUSHI": "@Ayushi.Stats2026",
-      "SIT@ADMIN.TANUSHREE": "@Tanushree.Stats2026",
-      "SIT@ADMIN.SARVESH": "@Sarvesh.Stats2026",
-      "SIT@ADMIN.SHUBHAM": "@Shubham.Stats2026",
-      "ADMIN@STATSINNOTECH.COM": "ADMIN123",
-      "ADMIN@STATSNOTECH.COM": "ADMIN123"
-    };
-
-    function quickFill(id, pw) {
-      document.getElementById('adminIdInput').value = id;
-      document.getElementById('adminPasswordInput').value = pw;
-    }
-
-    document.getElementById('adminLoginForm').addEventListener('submit', function (e) {
-      e.preventDefault();
-      const id = document.getElementById('adminIdInput').value.trim().toUpperCase();
-      const pw = document.getElementById('adminPasswordInput').value.trim();
-      const errBox = document.getElementById('adminLoginError');
-
-      if (VALID_ADMINS[id] && (VALID_ADMINS[id] === pw || VALID_ADMINS[id].toUpperCase() === pw.toUpperCase())) {
-        errBox.style.display = 'none';
-        const displayName = id.replace("SIT@ADMIN.", "").replace("@STATSINNOTECH.COM", "").replace("@STATSNOTECH.COM", "");
-        sessionStorage.setItem('sit_current_admin', displayName);
-        enterDashboard(displayName);
-      } else {
-        errBox.textContent = 'Invalid Admin credentials. Please check your Admin ID and password.';
-        errBox.style.display = 'block';
-      }
+  function showPanel(name) {
+    PANELS.forEach(function(p) {
+      document.getElementById('panel-' + p).classList.remove('active');
+      document.getElementById('nav-' + p).classList.remove('active');
     });
+    document.getElementById('panel-' + name).classList.add('active');
+    document.getElementById('nav-' + name).classList.add('active');
+    document.getElementById('topbarTitle').textContent = TITLES[name];
+    if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('mobile-open');
+  }
 
-    function enterDashboard(name) {
-      document.getElementById('adminAuthScreen').style.display = 'none';
-      document.getElementById('adminAppLayout').style.display = 'flex';
-      document.getElementById('adminDisplayId').textContent = name || 'Admin';
-      document.getElementById('adminAvatarInitials').textContent = (name || 'AD').slice(0, 2).toUpperCase();
-      renderAllViews();
-    }
+  function openModal(id)  { document.getElementById(id).classList.add('open'); }
+  function closeModal(id) { document.getElementById(id).classList.remove('open'); }
 
-    function adminLogout() {
-      sessionStorage.removeItem('sit_current_admin');
-      document.getElementById('adminAppLayout').style.display = 'none';
-      document.getElementById('adminAuthScreen').style.display = 'flex';
-      document.getElementById('adminPasswordInput').value = '';
-    }
+  document.querySelectorAll('.modal-overlay').forEach(function(o) {
+    o.addEventListener('click', function(e) { if (e.target === o) o.classList.remove('open'); });
+  });
 
-    // Auto login if already logged in this session
-    window.addEventListener('DOMContentLoaded', function () {
-      const active = sessionStorage.getItem('sit_current_admin');
-      if (active) {
-        enterDashboard(active);
-      }
-    });
+  function toggleSidebar() { document.getElementById('sidebar').classList.toggle('mobile-open'); }
 
-    // ----------------------------------------------------
-    // VIEW SWITCHING
-    // ----------------------------------------------------
-    function showAdminTab(tabName, btnElem) {
-      const views = ['dashboard', 'courses', 'internships', 'applications', 'announcements', 'settings'];
-      views.forEach(v => {
-        const el = document.getElementById('view' + v.charAt(0).toUpperCase() + v.slice(1));
-        if (el) el.style.display = (v === tabName) ? 'block' : 'none';
-      });
+  function checkMobile() {
+    document.getElementById('hamburgerBtn').style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+  }
+  checkMobile();
+  window.addEventListener('resize', checkMobile);
 
-      const titleMap = {
-        dashboard: 'Dashboard Overview',
-        courses: 'Courses Directory & Curriculum',
-        internships: 'Internship Tracks Management',
-        applications: 'Student Applications & Leads',
-        announcements: 'Announcements & Broadcasts',
-        settings: 'System Configuration'
-      };
-      document.getElementById('adminPageHeaderTitle').textContent = titleMap[tabName] || 'Admin Console';
-
-      document.querySelectorAll('.admin-nav-item').forEach(b => b.classList.remove('active'));
-      if (btnElem) btnElem.classList.add('active');
-    }
-
-    // ----------------------------------------------------
-    // RENDER FUNCTIONS
-    // ----------------------------------------------------
-    function renderAllViews() {
-      renderDashboardRecent();
-      renderCoursesTable(courses);
-      renderTracksTable(tracks);
-      renderAppsTable(applications);
-      renderAnnouncements();
-      updateBadgeCounts();
-    }
-
-    function updateBadgeCounts() {
-      document.getElementById('statTotalCourses').textContent = courses.length;
-      document.getElementById('statTotalTracks').textContent = tracks.length;
-      document.getElementById('badgeCourseCount').textContent = courses.length;
-      document.getElementById('badgeTrackCount').textContent = tracks.length;
-      document.getElementById('badgeAppCount').textContent = applications.length;
-      document.getElementById('statPendingApps').textContent = applications.filter(a => a.status === 'Pending').length;
-    }
-
-    // 1. Dashboard Recent Table
-    function renderDashboardRecent() {
-      const tbody = document.getElementById('dashboardRecentBody');
-      tbody.innerHTML = '';
-      applications.slice(0, 5).forEach(app => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${app.name}</strong></td>
-          <td><span style="color:var(--admin-blue); font-weight:600;">${app.domain}</span></td>
-          <td>${app.email}</td>
-          <td>${app.college}</td>
-          <td><span class="badge-status badge-${app.status.toLowerCase()}">${app.status}</span></td>
-          <td>
-            <button class="btn-tbl-action" onclick="showAdminTab('applications')">Review</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    // 2. Courses Table
-    function renderCoursesTable(data) {
-      const tbody = document.getElementById('coursesAdminBody');
-      tbody.innerHTML = '';
-      data.forEach(c => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td><strong>${c.name}</strong></td>
-          <td>${c.subname}</td>
-          <td>${c.duration}</td>
-          <td><span class="badge-status" style="background:#E2E8F0; color:#334155;">${c.level}</span></td>
-          <td>${c.students || 'Active'}</td>
-          <td><span class="badge-status badge-${c.status === 'Active' ? 'active' : 'draft'}">${c.status}</span></td>
-          <td>
-            <div class="table-actions">
-              <button class="btn-tbl-action" onclick="editCourse('${c.id}')">Edit</button>
-              <button class="btn-tbl-action delete" onclick="deleteCourse('${c.id}')">Delete</button>
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function filterCoursesTable() {
-      const query = document.getElementById('searchCourseInput').value.toLowerCase();
-      const level = document.getElementById('filterCourseLevel').value;
-      const filtered = courses.filter(c => {
-        const matchQ = c.name.toLowerCase().includes(query) || c.subname.toLowerCase().includes(query);
-        const matchL = (level === 'ALL' || c.level === level);
-        return matchQ && matchL;
-      });
-      renderCoursesTable(filtered);
-    }
-
-    // 3. Internship Tracks Table
-    function renderTracksTable(data) {
-      const tbody = document.getElementById('tracksAdminBody');
-      tbody.innerHTML = '';
-      data.forEach(t => {
-        const tr = document.createElement('tr');
-        const skillBadges = t.skills.map(s => `<span style="background:#F1F5F9; border:1px solid #CBD5E1; font-size:11px; padding:2px 6px; border-radius:4px; margin-right:4px;">${s}</span>`).join('');
-        tr.innerHTML = `
-          <td><strong>${t.title}</strong></td>
-          <td><span class="badge-status" style="background:rgba(6,182,212,0.15); color:#0891B2;">${t.badge}</span></td>
-          <td>${skillBadges}</td>
-          <td><span class="badge-status badge-${t.status === 'Active' ? 'active' : 'draft'}">${t.status}</span></td>
-          <td>
-            <div class="table-actions">
-              <button class="btn-tbl-action" onclick="editTrack('${t.id}')">Edit</button>
-              <button class="btn-tbl-action delete" onclick="deleteTrack('${t.id}')">Delete</button>
-            </div>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function filterTracksTable() {
-      const query = document.getElementById('searchTrackInput').value.toLowerCase();
-      const filtered = tracks.filter(t => t.title.toLowerCase().includes(query) || t.badge.toLowerCase().includes(query));
-      renderTracksTable(filtered);
-    }
-
-    // 4. Applications Table
-    function renderAppsTable(data) {
-      const tbody = document.getElementById('appsAdminBody');
-      tbody.innerHTML = '';
-      data.forEach(a => {
-        const tr = document.createElement('tr');
-        tr.innerHTML = `
-          <td>${a.date}</td>
-          <td><strong>${a.name}</strong></td>
-          <td><a href="mailto:${a.email}" style="color:var(--admin-blue);">${a.email}</a></td>
-          <td>${a.phone}</td>
-          <td><span style="color:#0891B2; font-weight:700;">${a.domain}</span></td>
-          <td>${a.college}</td>
-          <td>
-            <select class="admin-select-filter" style="padding:4px 8px; font-size:12px;" onchange="updateAppStatus('${a.id}', this.value)">
-              <option value="Pending" ${a.status === 'Pending' ? 'selected' : ''}>Pending</option>
-              <option value="Shortlisted" ${a.status === 'Shortlisted' ? 'selected' : ''}>Shortlisted</option>
-              <option value="Accepted" ${a.status === 'Accepted' ? 'selected' : ''}>Accepted</option>
-              <option value="Rejected" ${a.status === 'Rejected' ? 'selected' : ''}>Rejected</option>
-            </select>
-          </td>
-          <td>
-            <button class="btn-tbl-action delete" onclick="deleteApp('${a.id}')">Remove</button>
-          </td>
-        `;
-        tbody.appendChild(tr);
-      });
-    }
-
-    function filterAppsTable() {
-      const status = document.getElementById('filterAppStatus').value;
-      const filtered = (status === 'ALL') ? applications : applications.filter(a => a.status === status);
-      renderAppsTable(filtered);
-    }
-
-    function updateAppStatus(id, newStatus) {
-      const item = applications.find(a => a.id === id);
-      if (item) {
-        item.status = newStatus;
-        setStoredData('applications', applications);
-        updateBadgeCounts();
-      }
-    }
-
-    function deleteApp(id) {
-      if (confirm('Are you sure you want to remove this application?')) {
-        applications = applications.filter(a => a.id !== id);
-        setStoredData('applications', applications);
-        renderAppsTable(applications);
-        renderDashboardRecent();
-        updateBadgeCounts();
-      }
-    }
-
-    function exportApplicationsToCSV() {
-      const headers = ["ID", "Date", "Name", "Email", "Phone", "Domain", "College", "Status"];
-      const rows = applications.map(a => [a.id, a.date, `"${a.name}"`, a.email, `"${a.phone}"`, `"${a.domain}"`, `"${a.college}"`, a.status]);
-      const csvContent = "data:text/csv;charset=utf-8," + [headers.join(","), ...rows.map(e => e.join(","))].join("\n");
-      const encodedUri = encodeURI(csvContent);
-      const link = document.createElement("a");
-      link.setAttribute("href", encodedUri);
-      link.setAttribute("download", `StatsInnotech_Applications_${new Date().toISOString().slice(0, 10)}.csv`);
-      document.body.appendChild(link);
-      link.click();
-      document.body.removeChild(link);
-    }
-
-    // 5. Announcements View
-    function renderAnnouncements() {
-      const container = document.getElementById('announcementsList');
-      container.innerHTML = '';
-      announcements.forEach(ann => {
-        const div = document.createElement('div');
-        div.style = "background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px; padding:16px 20px; position:relative;";
-        div.innerHTML = `
-          <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:6px;">
-            <h4 style="margin:0; font-size:15px; color:var(--admin-navy);">${ann.title}</h4>
-            <span style="font-size:12px; color:#64748B;">${ann.date} • ${ann.author}</span>
-          </div>
-          <p style="margin:0; font-size:13.5px; color:#334155; line-height:1.5;">${ann.message}</p>
-          <button onclick="deleteAnnouncement('${ann.id}')" style="background:transparent; border:none; color:#EF4444; font-size:11.5px; font-weight:600; cursor:pointer; padding:0; margin-top:10px;">&times; Delete Notice</button>
-        `;
-        container.appendChild(div);
-      });
-    }
-
-    function handlePostAnnouncement(e) {
-      e.preventDefault();
-      const title = document.getElementById('announceTitle').value;
-      const message = document.getElementById('announceMessage').value;
-      const author = 'Admin ' + (sessionStorage.getItem('sit_current_admin') || 'Team');
-      const newAnn = {
-        id: 'ann_' + Date.now(),
-        title: title,
-        message: message,
-        date: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }),
-        author: author
-      };
-      announcements.unshift(newAnn);
-      setStoredData('announcements', announcements);
-      document.getElementById('announcementForm').reset();
-      renderAnnouncements();
-      alert('Announcement successfully published!');
-    }
-
-    function deleteAnnouncement(id) {
-      if (confirm('Delete this announcement?')) {
-        announcements = announcements.filter(a => a.id !== id);
-        setStoredData('announcements', announcements);
-        renderAnnouncements();
-      }
-    }
-
-    // ----------------------------------------------------
-    // COURSE CRUD OPERATIONS
-    // ----------------------------------------------------
-    function openAddCourseModal() {
-      document.getElementById('courseForm').reset();
-      document.getElementById('courseEditId').value = '';
-      document.getElementById('courseModalHeading').textContent = 'Add New Course';
-      document.getElementById('courseModalOverlay').classList.add('open');
-    }
-
-    function editCourse(id) {
-      const c = courses.find(item => item.id === id);
-      if (!c) return;
-      document.getElementById('courseEditId').value = c.id;
-      document.getElementById('inputCourseName').value = c.name;
-      document.getElementById('inputCourseSubname').value = c.subname;
-      document.getElementById('inputCourseDuration').value = c.duration;
-      document.getElementById('inputCourseLevel').value = c.level;
-      document.getElementById('inputCourseStudents').value = c.students || '';
-      document.getElementById('inputCourseStatus').value = c.status || 'Active';
-      document.getElementById('inputCourseDesc').value = c.desc || '';
-      document.getElementById('courseModalHeading').textContent = 'Edit Course: ' + c.name;
-      document.getElementById('courseModalOverlay').classList.add('open');
-    }
-
-    function closeCourseModal() {
-      document.getElementById('courseModalOverlay').classList.remove('open');
-    }
-
-    function handleSaveCourse(e) {
-      e.preventDefault();
-      const editId = document.getElementById('courseEditId').value;
-      const courseData = {
-        name: document.getElementById('inputCourseName').value.trim(),
-        subname: document.getElementById('inputCourseSubname').value.trim(),
-        duration: document.getElementById('inputCourseDuration').value.trim(),
-        level: document.getElementById('inputCourseLevel').value,
-        students: document.getElementById('inputCourseStudents').value.trim() || 'Active Batch',
-        status: document.getElementById('inputCourseStatus').value,
-        desc: document.getElementById('inputCourseDesc').value.trim()
-      };
-
-      if (editId) {
-        // Update existing
-        const idx = courses.findIndex(c => c.id === editId);
-        if (idx !== -1) {
-          courses[idx] = { ...courses[idx], ...courseData };
-        }
-      } else {
-        // Create new
-        const newId = 'c_' + Date.now();
-        courses.push({ id: newId, ...courseData });
-      }
-
-      setStoredData('courses', courses);
-      closeCourseModal();
-      renderCoursesTable(courses);
-      updateBadgeCounts();
-    }
-
-    function deleteCourse(id) {
-      if (confirm('Are you sure you want to delete this course from catalog?')) {
-        courses = courses.filter(c => c.id !== id);
-        setStoredData('courses', courses);
-        renderCoursesTable(courses);
-        updateBadgeCounts();
-      }
-    }
-
-    // ----------------------------------------------------
-    // TRACK CRUD OPERATIONS
-    // ----------------------------------------------------
-    function openAddTrackModal() {
-      document.getElementById('trackForm').reset();
-      document.getElementById('trackEditId').value = '';
-      document.getElementById('trackModalHeading').textContent = 'Add Internship Track';
-      document.getElementById('trackModalOverlay').classList.add('open');
-    }
-
-    function editTrack(id) {
-      const t = tracks.find(item => item.id === id);
-      if (!t) return;
-      document.getElementById('trackEditId').value = t.id;
-      document.getElementById('inputTrackTitle').value = t.title;
-      document.getElementById('inputTrackBadge').value = t.badge;
-      document.getElementById('inputTrackSkills').value = t.skills.join(', ');
-      document.getElementById('inputTrackDesc').value = t.desc;
-      document.getElementById('inputTrackStatus').value = t.status || 'Active';
-      document.getElementById('trackModalHeading').textContent = 'Edit Track: ' + t.title;
-      document.getElementById('trackModalOverlay').classList.add('open');
-    }
-
-    function closeTrackModal() {
-      document.getElementById('trackModalOverlay').classList.remove('open');
-    }
-
-    function handleSaveTrack(e) {
-      e.preventDefault();
-      const editId = document.getElementById('trackEditId').value;
-      const rawSkills = document.getElementById('inputTrackSkills').value.split(',').map(s => s.trim()).filter(Boolean);
-      const trackData = {
-        title: document.getElementById('inputTrackTitle').value.trim(),
-        badge: document.getElementById('inputTrackBadge').value.trim().toUpperCase(),
-        skills: rawSkills,
-        desc: document.getElementById('inputTrackDesc').value.trim(),
-        status: document.getElementById('inputTrackStatus').value
-      };
-
-      if (editId) {
-        const idx = tracks.findIndex(t => t.id === editId);
-        if (idx !== -1) {
-          tracks[idx] = { ...tracks[idx], ...trackData };
-        }
-      } else {
-        const newId = 't_' + Date.now();
-        tracks.push({ id: newId, ...trackData });
-      }
-
-      setStoredData('tracks', tracks);
-      closeTrackModal();
-      renderTracksTable(tracks);
-      updateBadgeCounts();
-    }
-
-    function deleteTrack(id) {
-      if (confirm('Are you sure you want to remove this internship track?')) {
-        tracks = tracks.filter(t => t.id !== id);
-        setStoredData('tracks', tracks);
-        renderTracksTable(tracks);
-        updateBadgeCounts();
-      }
-    }
-
-    function resetToDemoData() {
-      if (confirm('Reset all catalog and tracks to initial default data?')) {
-        localStorage.removeItem('sit_admin_courses');
-        localStorage.removeItem('sit_admin_tracks');
-        courses = DEFAULT_COURSES;
-        tracks = DEFAULT_TRACKS;
-        setStoredData('courses', courses);
-        setStoredData('tracks', tracks);
-        renderAllViews();
-        alert('Data reset to default.');
-      }
-    }
-  </script>
+  ['adminEmail','adminPass'].forEach(function(id) {
+    document.getElementById(id).addEventListener('keydown', function(e) { if (e.key === 'Enter') doAdminLogin(); });
+  });
+</script>
 </body>
-
 </html>
