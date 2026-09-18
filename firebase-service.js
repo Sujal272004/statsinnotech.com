@@ -126,22 +126,35 @@
       throw new Error('Firebase credentials are not configured in firebase-config.js');
     }
 
-    const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+    const cleanEmail = (email || '').trim().toLowerCase();
+    const cleanName = (name || '').trim();
+
+    const userCredential = await auth.createUserWithEmailAndPassword(cleanEmail, password);
     const user = userCredential.user;
 
     // Update Auth Profile Display Name
-    await user.updateProfile({ displayName: name });
+    try {
+      await user.updateProfile({ displayName: cleanName });
+    } catch (e) {
+      console.warn('Could not update displayName:', e);
+    }
 
-    // Create student profile record in Firestore
-    await db.collection('students').doc(user.uid).set({
-      uid: user.uid,
-      name: name,
-      email: email,
-      course: course || '',
-      role: 'Student',
-      status: 'Active',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
-    });
+    // Create student profile record in Firestore (with resilient fallback if rules are locked)
+    try {
+      if (db) {
+        await db.collection('students').doc(user.uid).set({
+          uid: user.uid,
+          name: cleanName,
+          email: cleanEmail,
+          course: course || 'Engineering Track',
+          role: 'Student',
+          status: 'Active',
+          createdAt: firebase.firestore.FieldValue.serverTimestamp()
+        });
+      }
+    } catch (firestoreErr) {
+      console.warn('Firestore student profile write skipped (check Firestore security rules):', firestoreErr);
+    }
 
     return user;
   }
@@ -154,12 +167,29 @@
       throw new Error('Firebase credentials are not configured in firebase-config.js');
     }
 
-    const userCredential = await auth.signInWithEmailAndPassword(email, password);
+    const cleanEmail = (email || '').trim().toLowerCase();
+
+    const userCredential = await auth.signInWithEmailAndPassword(cleanEmail, password);
     const user = userCredential.user;
 
-    // Fetch user profile from Firestore
-    const userDoc = await db.collection('students').doc(user.uid).get();
-    const profile = userDoc.exists ? userDoc.data() : { role: 'Student' };
+    // Fetch user profile from Firestore with resilient fallback
+    let profile = {
+      role: 'Student',
+      name: user.displayName || cleanEmail.split('@')[0],
+      email: cleanEmail,
+      course: 'Engineering Track'
+    };
+
+    try {
+      if (db) {
+        const userDoc = await db.collection('students').doc(user.uid).get();
+        if (userDoc && userDoc.exists) {
+          profile = { ...profile, ...userDoc.data() };
+        }
+      }
+    } catch (firestoreErr) {
+      console.warn('Firestore profile read skipped (using Auth credentials):', firestoreErr);
+    }
 
     return { user, profile };
   }
@@ -200,7 +230,8 @@
    */
   async function resetPassword(email) {
     if (!initFirebase()) throw new Error('Firebase credentials are not configured.');
-    return await auth.sendPasswordResetEmail(email);
+    const cleanEmail = (email || '').trim().toLowerCase();
+    return await auth.sendPasswordResetEmail(cleanEmail);
   }
 
   // Expose methods on window.StatsFirebase
