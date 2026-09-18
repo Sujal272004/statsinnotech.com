@@ -4368,28 +4368,55 @@
       // ============================================================
       // SERVER CALL
       // ============================================================
+      // SERVER / BACKEND CALL (FIREBASE & GOOGLE SCRIPT ADAPTER)
+      // ============================================================
 
-      function callServer(
+      async function callServer(
         functionName,
         ...args
       ) {
-
-        return new Promise(
-          function (resolve, reject) {
-
-            google.script.run
-
-              .withSuccessHandler(
-                resolve
-              )
-
-              .withFailureHandler(
-                reject
-              )[functionName](...args);
-
+        if (window.StatsFirebase && window.isFirebaseConfigured && window.isFirebaseConfigured()) {
+          if (functionName === "login") {
+            const [email, password] = args;
+            try {
+              const res = await window.StatsFirebase.loginUser(email, password);
+              return {
+                ok: true,
+                token: res.user.uid,
+                role: res.profile?.role || "Student",
+                email: res.user.email,
+                name: res.profile?.name || res.user.displayName || email.split('@')[0],
+                course: res.profile?.course || "Engineering Track",
+                batch: res.profile?.batch || "2026"
+              };
+            } catch (err) {
+              throw new Error(err.message || "Invalid email or password.");
+            }
           }
-        );
+          if (functionName === "logout") {
+            if (window.StatsFirebase.logoutUser) {
+              await window.StatsFirebase.logoutUser();
+            }
+            return { ok: true };
+          }
+        }
 
+        if (typeof google !== "undefined" && google.script && google.script.run) {
+          return new Promise(
+            function (resolve, reject) {
+              google.script.run
+                .withSuccessHandler(
+                  resolve
+                )
+                .withFailureHandler(
+                  reject
+                )[functionName](...args);
+            }
+          );
+        }
+
+        // Fallback demo response if offline
+        return { ok: true };
       }
 
 
