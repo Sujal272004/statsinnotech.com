@@ -4429,7 +4429,7 @@
             if (idx >= 0) users[idx] = userData;
             else users.push(userData);
             localStorage.setItem('stats_students', JSON.stringify(users));
-          } catch (e) {}
+          } catch (e) { }
 
           return {
             ok: true,
@@ -6682,4 +6682,5 @@
   </script>
   <script src="main.js"></script>
 </body>
+
 </html>
