@@ -195,6 +195,14 @@
     });
   }
 
+  /**
+   * Send Password Reset Email
+   */
+  async function resetPassword(email) {
+    if (!initFirebase()) throw new Error('Firebase credentials are not configured.');
+    return await auth.sendPasswordResetEmail(email);
+  }
+
   // Expose methods on window.StatsFirebase
   window.StatsFirebase = {
     saveContactInquiry,
@@ -203,6 +211,7 @@
     registerStudent,
     loginUser,
     logoutUser,
+    resetPassword,
     onAuthStateChanged
   };
 

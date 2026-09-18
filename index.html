@@ -4390,7 +4390,51 @@
                 batch: res.profile?.batch || "2026"
               };
             } catch (err) {
+              const code = err.code || "";
+              if (code === "auth/invalid-credential" || code === "auth/user-not-found" || code === "auth/wrong-password") {
+                throw new Error("Invalid email or password. If you don't have an account yet, click 'Create Account' below to sign up!");
+              } else if (code === "auth/too-many-requests") {
+                throw new Error("Too many failed attempts. Please try again in a few moments or click 'Forgot Password?'.");
+              } else if (code === "auth/user-disabled") {
+                throw new Error("This student account has been disabled. Please contact support.");
+              }
               throw new Error(err.message || "Invalid email or password.");
+            }
+          }
+          if (functionName === "registerStudent") {
+            const [name, email, password, course] = args;
+            try {
+              const user = await window.StatsFirebase.registerStudent(name, email, password, course);
+              return {
+                ok: true,
+                message: "Account created successfully in Firebase! You can now log in."
+              };
+            } catch (err) {
+              const code = err.code || "";
+              if (code === "auth/email-already-in-use") {
+                throw new Error("An account with this email already exists. Please log in or use 'Forgot Password'.");
+              } else if (code === "auth/weak-password") {
+                throw new Error("Password should be at least 6 characters long.");
+              } else if (code === "auth/invalid-email") {
+                throw new Error("Please enter a valid email address.");
+              }
+              throw new Error(err.message || "Unable to create account.");
+            }
+          }
+          if (functionName === "forgotPassword") {
+            const [email] = args;
+            try {
+              await window.StatsFirebase.resetPassword(email);
+              return {
+                ok: true,
+                message: "Password reset link has been sent to your email!"
+              };
+            } catch (err) {
+              const code = err.code || "";
+              if (code === "auth/user-not-found") {
+                throw new Error("No account found with this email address.");
+              }
+              throw new Error(err.message || "Unable to send password reset email.");
             }
           }
           if (functionName === "logout") {
