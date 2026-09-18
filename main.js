@@ -224,22 +224,48 @@ function initNavigation() {
   const siteHeader = document.getElementById('siteHeader');
 
   if (mobileToggle && navMenu) {
+    function closeMobileMenu() {
+      navMenu.classList.remove('mobile-open');
+      mobileToggle.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    function toggleMobileMenu() {
+      const isOpen = navMenu.classList.toggle('mobile-open');
+      mobileToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
     mobileToggle.addEventListener('click', function(e) {
       e.stopPropagation();
-      navMenu.classList.toggle('mobile-open');
+      toggleMobileMenu();
     });
 
     // Close when clicking outside
     document.addEventListener('click', function(e) {
       if (!navMenu.contains(e.target) && !mobileToggle.contains(e.target)) {
-        navMenu.classList.remove('mobile-open');
+        closeMobileMenu();
+      }
+    });
+
+    // Close on Escape key
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && navMenu.classList.contains('mobile-open')) {
+        closeMobileMenu();
+      }
+    });
+
+    // Close on resize if wider than tablet
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 900 && navMenu.classList.contains('mobile-open')) {
+        closeMobileMenu();
       }
     });
 
     // Close when link clicked
     navMenu.querySelectorAll('a').forEach(function(link) {
       link.addEventListener('click', function() {
-        navMenu.classList.remove('mobile-open');
+        closeMobileMenu();
       });
     });
   }
@@ -339,6 +365,7 @@ function openModal(modalId) {
   if (modal) {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
   }
 }
 window.openModal = openModal;
@@ -348,6 +375,10 @@ function closeModal(modalId) {
   if (modal) {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
+    const anyActive = document.querySelector('.modal-overlay.active');
+    if (!anyActive) {
+      document.body.style.overflow = '';
+    }
   }
 }
 window.closeModal = closeModal;

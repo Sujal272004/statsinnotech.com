@@ -68,6 +68,9 @@
     html {
       scroll-behavior: smooth;
       font-size: 16px;
+      overflow-x: clip;
+      width: 100%;
+      max-width: 100vw;
     }
 
     body {
@@ -77,7 +80,10 @@
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      overflow-x: hidden;
+      overflow-x: clip;
+      width: 100%;
+      max-width: 100vw;
+      -webkit-overflow-scrolling: touch;
     }
 
     /* Typography Utilities */
@@ -156,13 +162,15 @@
 
     .brand-logo-image {
       display: block;
-      width: 220px;
-      height: auto;
+      width: 150px;
+      height: 150px;
       max-height: 52px;
       object-fit: contain;
       object-position: left center;
       flex-shrink: 0;
     }
+
+    `
 
     /* Nav Links */
     .nav-menu {
@@ -1619,31 +1627,80 @@
       }
     }
 
-    @media (max-width: 860px) {
+    @media (max-width: 900px) {
       .brand-logo-image {
-        width: 185px;
-        max-height: 44px;
+        width: 165px;
+        max-height: 40px;
       }
 
       .nav-menu {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 70px;
         left: 0;
+        right: 0;
         width: 100%;
-        background-color: var(--navy-primary);
+        max-height: calc(100dvh - 70px);
+        background: rgba(11, 31, 58, 0.98);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
         flex-direction: column;
-        padding: 20px;
-        gap: 16px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding: 20px 20px 32px;
+        gap: 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
       }
 
       .nav-menu.mobile-open {
         display: flex;
+        animation: mobileNavSlide 0.22s ease-out forwards;
+      }
+
+      @keyframes mobileNavSlide {
+        from {
+          opacity: 0;
+          transform: translateY(-8px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .nav-menu .nav-link {
+        font-size: 15.5px;
+        padding: 12px 16px;
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        color: #F1F5F9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+
+      .nav-menu .nav-link:hover,
+      .nav-menu .nav-link.active {
+        background: rgba(6, 182, 212, 0.12);
+        border-color: var(--cyan-primary);
+        color: var(--cyan-primary);
       }
 
       .mobile-nav-toggle {
-        display: block;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: 8px;
+        border-radius: var(--radius-sm);
+        color: var(--white);
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        cursor: pointer;
       }
 
       .hero-grid {
@@ -1676,22 +1733,18 @@
       }
 
       .courses-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(2, 1fr);
       }
     }
 
-    @media (max-width: 580px) {
-      .brand-logo-image {
-        width: 165px;
-        max-height: 40px;
-      }
-
-      .footer-logo {
-        width: 165px;
+    @media (max-width: 680px) {
+      .courses-grid,
+      .home-courses-grid {
+        grid-template-columns: 1fr !important;
       }
 
       .feature-cards-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr !important;
       }
 
       .impact-grid {
@@ -1702,21 +1755,58 @@
         padding: 4px 10px;
       }
 
-      .courses-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
       .why-choose-grid {
         grid-template-columns: 1fr;
       }
 
       .hero-title {
-        font-size: 28px;
+        font-size: clamp(24px, 6vw, 32px);
       }
 
-      .hero-badges-row {
-        flex-direction: column;
-        align-items: flex-start;
+      .nav-actions .btn-header-cta {
+        display: none;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .brand-logo-image {
+        width: 130px !important;
+        max-height: 32px !important;
+      }
+
+      .nav-actions {
+        gap: 8px;
+      }
+
+      .btn-header-login {
+        padding: 6px 11px !important;
+        font-size: 12px !important;
+        gap: 5px;
+      }
+
+      .btn-header-login svg {
+        width: 13px;
+        height: 13px;
+      }
+
+      .mobile-nav-toggle {
+        width: 36px;
+        height: 36px;
+        padding: 6px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .brand-logo-image {
+        width: 115px !important;
+      }
+
+      .btn-header-login span {
+        display: none;
+      }
+
+      .btn-header-login {
+        padding: 7px 9px !important;
       }
     }
 
@@ -2555,6 +2645,68 @@
     #studentPortalRoot #page-activity {
       display: none !important;
     }
+
+    /* Hero Stats Strip & Mobile Layout */
+    .hero-stats-strip {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 32px;
+      margin-top: 44px;
+      flex-wrap: wrap;
+    }
+
+    .hero-stat-item {
+      text-align: center;
+      color: #CBD5E1;
+      flex: 1 1 auto;
+      min-width: 90px;
+    }
+
+    .hero-stat-value {
+      font-family: var(--font-main);
+      font-size: clamp(26px, 5.5vw, 36px);
+      font-weight: 800;
+      line-height: 1.1;
+      color: #FFFFFF;
+    }
+
+    .hero-stat-label {
+      font-size: clamp(10.5px, 2.6vw, 12px);
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-top: 6px;
+      text-transform: uppercase;
+    }
+
+    .hero-stat-divider {
+      width: 1px;
+      height: 40px;
+      background: rgba(255, 255, 255, 0.18);
+      flex-shrink: 0;
+    }
+
+    @media (max-width: 600px) {
+      .hero-stats-strip {
+        gap: 12px;
+        margin-top: 36px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        width: 100%;
+        max-width: 440px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-stat-divider {
+        display: none;
+      }
+      .hero-stat-item {
+        padding: 10px 4px;
+        background: rgba(255, 255, 255, 0.04);
+        border-radius: var(--radius-sm);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+    }
   </style>
 </head>
 
@@ -2610,20 +2762,18 @@
       <!-- ==========================================================================
          HERO SECTION (NEW PREMIUM HERO DESIGN)
          ========================================================================== -->
-      <section class="cta-banner-section" id="home" style="padding: 110px 0 96px;">
+      <section class="cta-banner-section" id="home">
         <div class="cta-banner-glow-left"></div>
         <div class="cta-banner-glow-right"></div>
         <div class="container cta-banner-content">
           <div class="page-banner-pill" style="margin: 0 auto 22px;">
             <span>INNOVATE • INSPIRE • IMPACT</span>
           </div>
-          <h1 class="cta-banner-title" id="heroTitle"
-            style="font-size: 52px; font-weight: 800; max-width: 880px; margin: 0 auto 20px; line-height: 1.15; letter-spacing: -1px;">
+          <h1 class="cta-banner-title" id="heroTitle">
             Innovating Today,<br />
             <span class="text-cyan">Inspiring Tomorrow.</span>
           </h1>
-          <p class="cta-banner-subtitle" id="heroDescription"
-            style="font-size: 18px; max-width: 660px; margin: 0 auto 36px; line-height: 1.65; color: #CBD5E1;">
+          <p class="cta-banner-subtitle" id="heroDescription">
             Stats Innotech is your partner in growth. We provide cutting-edge technical education, industry-relevant
             internships, and innovative solutions to empower your future.
           </p>
@@ -2645,50 +2795,25 @@
               </svg>
             </a>
           </div>
-          <div style="display: flex; justify-content: center; gap: 36px; margin-top: 50px; flex-wrap: wrap;">
-            <div style="text-align: center; color: #CBD5E1;">
-              <div
-                style="font-family: var(--font-main); font-size: 32px; font-weight: 800; color: #fff; line-height: 1;">
-                1,200+</div>
-              <div
-                style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-top: 6px; text-transform: uppercase;">
-                Students Trained</div>
+          <div class="hero-stats-strip">
+            <div class="hero-stat-item">
+              <div class="hero-stat-value text-white">1,200+</div>
+              <div class="hero-stat-label">Students Trained</div>
             </div>
-            <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
-            <div style="text-align: center; color: #CBD5E1;">
-              <div
-                style="font-family: var(--font-main); font-size: 32px; font-weight: 800; color: #06B6D4; line-height: 1;">
-                11+</div>
-              <div
-                style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-top: 6px; text-transform: uppercase;">
-                Expert Courses</div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value text-cyan">11+</div>
+              <div class="hero-stat-label">Expert Courses</div>
             </div>
-            <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
-            <div style="text-align: center; color: #CBD5E1;">
-              <div
-                style="font-family: var(--font-main); font-size: 32px; font-weight: 800; color: #fff; line-height: 1;">
-                92%</div>
-              <div
-                style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-top: 6px; text-transform: uppercase;">
-                Completion Rate</div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value text-white">92%</div>
+              <div class="hero-stat-label">Completion Rate</div>
             </div>
-            <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
-            <div style="text-align: center; color: #CBD5E1;">
-              <div
-                style="font-family: var(--font-main); font-size: 32px; font-weight: 800; color: #06B6D4; line-height: 1;">
-                100%</div>
-              <div
-                style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-top: 6px; text-transform: uppercase;">
-                Remote Accessible</div>
-            </div>
-            <div style="width: 1px; background: rgba(255,255,255,0.15);"></div>
-            <div style="text-align: center; color: #CBD5E1;">
-              <div
-                style="font-family: var(--font-main); font-size: 32px; font-weight: 800; color: #3B82F6; line-height: 1;">
-                24+</div>
-              <div
-                style="font-size: 12px; font-weight: 600; letter-spacing: 0.5px; margin-top: 6px; text-transform: uppercase;">
-                Industry Tracks</div>
+            <div class="hero-stat-divider"></div>
+            <div class="hero-stat-item">
+              <div class="hero-stat-value text-cyan">100%</div>
+              <div class="hero-stat-label">Remote Accessible</div>
             </div>
           </div>
         </div>
