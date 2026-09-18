@@ -10,19 +10,20 @@
  */
 
 const firebaseConfig = {
-  apiKey: "YOUR_API_KEY",
-  authDomain: "YOUR_PROJECT_ID.firebaseapp.com",
-  projectId: "YOUR_PROJECT_ID",
-  storageBucket: "YOUR_PROJECT_ID.appspot.com",
-  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-  appId: "YOUR_APP_ID"
-};
+  apiKey: "AIzaSyBNGSR89PvthDMN1IEJNhm9Q_CaSOP1uog",
+  authDomain: "stats-innotech.firebaseapp.com",
+  projectId: "stats-innotech",
+  storageBucket: "stats-innotech.firebasestorage.app",
+  messagingSenderId: "602670692748",
+  appId: "1:602670692748:web:6f000bbf16fbd6547ffea9",
+  measurementId: "G-Y990E24WNH"
+}
 
 // Check if credentials have been replaced
 function isFirebaseConfigured() {
-  return firebaseConfig && 
-         firebaseConfig.apiKey && 
-         !firebaseConfig.apiKey.startsWith("YOUR_");
+  return firebaseConfig &&
+    firebaseConfig.apiKey &&
+    !firebaseConfig.apiKey.startsWith("YOUR_");
 }
 
 window.firebaseConfig = firebaseConfig;
