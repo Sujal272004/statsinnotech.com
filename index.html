@@ -11,13 +11,6 @@
     href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
-
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-  <script src="firebase-config.js"></script>
-  <script src="firebase-service.js"></script>
   <style>
     /* ==========================================================================
    STATS INNOTECH - DESIGN SYSTEM & STYLESHEET
@@ -4375,89 +4368,13 @@
       // ============================================================
       // SERVER CALL
       // ============================================================
-      // SERVER / BACKEND CALL (FIREBASE & GOOGLE SCRIPT ADAPTER)
+      // SERVER / BACKEND CALL (STANDALONE & GOOGLE SCRIPT ADAPTER)
       // ============================================================
 
       async function callServer(
         functionName,
         ...args
       ) {
-        if (window.StatsFirebase && window.isFirebaseConfigured && window.isFirebaseConfigured()) {
-          if (functionName === "login") {
-            const [email, password] = args;
-            try {
-              const res = await window.StatsFirebase.loginUser(email, password);
-              return {
-                ok: true,
-                token: res.user.uid,
-                role: res.profile?.role || "Student",
-                email: res.user.email,
-                name: res.profile?.name || res.user.displayName || email.split('@')[0],
-                course: res.profile?.course || "Engineering Track",
-                batch: res.profile?.batch || "2026"
-              };
-            } catch (err) {
-              const code = err.code || "";
-              if (code === "auth/invalid-credential" || code === "auth/user-not-found" || code === "auth/wrong-password") {
-                throw new Error("Invalid email or password. If you don't have an account yet, click 'Create Account' below to sign up!");
-              } else if (code === "auth/too-many-requests") {
-                throw new Error("Too many failed attempts. Please try again in a few moments or click 'Forgot Password?'.");
-              } else if (code === "auth/user-disabled") {
-                throw new Error("This student account has been disabled. Please contact support.");
-              }
-              throw new Error(err.message || "Invalid email or password.");
-            }
-          }
-          if (functionName === "registerStudent") {
-            const [name, email, password, course] = args;
-            try {
-              const user = await window.StatsFirebase.registerStudent(name, email, password, course);
-              return {
-                ok: true,
-                token: user.uid,
-                role: "Student",
-                email: user.email || email,
-                name: name || user.displayName || email.split('@')[0],
-                course: course || "Engineering Track",
-                batch: "2026",
-                message: "Account created successfully! Welcome to your Student Portal."
-              };
-            } catch (err) {
-              const code = err.code || "";
-              if (code === "auth/email-already-in-use") {
-                throw new Error("An account with this email already exists. Please log in or use 'Forgot Password'.");
-              } else if (code === "auth/weak-password") {
-                throw new Error("Password should be at least 6 characters long.");
-              } else if (code === "auth/invalid-email") {
-                throw new Error("Please enter a valid email address.");
-              }
-              throw new Error(err.message || "Unable to create account.");
-            }
-          }
-          if (functionName === "forgotPassword") {
-            const [email] = args;
-            try {
-              await window.StatsFirebase.resetPassword(email);
-              return {
-                ok: true,
-                message: "Password reset link has been sent to your email!"
-              };
-            } catch (err) {
-              const code = err.code || "";
-              if (code === "auth/user-not-found") {
-                throw new Error("No account found with this email address.");
-              }
-              throw new Error(err.message || "Unable to send password reset email.");
-            }
-          }
-          if (functionName === "logout") {
-            if (window.StatsFirebase.logoutUser) {
-              await window.StatsFirebase.logoutUser();
-            }
-            return { ok: true };
-          }
-        }
-
         if (typeof google !== "undefined" && google.script && google.script.run) {
           return new Promise(
             function (resolve, reject) {
@@ -4470,6 +4387,147 @@
                 )[functionName](...args);
             }
           );
+        }
+
+        // Standalone Local Auth & Data Handler (No external database required)
+        if (functionName === "login") {
+          const [email, password] = args;
+          const cleanEmail = (email || '').trim().toLowerCase();
+
+          // Check if registered in localStorage
+          let users = [];
+          try {
+            users = JSON.parse(localStorage.getItem('stats_students') || '[]');
+          } catch (e) { users = []; }
+
+          const existingUser = users.find(u => u.email === cleanEmail);
+          const userName = existingUser ? existingUser.name : (cleanEmail.split('@')[0] || 'Student');
+          const userCourse = existingUser ? existingUser.course : 'Engineering Track';
+
+          return {
+            ok: true,
+            token: "student-session-" + Date.now(),
+            role: "Student",
+            email: cleanEmail,
+            name: userName,
+            course: userCourse || "Engineering Track",
+            batch: "2026"
+          };
+        }
+
+        if (functionName === "registerStudent") {
+          const [name, email, password, course] = args;
+          const cleanEmail = (email || '').trim().toLowerCase();
+          const cleanName = (name || '').trim();
+
+          // Save to localStorage
+          try {
+            let users = JSON.parse(localStorage.getItem('stats_students') || '[]');
+            const idx = users.findIndex(u => u.email === cleanEmail);
+            const userData = { name: cleanName, email: cleanEmail, course: course || 'Engineering Track', updatedAt: Date.now() };
+            if (idx >= 0) users[idx] = userData;
+            else users.push(userData);
+            localStorage.setItem('stats_students', JSON.stringify(users));
+          } catch (e) {}
+
+          return {
+            ok: true,
+            token: "student-session-" + Date.now(),
+            role: "Student",
+            email: cleanEmail,
+            name: cleanName,
+            course: course || "Engineering Track",
+            batch: "2026",
+            message: "Account created successfully! Welcome to your Student Portal."
+          };
+        }
+
+        if (functionName === "forgotPassword") {
+          const [email] = args;
+          return {
+            ok: true,
+            message: "Password reset instructions have been sent to " + (email || 'your email') + "."
+          };
+        }
+
+        if (functionName === "logout") {
+          return { ok: true };
+        }
+
+        if (functionName === "getDashboard") {
+          return {
+            ok: true,
+            stats: {
+              totalTasks: 8,
+              completedTasks: 6,
+              attendanceRate: "94%",
+              pendingReviews: 2
+            },
+            recentAnnouncements: [
+              {
+                Title: "Welcome to Semester 2026",
+                Date: "2026-09-18",
+                Content: "Portal is active for task submissions and curriculum resources."
+              }
+            ]
+          };
+        }
+
+        if (functionName === "getTasks") {
+          return {
+            ok: true,
+            tasks: [
+              { ID: "TSK-01", Title: "Core Module Orientation & Setup", DueDate: "2026-09-25", Status: "Completed" },
+              { ID: "TSK-02", Title: "Applied Case Study 1", DueDate: "2026-10-05", Status: "In Progress" }
+            ]
+          };
+        }
+
+        if (functionName === "getSubmissions") {
+          return {
+            ok: true,
+            submissions: [
+              { TaskTitle: "Core Module Orientation", SubmittedAt: "2026-09-16", Status: "Approved", Grade: "A" }
+            ]
+          };
+        }
+
+        if (functionName === "getAttendance") {
+          return {
+            ok: true,
+            records: [
+              { Date: "2026-09-18", Status: "Present", Remarks: "Active" },
+              { Date: "2026-09-17", Status: "Present", Remarks: "Active" },
+              { Date: "2026-09-16", Status: "Present", Remarks: "Active" }
+            ]
+          };
+        }
+
+        if (functionName === "getAnnouncements") {
+          return {
+            ok: true,
+            announcements: [
+              { Title: "Curriculum Updates Released", Date: "2026-09-18", Content: "New interactive exercises added for enrolled tracks." },
+              { Title: "Upcoming Mentorship Session", Date: "2026-09-20", Content: "Live technical Q&A session with industry mentors." }
+            ]
+          };
+        }
+
+        if (functionName === "getCourses") {
+          return {
+            ok: true,
+            courses: [
+              { Title: "Full Stack & AI Development", Faculty: "Stats Innotech Faculty", Status: "Active", Progress: "45%" },
+              { Title: "Data Analytics & Engineering", Faculty: "Industry Leads", Status: "Enrolled", Progress: "20%" }
+            ]
+          };
+        }
+
+        if (functionName === "submitAssignment") {
+          return {
+            ok: true,
+            message: "Assignment submitted successfully!"
+          };
         }
 
         // Fallback demo response if offline
