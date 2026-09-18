@@ -97,6 +97,9 @@
       align-items: center;
       justify-content: center;
       z-index: 999;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 20px 16px;
     }
 
     .login-bg-glow {
@@ -125,8 +128,9 @@
       background: var(--navy-card);
       border: 1px solid rgba(21, 94, 239, 0.2);
       border-radius: 24px;
-      padding: 52px 48px;
-      width: 420px;
+      padding: 48px 40px;
+      width: 100%;
+      max-width: 420px;
       box-shadow: 0 24px 80px rgba(0, 0, 0, 0.5);
       z-index: 1;
     }
@@ -1134,46 +1138,248 @@
       margin-top: 6px;
     }
 
+    /* SIDEBAR OVERLAY */
+    .sidebar-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(4, 12, 24, 0.72);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 99;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+
+    .sidebar-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .sidebar-close-btn {
+      display: none;
+      margin-left: auto;
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border);
+      color: var(--slate-light);
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s, color 0.15s;
+    }
+
+    .sidebar-close-btn:hover {
+      background: rgba(239, 68, 68, 0.15);
+      color: var(--red);
+    }
+
     /* RESPONSIVE */
     @media (max-width: 1100px) {
       .stats-grid {
         grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
       }
     }
 
     @media (max-width: 768px) {
+      #hamburgerBtn {
+        display: flex !important;
+      }
+
       .sidebar {
         transform: translateX(-100%);
+        box-shadow: 0 0 50px rgba(0, 0, 0, 0.7);
+        z-index: 1000;
       }
 
       .sidebar.mobile-open {
         transform: translateX(0);
       }
 
+      .sidebar-close-btn {
+        display: flex;
+      }
+
       .main-content {
         margin-left: 0;
       }
 
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-
-      .two-col {
-        grid-template-columns: 1fr;
+      .topbar {
+        padding: 0 16px;
+        gap: 10px;
+        height: 58px;
       }
 
       .topbar-search {
         display: none;
       }
-    }
 
-    @media (max-width: 480px) {
+      .topbar-title {
+        font-size: 1.05rem;
+      }
+
       .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+        margin-bottom: 20px;
+      }
+
+      .two-col {
         grid-template-columns: 1fr;
+        gap: 16px;
       }
 
       .page-area {
+        padding: 20px 16px;
+      }
+
+      .table-wrap {
+        margin: 0 -8px;
+        padding: 0 8px;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .data-table {
+        min-width: 640px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .page-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 12px;
+        margin-bottom: 18px;
+      }
+
+      .page-header-left h2 {
+        font-size: 1.25rem;
+      }
+
+      .page-header button,
+      .page-header .btn-primary,
+      .page-header .btn-secondary {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .filter-bar {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+      }
+
+      .filter-input {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .filter-select {
+        width: 100%;
+      }
+
+      .card {
+        padding: 18px 14px;
+        border-radius: 14px;
+      }
+
+      .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-bottom: 14px;
+      }
+
+      .modal {
+        padding: 22px 16px;
+        border-radius: 16px;
+        width: 100%;
+        max-width: calc(100vw - 32px);
+        margin: 16px;
+      }
+
+      .modal-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .modal-grid .full {
+        grid-column: 1;
+      }
+
+      .modal-footer {
+        flex-direction: column-reverse;
+        gap: 8px;
+        margin-top: 20px;
+      }
+
+      .modal-footer button {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .ann-card {
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .ann-actions {
+        flex-direction: row;
+        align-items: center;
+        align-self: flex-start;
+      }
+
+      .enquiry-item {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .action-btn {
+        width: 34px;
+        height: 34px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .login-card {
+        padding: 28px 18px;
+        border-radius: 20px;
+      }
+
+      .login-title {
+        font-size: 1.35rem;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .stat-card {
         padding: 16px;
+      }
+
+      .stat-value {
+        font-size: 1.6rem;
+      }
+
+      .page-area {
+        padding: 14px 12px;
+      }
+
+      .logout-btn span {
+        display: none;
+      }
+
+      .logout-btn {
+        padding: 8px 10px;
+      }
+
+      .topbar-title {
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -1217,11 +1423,17 @@
   <!-- ADMIN SHELL -->
   <div id="adminShell">
 
+    <!-- Sidebar Overlay for mobile -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
     <!-- Sidebar -->
     <aside class="sidebar" id="sidebar">
       <div class="sidebar-header">
         <img src="assets/logo_clean.png" alt="Stats Innotech">
         <span class="sidebar-admin-tag">Admin</span>
+        <button class="sidebar-close-btn" onclick="toggleSidebar()" aria-label="Close menu">
+          <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
       </div>
       <nav class="sidebar-nav">
         <div class="sidebar-section-label">Main</div>
@@ -1342,7 +1554,7 @@
             <polyline points="16 17 21 12 16 7"></polyline>
             <line x1="21" y1="12" x2="9" y2="12"></line>
           </svg>
-          Logout
+          <span>Logout</span>
         </button>
       </div>
 
@@ -2669,24 +2881,65 @@
       document.getElementById('panel-' + name).classList.add('active');
       document.getElementById('nav-'   + name).classList.add('active');
       document.getElementById('topbarTitle').textContent = TITLES[name];
-      if (window.innerWidth <= 768) document.getElementById('sidebar').classList.remove('mobile-open');
+      if (window.innerWidth <= 768) {
+        var sb = document.getElementById('sidebar');
+        var ov = document.getElementById('sidebarOverlay');
+        if (sb) sb.classList.remove('mobile-open');
+        if (ov) ov.classList.remove('active');
+        document.body.style.overflow = '';
+      }
     }
 
     /* ---- Modals ---- */
-    function openModal(id)  { document.getElementById(id).classList.add('open');    }
-    function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+    function openModal(id)  {
+      document.getElementById(id).classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeModal(id) {
+      document.getElementById(id).classList.remove('open');
+      document.body.style.overflow = '';
+    }
 
     document.querySelectorAll('.modal-overlay').forEach(function(o) {
-      o.addEventListener('click', function(e) { if (e.target === o) o.classList.remove('open'); });
+      o.addEventListener('click', function(e) {
+        if (e.target === o) {
+          o.classList.remove('open');
+          document.body.style.overflow = '';
+        }
+      });
     });
 
     /* ---- Mobile ---- */
-    function toggleSidebar() { document.getElementById('sidebar').classList.toggle('mobile-open'); }
+    function toggleSidebar() {
+      var sb = document.getElementById('sidebar');
+      var ov = document.getElementById('sidebarOverlay');
+      var isOpen = sb.classList.toggle('mobile-open');
+      if (ov) ov.classList.toggle('active', isOpen);
+      document.body.style.overflow = isOpen ? 'hidden' : '';
+    }
+
     function checkMobile() {
-      document.getElementById('hamburgerBtn').style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+      var btn = document.getElementById('hamburgerBtn');
+      if (btn) btn.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
     }
     checkMobile();
     window.addEventListener('resize', checkMobile);
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        var sb = document.getElementById('sidebar');
+        var ov = document.getElementById('sidebarOverlay');
+        if (sb && sb.classList.contains('mobile-open')) {
+          sb.classList.remove('mobile-open');
+          if (ov) ov.classList.remove('active');
+          document.body.style.overflow = '';
+        }
+        document.querySelectorAll('.modal-overlay.open').forEach(function(m) {
+          m.classList.remove('open');
+          document.body.style.overflow = '';
+        });
+      }
+    });
 
     /* ---- Enter key ---- */
     ['adminId', 'adminPass'].forEach(function(id) {
