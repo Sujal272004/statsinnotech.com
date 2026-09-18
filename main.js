@@ -311,18 +311,12 @@ function initNavigation() {
     });
   }
 
-  // Student login button on multi-page subpages
+  // Student login button navigation
   const btnLogin = document.getElementById('btnLogin');
   if (btnLogin) {
     btnLogin.addEventListener('click', function(e) {
-      // If we are already on index.html and showStudentPortal exists
-      if (typeof window.showStudentPortal === 'function') {
-        e.preventDefault();
-        window.showStudentPortal();
-      } else {
-        // Navigate to index.html with login query/hash
-        window.location.href = 'index.html#student';
-      }
+      e.preventDefault();
+      window.location.href = 'student.html';
     });
   }
 }

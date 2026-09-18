@@ -2729,7 +2729,7 @@
         </nav>
         <!-- Right Header CTA & Actions -->
         <div class="nav-actions">
-          <a class="btn-header-login" href="index.html#student" id="btnLogin">
+          <a class="btn-header-login" href="student.html" id="btnLogin">
             <span>Student Login</span>
             <svg fill="none" height="15" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
               stroke-width="2.5" viewbox="0 0 24 24" width="15">
@@ -3604,7 +3604,9 @@
               <li><a href="courses.html">Our Courses</a></li>
               <li><a href="internships.html">Internship Tracks</a></li>
               <li><a href="contact.html">Contact &amp; Location</a></li>
-              <li><a href="index.html#student">Student Portal</a></li>
+              <li><a href="student.html">Student Portal</a></li>
+              <li><a href="verify.html">Verify Certificate</a></li>
+              <li><a href="admin.html">Admin Portal</a></li>
             </ul>
           </div>
 
@@ -6667,7 +6669,7 @@
 
       // Check URL hash for direct student login access
       if (window.location.hash === '#student') {
-        showStudentPortal();
+        window.location.href = 'student.html';
       }
 
       // Header Student Login: switch to student portal
@@ -6675,7 +6677,7 @@
       if (login) {
         login.addEventListener('click', function (e) {
           e.preventDefault();
-          showStudentPortal();
+          window.location.href = 'student.html';
         });
       }
     })();
