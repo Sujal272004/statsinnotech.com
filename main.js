@@ -60,6 +60,78 @@ const COURSES_DATA = {
     project: "Algorithmic Routing & Network Flow Optimization System",
     certification: "Stats Innotech Algorithms & Problem Solving Specialist"
   },
+  "dsa-java": {
+    title: "Data Structures & Algorithms with Java",
+    badge: "Interview Prep",
+    duration: "10 Weeks (Problem Solving)",
+    level: "Intermediate",
+    summary: "Conquer technical interview algorithms, time/space complexity, arrays, trees, graphs, and dynamic programming with Java as the language of implementation.",
+    prerequisites: "Working knowledge of Core Java syntax and OOP principles.",
+    modules: [
+      "Asymptotic Analysis, Time/Space Complexity & Java Collections Internals",
+      "Arrays, Strings, Two-Pointer & Sliding Window Techniques",
+      "Linked Lists, Stacks, Queues, and Priority Queues (Heaps)",
+      "Binary Trees, BSTs, Traversals & Tree DP",
+      "Recursion, Backtracking & Dynamic Programming (1D/2D)",
+      "Graph Algorithms: BFS, DFS, Dijkstra, Topo Sort & Disjoint Set Union (DSU)"
+    ],
+    project: "Algorithmic Routing & Network Flow Optimization Engine in Java",
+    certification: "Stats Innotech Algorithms Specialist (Java)"
+  },
+  "dsa-python": {
+    title: "Data Structures & Algorithms with Python",
+    badge: "Interview Prep",
+    duration: "10 Weeks (Problem Solving)",
+    level: "Intermediate",
+    summary: "Master problem-solving patterns, algorithmic complexity, recursion, graph theory, and dynamic programming using clean, idiomatic Python.",
+    prerequisites: "Working knowledge of Python 3 fundamentals.",
+    modules: [
+      "Time & Space Complexity Analysis & Pythonic Data Structures",
+      "Lists, Dictionaries, Sets, Two-Pointer & Sliding Window Algorithms",
+      "Linked Lists, Stacks, Queues & Monotonic Stacks in Python",
+      "Binary Trees, Heapq, and Priority Queue Applications",
+      "Recursion, Memoization & Dynamic Programming (Tabulation/Memoization)",
+      "Graph Theory: BFS, DFS, Shortest Paths, Topological Sort & Union-Find"
+    ],
+    project: "Automated Algorithmic Problem Solver & Graph Analysis Engine",
+    certification: "Stats Innotech Algorithms Specialist (Python)"
+  },
+  cpp: {
+    title: "C & C++ Systems Programming",
+    badge: "Foundational",
+    duration: "10 Weeks (Code Intensive)",
+    level: "Beginner to Advanced",
+    summary: "Deep-dive into low-level systems programming, memory management, pointers, Object-Oriented C++, STL templates, and performance-critical engineering.",
+    prerequisites: "Logical aptitude and curiosity about how hardware and software interact.",
+    modules: [
+      "C Fundamentals: Variables, Operators, Control Flow, and Functions",
+      "Pointers, Dynamic Memory Allocation (malloc/free) & Arrays",
+      "Structures, Unions, File I/O, and Modular Compilation",
+      "C++ OOP: Classes, Encapsulation, Inheritance & Polymorphism",
+      "Standard Template Library (STL): Vectors, Maps, Sets, and Iterators",
+      "Modern C++ (C++17/20), Smart Pointers, Concurrency & Memory Safety"
+    ],
+    project: "High-Performance In-Memory Key-Value Store & System Resource Monitor",
+    certification: "Stats Innotech Certified C/C++ Systems Developer"
+  },
+  analytics: {
+    title: "Data Analytics & Business Intelligence",
+    badge: "High Demand",
+    duration: "12 Weeks (Practical + Projects)",
+    level: "Beginner to Intermediate",
+    summary: "Master data preparation, statistical analysis, interactive dashboards, and business reporting using Advanced Excel, SQL, Power BI, Tableau, and introductory Python.",
+    prerequisites: "Basic computer familiarity and arithmetic/analytical mindset.",
+    modules: [
+      "Advanced Excel: Formulas, Pivot Tables, Power Query & Data Modeling",
+      "SQL for Data Analysis: Joins, Aggregations, Window Functions & CTEs",
+      "Power BI Essentials: Data Modeling, DAX Calculations & Interactive Dashboards",
+      "Tableau Visualizations: Storytelling with Data & KPI Dashboards",
+      "Exploratory Data Analysis (EDA) with Python, Pandas & Seaborn",
+      "Business Metrics, Cohort Analysis & Executive KPI Reporting"
+    ],
+    project: "End-to-End Retail & Sales Intelligence Dashboard with Predictive Forecasting",
+    certification: "Stats Innotech Certified Data Analytics Professional"
+  },
   cloud: {
     title: "Cloud Computing & AWS Architecture",
     badge: "High Demand",

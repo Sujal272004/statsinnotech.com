@@ -889,9 +889,11 @@ footer {
     scrollbar-width: none;
     -ms-overflow-style: none;
   }
+
   .courses-filter-nav::-webkit-scrollbar {
     display: none;
   }
+
   .filter-btn {
     white-space: nowrap;
     flex-shrink: 0;
@@ -2248,8 +2250,9 @@ footer {
 
 .footer-top-grid {
   display: grid;
-  grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
-  gap: 36px;
+  grid-template-columns: 1.35fr 1fr 1fr 1fr 1.15fr;
+  gap: 28px;
+  align-items: start;
   margin-bottom: 46px;
 }
 
@@ -2293,7 +2296,7 @@ footer {
 .footer-links-list {
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 6px;
 }
 
 .footer-links-list a {
@@ -2418,6 +2421,7 @@ footer {
   .modal-overlay {
     padding: 12px;
   }
+
   .modal-card {
     border-radius: var(--radius-lg);
     max-height: 92dvh;
@@ -2520,6 +2524,11 @@ footer {
 
   .footer-top-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 32px;
+  }
+
+  .footer-brand-col {
+    grid-column: 1 / -1;
   }
 }
 
@@ -2591,6 +2600,7 @@ footer {
       opacity: 0;
       transform: translateY(-8px);
     }
+
     to {
       opacity: 1;
       transform: translateY(0);
@@ -2677,6 +2687,11 @@ footer {
 
   .footer-top-grid {
     grid-template-columns: 1fr;
+    gap: 28px;
+  }
+
+  .footer-brand-col {
+    grid-column: auto;
   }
 
   .hero-title,
@@ -2932,6 +2947,7 @@ footer {
     width: 100%;
     gap: 12px;
   }
+
   .cta-banner-actions .btn-cta-primary,
   .cta-banner-actions .btn-cta-secondary {
     width: 100%;
@@ -2989,9 +3005,11 @@ footer {
     margin-left: auto;
     margin-right: auto;
   }
+
   .hero-stat-divider {
     display: none;
   }
+
   .hero-stat-item {
     padding: 10px 4px;
     background: rgba(255, 255, 255, 0.04);
