@@ -150,6 +150,7 @@ function getDashboard(token) {
   const announcements = getAnnouncementsInternal();
   const attendance = calculateAttendancePercentage(s.email);
   const completed = tasks.filter(t => String(t.Status).toLowerCase() === "completed").length;
+  const grievances = getGrievancesInternal(s.email);
 
   return {
     session:s,
@@ -161,7 +162,8 @@ function getDashboard(token) {
     },
     tasks:tasks,
     submissions:submissions,
-    announcements:announcements
+    announcements:announcements,
+    grievances:grievances
   };
 }
 
@@ -251,6 +253,115 @@ function reviewSubmission(token, submissionId, status, feedback) {
   sh.getRange(idx+2,10).setValue(new Date());
   sh.getRange(idx+2,11).setValue(admin.adminId);
   return {ok:true};
+}
+
+function getGrievancesInternal(email) {
+  try {
+    const list = sheetObjects("Grievances");
+    const norm = normalizeEmail(email);
+    return list.filter(g => normalizeEmail(g.StudentEmail) === norm);
+  } catch (e) {
+    return [];
+  }
+}
+
+function submitGrievance(token, payload) {
+  const s = requireStudent(token);
+  if (!payload || !payload.title || !payload.description) {
+    throw new Error("Title and description are required.");
+  }
+  const id = generateId("GRV");
+  const now = new Date().toISOString();
+  try {
+    const ss = getSpreadsheet();
+    let sheet = ss.getSheetByName("Grievances");
+    if (!sheet) {
+      sheet = ss.insertSheet("Grievances");
+      sheet.appendRow(["ID", "StudentEmail", "StudentName", "Category", "Priority", "Course", "Title", "Description", "Link", "Status", "AdminResponse", "CreatedAt", "ResolvedAt", "ResponderName"]);
+    }
+    const record = [
+      id,
+      s.email,
+      s.name,
+      payload.category || "General Inquiry",
+      payload.priority || "Medium",
+      payload.course || s.course,
+      payload.title,
+      payload.description,
+      payload.link || "",
+      "Pending",
+      "",
+      now,
+      "",
+      ""
+    ];
+    sheet.appendRow(record);
+  } catch (e) {}
+  return {
+    ok: true,
+    ticket: {
+      ID: id,
+      Category: payload.category || "General Inquiry",
+      Priority: payload.priority || "Medium",
+      Course: payload.course || s.course,
+      Title: payload.title,
+      Description: payload.description,
+      Link: payload.link || "",
+      Status: "Pending",
+      CreatedAt: new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }),
+      AdminResponse: "",
+      ResolvedAt: null,
+      ResponderName: ""
+    }
+  };
+}
+
+function resolveGrievance(token, ticketId, status, responseText, responderName) {
+  const admin = requireAdmin(token);
+  if (!ticketId || !status || !responseText) {
+    throw new Error("Ticket ID, status, and response are required.");
+  }
+  try {
+    const ss = getSpreadsheet();
+    const sheet = ss.getSheetByName("Grievances");
+    if (!sheet) throw new Error("Grievances sheet not found.");
+    const data = sheet.getDataRange().getValues();
+    const headers = data[0];
+    const idCol         = headers.indexOf("ID");
+    const statusCol     = headers.indexOf("Status");
+    const responseCol   = headers.indexOf("AdminResponse");
+    const resolvedAtCol = headers.indexOf("ResolvedAt");
+    const responderCol  = headers.indexOf("ResponderName");
+
+    for (let i = 1; i < data.length; i++) {
+      if (String(data[i][idCol]).trim() === String(ticketId).trim()) {
+        const row = i + 1; // 1-indexed
+        const now = new Date().toLocaleString("en-IN", {
+          day: "2-digit", month: "short", year: "numeric",
+          hour: "2-digit", minute: "2-digit"
+        });
+        if (statusCol     >= 0) sheet.getRange(row, statusCol     + 1).setValue(status);
+        if (responseCol   >= 0) sheet.getRange(row, responseCol   + 1).setValue(responseText);
+        if (resolvedAtCol >= 0) sheet.getRange(row, resolvedAtCol + 1).setValue(now);
+        if (responderCol  >= 0) sheet.getRange(row, responderCol  + 1).setValue(responderName || admin.adminId);
+        return { ok: true, ticketId: ticketId, status: status };
+      }
+    }
+    throw new Error("Ticket not found: " + ticketId);
+  } catch (e) {
+    throw new Error("Failed to resolve grievance: " + e.message);
+  }
+}
+
+function getAllGrievances(token) {
+  requireAdmin(token);
+  try {
+    return sheetObjects("Grievances").sort(function(a, b) {
+      return new Date(b.CreatedAt) - new Date(a.CreatedAt);
+    });
+  } catch (e) {
+    return [];
+  }
 }
 
 function createAnnouncement(token, title, message) {

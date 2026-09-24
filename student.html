@@ -2239,7 +2239,7 @@
     ============================================================ */
     .quick-actions {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 12px;
       margin-bottom: 22px;
     }
@@ -2584,14 +2584,163 @@
       }
     }
 
-    @media (max-width: 360px) {
-      .quick-actions {
-        grid-template-columns: 1fr;
-      }
+    /* ============================================================
+       GRIEVANCES & QUERIES SECTION
+    ============================================================ */
+    .grv-card {
+      background: var(--navy-card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+      margin-bottom: 18px;
+      transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+      position: relative;
+    }
 
-      .auth-card {
-        padding: 22px 14px;
-      }
+    .grv-card:hover {
+      border-color: rgba(6, 182, 212, 0.35);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .grv-card-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .grv-meta-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .grv-ticket-id {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(6, 182, 212, 0.12);
+      padding: 3px 9px;
+      border-radius: 6px;
+      border: 1px solid rgba(6, 182, 212, 0.25);
+      letter-spacing: 0.03em;
+    }
+
+    .grv-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .grv-desc {
+      font-size: 0.88rem;
+      color: var(--slate-light);
+      line-height: 1.6;
+      margin-bottom: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      padding: 12px 14px;
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .grv-proof-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      font-size: 0.8rem;
+      color: var(--cyan);
+    }
+
+    .grv-proof-row a {
+      color: var(--cyan);
+      text-decoration: underline;
+      word-break: break-all;
+    }
+
+    .grv-response-box {
+      background: rgba(16, 185, 129, 0.06);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      border-left: 3px solid var(--green);
+      border-radius: 0 10px 10px 0;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+
+    .grv-response-hdr {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--green);
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+
+    .grv-response-text {
+      font-size: 0.86rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+    }
+
+    .grv-pending-box {
+      background: rgba(245, 158, 11, 0.06);
+      border: 1px solid rgba(245, 158, 11, 0.2);
+      border-left: 3px solid var(--amber);
+      border-radius: 0 10px 10px 0;
+      padding: 12px 16px;
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.82rem;
+      color: var(--amber);
+    }
+
+    .grv-footer-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 0.76rem;
+      color: var(--slate-mid);
+    }
+
+    .grv-filter-btn {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border);
+      color: var(--slate-light);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .grv-filter-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--white);
+    }
+
+    .grv-filter-btn.active {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: var(--white);
+      box-shadow: 0 0 12px var(--blue-glow);
     }
   </style>
 </head>
@@ -2840,6 +2989,16 @@
           Announcements
           <span class="nav-badge" id="annBadge" style="display:none">0</span>
         </div>
+        <div class="nav-section-lbl">Support</div>
+        <div class="nav-item" id="nav-grievances" onclick="showPanel('grievances')" title="G">
+          <div class="nav-active-bar"></div>
+          <svg width="17" height="17" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" viewBox="0 0 24 24">
+            <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+          </svg>
+          Grievances &amp; Queries
+          <span class="nav-badge" id="grievanceBadge" style="display:none">0</span>
+        </div>
         <div class="nav-section-lbl">Account</div>
         <div class="nav-item" id="nav-profile" onclick="showPanel('profile')">
           <div class="nav-active-bar"></div>
@@ -3036,6 +3195,32 @@
                   <path d="M22 17H2a3 3 0 0 0 3-3V9a7 7 0 0 1 14 0v5a3 3 0 0 0 3 3zm-8.27 4a2 2 0 0 1-3.46 0" />
                 </svg></div>
               <div class="qa-label">Announcements</div>
+            </div>
+            <div class="qa-card" onclick="showPanel('grievances')">
+              <div class="qa-icon" style="background:rgba(6,182,212,0.15)"><svg width="20" height="20" fill="none"
+                  stroke="#06B6D4" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg></div>
+              <div class="qa-label">Grievances</div>
+            </div>
+          </div>
+
+          <!-- Support & Grievance Prompt Banner -->
+          <div class="card" style="background: linear-gradient(135deg, rgba(6,182,212,0.08) 0%, rgba(21,94,239,0.06) 100%); border-color: rgba(6,182,212,0.25); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; margin-bottom: 22px;">
+            <div style="display: flex; align-items: center; gap: 14px;">
+              <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(6,182,212,0.15); display: flex; align-items: center; justify-content: center; color: var(--cyan); flex-shrink: 0;">
+                <svg width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/>
+                </svg>
+              </div>
+              <div>
+                <div style="font-weight: 700; font-size: 0.98rem; color: var(--white);">Have a course doubt or attendance discrepancy?</div>
+                <div style="font-size: 0.8rem; color: var(--slate-light); margin-top: 3px;">Submit a ticket to the Stats Innotech academic team for rapid resolution within 24 hours.</div>
+              </div>
+            </div>
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+              <button class="btn btn-secondary btn-sm" onclick="showPanel('grievances')">View Tickets</button>
+              <button class="btn btn-primary btn-sm" onclick="openGrievanceModal()">+ Raise Query / Grievance</button>
             </div>
           </div>
 
@@ -3275,6 +3460,113 @@
           </div>
         </div>
 
+        <!-- ===== GRIEVANCES & QUERIES ===== -->
+        <div class="panel" id="panel-grievances">
+          <div class="pg-header">
+            <div class="pg-header-left">
+              <h2>Grievances &amp; Academic Helpdesk</h2>
+              <p>Raise questions about course concepts, syllabus, mentor sessions, or report discrepancies in attendance and task grading.</p>
+            </div>
+            <div class="pg-actions">
+              <button class="btn btn-primary" onclick="openGrievanceModal()">
+                <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                  <line x1="12" y1="5" x2="12" y2="19"></line>
+                  <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Raise New Grievance / Query
+              </button>
+            </div>
+          </div>
+
+          <!-- Grievance Stat Cards -->
+          <div class="stats-row">
+            <div class="stat-card cyan">
+              <div class="stat-glow" style="background:var(--cyan)"></div>
+              <div class="stat-card-top">
+                <div class="stat-icon" style="background:rgba(6,182,212,0.15)">
+                  <svg width="20" height="20" fill="none" stroke="#06B6D4" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                    <polyline points="14 2 14 8 20 8"></polyline>
+                    <line x1="16" y1="13" x2="8" y2="13"></line>
+                    <line x1="16" y1="17" x2="8" y2="17"></line>
+                    <polyline points="10 9 9 9 8 9"></polyline>
+                  </svg>
+                </div>
+                <span class="pill pill-cyan">All</span>
+              </div>
+              <div class="stat-val" id="grvTotalCount">0</div>
+              <div class="stat-lbl">Tickets Raised</div>
+            </div>
+
+            <div class="stat-card amber">
+              <div class="stat-glow" style="background:var(--amber)"></div>
+              <div class="stat-card-top">
+                <div class="stat-icon" style="background:rgba(245,158,11,0.15)">
+                  <svg width="20" height="20" fill="none" stroke="#f59e0b" stroke-width="2" viewBox="0 0 24 24">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <polyline points="12 6 12 12 16 14"></polyline>
+                  </svg>
+                </div>
+                <span class="pill pill-amber">Active</span>
+              </div>
+              <div class="stat-val" id="grvPendingCount">0</div>
+              <div class="stat-lbl">Under Review</div>
+            </div>
+
+            <div class="stat-card green">
+              <div class="stat-glow" style="background:var(--green)"></div>
+              <div class="stat-card-top">
+                <div class="stat-icon" style="background:rgba(16,185,129,0.15)">
+                  <svg width="20" height="20" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24">
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                    <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                  </svg>
+                </div>
+                <span class="pill pill-green">Done</span>
+              </div>
+              <div class="stat-val" id="grvResolvedCount">0</div>
+              <div class="stat-lbl">Resolved / Corrected</div>
+            </div>
+
+            <div class="stat-card blue">
+              <div class="stat-glow" style="background:var(--blue)"></div>
+              <div class="stat-card-top">
+                <div class="stat-icon" style="background:rgba(21,94,239,0.15)">
+                  <svg width="20" height="20" fill="none" stroke="#60a5fa" stroke-width="2" viewBox="0 0 24 24">
+                    <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+                  </svg>
+                </div>
+                <span class="pill pill-blue">SLA</span>
+              </div>
+              <div class="stat-val">&lt; 24h</div>
+              <div class="stat-lbl">Avg Response Time</div>
+            </div>
+          </div>
+
+          <!-- Controls: Filters & Search -->
+          <div class="card" style="padding: 16px 20px; margin-bottom: 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap;">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <button class="grv-filter-btn active" data-filter="all" onclick="filterGrievances('all', this)">All Tickets</button>
+                <button class="grv-filter-btn" data-filter="Pending" onclick="filterGrievances('Pending', this)">Pending</button>
+                <button class="grv-filter-btn" data-filter="In Review" onclick="filterGrievances('In Review', this)">In Review</button>
+                <button class="grv-filter-btn" data-filter="Resolved" onclick="filterGrievances('Resolved', this)">Resolved</button>
+              </div>
+              <div style="display: flex; align-items: center; gap: 10px; flex: 1; max-width: 380px;">
+                <input type="text" id="grvSearchInput" class="m-input" placeholder="Search by ID, query title, keyword..." oninput="searchGrievances(this.value)" style="padding: 8px 14px; font-size: 0.84rem; height: 38px;">
+              </div>
+            </div>
+          </div>
+
+          <!-- Grievances List Container -->
+          <div id="grievanceList">
+            <div class="empty">
+              <div class="empty-icon">💬</div>
+              <p>Loading grievances &amp; queries...</p>
+            </div>
+          </div>
+        </div>
+
         <!-- ===== PROFILE ===== -->
         <div class="panel" id="panel-profile">
           <div class="pg-header">
@@ -3418,6 +3710,90 @@
     </div>
   </div>
 
+  <!-- ============================================================
+     RAISE GRIEVANCE / QUERY MODAL
+  ============================================================ -->
+  <div class="modal-overlay" id="grievanceModal">
+    <div class="modal" style="width: 580px;">
+      <div class="modal-hdr">
+        <div>
+          <h3>Raise Grievance / Query</h3>
+          <p style="font-size: 0.8rem; color: var(--slate-light); margin-top: 3px;">Report an attendance discrepancy or ask questions regarding your course.</p>
+        </div>
+        <div class="modal-x" onclick="closeModal('grievanceModal')">✕</div>
+      </div>
+      <div class="m-field">
+        <div class="m-label">Category <span style="color:var(--red)">*</span></div>
+        <select class="m-input" id="grvCategory" style="background:#0d2040;">
+          <option value="Attendance Discrepancy">Attendance Discrepancy (e.g., Marked absent while attended)</option>
+          <option value="Course Material & Doubt">Course Material &amp; Doubts (e.g., Concept clarification, resources)</option>
+          <option value="Task & Assignment Grading">Task / Assignment Grading (e.g., Score discrepancy, re-evaluation)</option>
+          <option value="Certificate & Verification">Certificate &amp; Verification (e.g., Name spelling, certificate issue)</option>
+          <option value="Mentor & Live Session">Mentor &amp; Live Session (e.g., Session clash, mentor support)</option>
+          <option value="Portal & Technical Glitch">Portal &amp; Technical Glitch (e.g., Link issue, submission bug)</option>
+          <option value="General Inquiry">General Academic Inquiry</option>
+        </select>
+      </div>
+      <div class="two-col" style="gap: 14px; margin-bottom: 0;">
+        <div class="m-field">
+          <div class="m-label">Priority Level</div>
+          <select class="m-input" id="grvPriority" style="background:#0d2040;">
+            <option value="Medium">Medium (Normal)</option>
+            <option value="High">High (Needs Attention)</option>
+            <option value="Urgent">Urgent (Time Sensitive)</option>
+            <option value="Low">Low (General Query)</option>
+          </select>
+        </div>
+        <div class="m-field">
+          <div class="m-label">Related Course</div>
+          <input class="m-input" id="grvCourse" placeholder="e.g. Full Stack Web Development">
+        </div>
+      </div>
+      <div class="m-field">
+        <div class="m-label">Query Subject / Brief Title <span style="color:var(--red)">*</span></div>
+        <input class="m-input" id="grvTitle" placeholder="e.g. Attendance marked absent for 18 Sep lecture">
+      </div>
+      <div class="m-field">
+        <div class="m-label">Detailed Description / Issue <span style="color:var(--red)">*</span></div>
+        <textarea class="m-input" id="grvDesc" rows="4" placeholder="Describe the issue, dates, session time, or discrepancy in detail so the academic team can verify immediately..."></textarea>
+      </div>
+      <div class="m-field">
+        <div class="m-label">Proof / Reference Link <span style="font-weight:400;text-transform:none;font-size:0.72rem">(optional)</span></div>
+        <input class="m-input" id="grvLink" type="url" placeholder="https://drive.google.com/... or screenshot URL / GitHub link">
+      </div>
+      <div class="modal-error" id="grvErr"></div>
+      <div class="modal-foot">
+        <button class="btn btn-secondary" onclick="closeModal('grievanceModal')">Cancel</button>
+        <button class="btn btn-primary" id="grvSubmitBtn" onclick="doSubmitGrievance()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+          Submit Ticket
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW GRIEVANCE DETAIL MODAL -->
+  <div class="modal-overlay" id="grievanceDetailModal">
+    <div class="modal" style="width: 580px;">
+      <div class="modal-hdr">
+        <div>
+          <h3 id="gdmTitle">Ticket Details</h3>
+          <div id="gdmId" style="font-size:0.75rem; color:var(--cyan); margin-top:2px; font-weight:700;"></div>
+        </div>
+        <div class="modal-x" onclick="closeModal('grievanceDetailModal')">✕</div>
+      </div>
+      <div id="gdmBody">
+        <!-- Injected via JavaScript -->
+      </div>
+      <div class="modal-foot">
+        <button class="btn btn-secondary" onclick="closeModal('grievanceDetailModal')">Close</button>
+      </div>
+    </div>
+  </div>
+
   <!-- CONFIRM LOGOUT MODAL -->
   <div class="modal-overlay" id="logoutModal">
     <div class="modal confirm-modal">
@@ -3453,16 +3829,37 @@
        STATE
     ================================================================ */
     var SESSION = null;
-    var DATA = { tasks: [], submissions: [], attendance: [], announcements: [] };
+    var DATA = { tasks: [], submissions: [], attendance: [], announcements: [], grievances: [] };
     var PENDING_TASK_ID = null;
     var READ_KEY = 'sit_ann_read_';
     var CAL_YEAR, CAL_MONTH; // for calendar navigation
 
-    var PANELS = ['dashboard', 'tasks', 'submissions', 'attendance', 'announcements', 'profile'];
+    var PANELS = ['dashboard', 'tasks', 'submissions', 'attendance', 'announcements', 'grievances', 'profile'];
     var TITLES = {
       dashboard: 'Dashboard', tasks: 'My Tasks', submissions: 'My Submissions',
-      attendance: 'Attendance', announcements: 'Announcements', profile: 'My Profile'
+      attendance: 'Attendance', announcements: 'Announcements', grievances: 'Grievances & Queries', profile: 'My Profile'
     };
+    var CURRENT_GRV_FILTER = 'all';
+    var CURRENT_GRV_SEARCH = '';
+
+    function getStoredGrievances(defaults) {
+      try {
+        var key = 'sit_student_grv_' + (SESSION && SESSION.email ? SESSION.email.replace(/[^a-zA-Z0-9]/g, '_') : 'guest');
+        var stored = localStorage.getItem(key);
+        if (stored) {
+          var parsed = JSON.parse(stored);
+          if (Array.isArray(parsed) && parsed.length) return parsed;
+        }
+      } catch (e) {}
+      return defaults || [];
+    }
+
+    function saveStoredGrievances(list) {
+      try {
+        var key = 'sit_student_grv_' + (SESSION && SESSION.email ? SESSION.email.replace(/[^a-zA-Z0-9]/g, '_') : 'guest');
+        localStorage.setItem(key, JSON.stringify(list));
+      } catch (e) {}
+    }
 
     /* ================================================================
        LOAD BAR
@@ -3535,7 +3932,37 @@
             { ID: 'ANN_002', Title: 'Holiday Notice – 2nd October', Message: 'The institute will remain closed on 2nd October (Gandhi Jayanti). All classes will resume on 3rd October as normal. Enjoy the long weekend!', CreatedAt: '2026-09-14', Category: 'Holiday' },
             { ID: 'ANN_003', Title: 'New Course: AI & Python Engineering', Message: 'We are excited to launch our new AI & Python Engineering Track starting October 2026. Batch size is limited to 15 students. Interested students may contact admin immediately.', CreatedAt: '2026-09-10', Category: 'Event' },
             { ID: 'ANN_004', Title: 'Workshop: Docker & DevOps Basics', Message: 'A hands-on workshop on Docker, CI/CD and cloud deployment will be held on 22 September for Full Stack batch students. Registration is free — limited seats.', CreatedAt: '2026-09-08', Category: 'Event' },
-          ]
+          ],
+          grievances: getStoredGrievances([
+            {
+              ID: 'GRV-2026-042',
+              Category: 'Attendance Discrepancy',
+              Priority: 'High',
+              Course: 'Full Stack Web Development',
+              Title: 'Marked absent on 18 Sep session despite attending full live call',
+              Description: 'I attended the entire 2-hour live session on React Hooks & Custom State on 18th September from 7:00 PM to 9:00 PM. However, my attendance log on the portal shows "Absent". Kindly verify with the Zoom attendee report and update.',
+              Link: 'https://drive.google.com/file/d/demo-attendance-proof/view',
+              Status: 'Resolved',
+              CreatedAt: '19 Sep 2026, 10:15 AM',
+              AdminResponse: 'We cross-referenced the Zoom meeting attendee report and confirmed your 118-minute session attendance. Your attendance record for 18 Sep has been updated from Absent to Present. Thank you for notifying us!',
+              ResolvedAt: '19 Sep 2026, 02:30 PM',
+              ResponderName: 'SIT Academic Admin (Sujal)'
+            },
+            {
+              ID: 'GRV-2026-057',
+              Category: 'Course Material & Doubt',
+              Priority: 'Medium',
+              Course: 'Full Stack Web Development',
+              Title: 'Node.js REST API starter code GitHub repository giving 404 error',
+              Description: 'The starter repository link provided in Task 5 (Node.js REST API) appears to be private or deleted as it returns a 404 Not Found error. Could the instructor please update the link or provide public access?',
+              Link: 'https://github.com/statsinnotech/starter-nodejs-api',
+              Status: 'In Review',
+              CreatedAt: '23 Sep 2026, 04:20 PM',
+              AdminResponse: 'Our technical mentor has updated the repository permissions to Public. Please refresh and check the link in Task 5 description.',
+              ResolvedAt: '24 Sep 2026, 09:10 AM',
+              ResponderName: 'Mentor Ayushi'
+            }
+          ])
         };
       },
       getAttendanceForStudent: function () {
@@ -3563,6 +3990,29 @@
         ];
       },
       submitAssignment: function () { return { ok: true }; },
+      submitGrievance: function (p) {
+        var payload = p[1] || {};
+        var id = 'GRV-2026-' + (Math.floor(100 + Math.random() * 900));
+        var nowStr = new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+        var newTicket = {
+          ID: id,
+          Category: payload.category || 'General Inquiry',
+          Priority: payload.priority || 'Medium',
+          Course: payload.course || (SESSION ? SESSION.course : 'Full Stack Web Development'),
+          Title: payload.title,
+          Description: payload.description,
+          Link: payload.link || '',
+          Status: 'Pending',
+          CreatedAt: nowStr,
+          AdminResponse: '',
+          ResolvedAt: null,
+          ResponderName: ''
+        };
+        if (!DATA.grievances) DATA.grievances = [];
+        DATA.grievances.unshift(newTicket);
+        saveStoredGrievances(DATA.grievances);
+        return { ok: true, ticket: newTicket };
+      },
       completeTask: function () { return { ok: true }; },
       logout: function () { return { ok: true }; }
     };
@@ -3768,6 +4218,8 @@
           document.getElementById('psSubmissions').textContent = d.stats.submissions;
           document.getElementById('psAttendance').textContent = d.stats.attendance + '%';
 
+          DATA.grievances = d.grievances || getStoredGrievances([]);
+
           renderDashTasks();
           renderDashAnn();
           renderDeadlines();
@@ -3775,6 +4227,7 @@
           renderTasks();
           renderSubmissions();
           renderAnnouncements();
+          renderGrievances();
           loadDone();
         },
         function (msg) { showToast(msg, true); loadDone(); }
@@ -4157,6 +4610,284 @@
     }
 
     /* ================================================================
+       RENDER & MANAGE: GRIEVANCES & QUERIES
+    ================================================================ */
+    function renderGrievances(filterStatus, searchTerm) {
+      if (filterStatus) CURRENT_GRV_FILTER = filterStatus;
+      if (typeof searchTerm === 'string') CURRENT_GRV_SEARCH = searchTerm.toLowerCase().trim();
+
+      var list = DATA.grievances || [];
+      var total = list.length;
+      var pending = list.filter(function (g) { return g.Status === 'Pending' || g.Status === 'In Review'; }).length;
+      var resolved = list.filter(function (g) { return g.Status === 'Resolved'; }).length;
+
+      // Update counters
+      var elTotal = document.getElementById('grvTotalCount');
+      var elPending = document.getElementById('grvPendingCount');
+      var elResolved = document.getElementById('grvResolvedCount');
+      if (elTotal) elTotal.textContent = total;
+      if (elPending) elPending.textContent = pending;
+      if (elResolved) elResolved.textContent = resolved;
+
+      // Update sidebar badge
+      var badge = document.getElementById('grievanceBadge');
+      if (badge) {
+        if (pending > 0) {
+          badge.textContent = pending;
+          badge.style.display = '';
+        } else {
+          badge.style.display = 'none';
+        }
+      }
+
+      // Filter list
+      var filtered = list.filter(function (g) {
+        if (CURRENT_GRV_FILTER !== 'all' && g.Status !== CURRENT_GRV_FILTER) return false;
+        if (CURRENT_GRV_SEARCH) {
+          var text = (g.ID + ' ' + g.Title + ' ' + g.Category + ' ' + g.Description + ' ' + (g.Course || '')).toLowerCase();
+          if (text.indexOf(CURRENT_GRV_SEARCH) === -1) return false;
+        }
+        return true;
+      });
+
+      var container = document.getElementById('grievanceList');
+      if (!container) return;
+
+      if (!filtered.length) {
+        if (total === 0) {
+          container.innerHTML = '<div class="empty" style="padding:48px 20px;text-align:center;">'
+            + '<div class="empty-icon" style="font-size:2.8rem;margin-bottom:12px;">💬</div>'
+            + '<div style="font-size:1.1rem;font-weight:700;color:var(--white);margin-bottom:6px;">No Grievances or Queries Raised</div>'
+            + '<p style="color:var(--slate-light);font-size:0.88rem;max-width:440px;margin:0 auto 20px;">Have questions about course concepts, missed sessions, or noticed an attendance/assignment discrepancy? Raise a ticket and our academic team will resolve it quickly.</p>'
+            + '<button class="btn btn-primary" onclick="openGrievanceModal()">+ Raise Your First Grievance / Query</button>'
+            + '</div>';
+        } else {
+          container.innerHTML = '<div class="empty" style="padding:40px 20px;text-align:center;">'
+            + '<div class="empty-icon" style="font-size:2.2rem;margin-bottom:10px;">🔍</div>'
+            + '<div style="font-size:1rem;font-weight:700;color:var(--white);margin-bottom:4px;">No matching tickets found</div>'
+            + '<p style="color:var(--slate-light);font-size:0.84rem;">Try resetting your status filter or search keywords.</p>'
+            + '</div>';
+        }
+        return;
+      }
+
+      container.innerHTML = filtered.map(grievanceItemHTML).join('');
+    }
+
+    function grievanceItemHTML(g) {
+      // Status Pill
+      var statusClass = 'pill-amber';
+      var statusIcon = '⏳';
+      if (g.Status === 'Resolved') {
+        statusClass = 'pill-green';
+        statusIcon = '✓';
+      } else if (g.Status === 'In Review') {
+        statusClass = 'pill-blue';
+        statusIcon = '🔄';
+      }
+
+      // Priority Pill
+      var prioClass = 'pill-purple';
+      if (g.Priority === 'Urgent') prioClass = 'pill-red';
+      else if (g.Priority === 'High') prioClass = 'pill-amber';
+      else if (g.Priority === 'Low') prioClass = 'pill-cyan';
+
+      // Category Pill
+      var catClass = 'pill-cyan';
+      if (g.Category && g.Category.indexOf('Attendance') !== -1) catClass = 'pill-amber';
+      else if (g.Category && g.Category.indexOf('Grading') !== -1) catClass = 'pill-purple';
+      else if (g.Category && g.Category.indexOf('Certificate') !== -1) catClass = 'pill-green';
+
+      var proofHTML = '';
+      if (g.Link) {
+        proofHTML = '<div class="grv-proof-row">'
+          + '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>'
+          + '<span>Reference Attachment:</span> <a href="' + escStr(g.Link) + '" target="_blank" rel="noopener noreferrer">View Proof / Link →</a>'
+          + '</div>';
+      }
+
+      var responseHTML = '';
+      if (g.Status === 'Resolved' && g.AdminResponse) {
+        responseHTML = '<div class="grv-response-box">'
+          + '<div class="grv-response-hdr">'
+          + '<span>🛡️ Official Resolution from Stats Innotech Academic Team</span>'
+          + '<span style="font-weight:500;font-size:0.75rem;color:var(--slate-light);">' + (g.ResolvedAt || 'Recently') + '</span>'
+          + '</div>'
+          + '<div class="grv-response-text">' + escStr(g.AdminResponse) + '</div>'
+          + (g.ResponderName ? '<div style="font-size:0.72rem;color:var(--green);margin-top:6px;font-weight:600;">Verified by: ' + escStr(g.ResponderName) + '</div>' : '')
+          + '</div>';
+      } else if (g.Status === 'In Review' && g.AdminResponse) {
+        responseHTML = '<div class="grv-response-box" style="border-left-color:var(--blue);background:rgba(21,94,239,0.06);border-color:rgba(21,94,239,0.25);">'
+          + '<div class="grv-response-hdr" style="color:#60a5fa;">'
+          + '<span>💬 Academic Support Note</span>'
+          + '<span style="font-weight:500;font-size:0.75rem;color:var(--slate-light);">' + (g.ResolvedAt || 'Recently') + '</span>'
+          + '</div>'
+          + '<div class="grv-response-text">' + escStr(g.AdminResponse) + '</div>'
+          + '</div>';
+      } else if (g.Status === 'Pending') {
+        responseHTML = '<div class="grv-pending-box">'
+          + '<svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>'
+          + '<span>Your query has been logged and assigned to an academic mentor. Expected response within 24 hours.</span>'
+          + '</div>';
+      }
+
+      return '<div class="grv-card" id="card-' + g.ID + '">'
+        + '<div class="grv-card-top">'
+        + '<div class="grv-meta-left">'
+        + '<span class="grv-ticket-id">' + escStr(g.ID) + '</span>'
+        + '<span class="pill ' + catClass + '">' + escStr(g.Category || 'Query') + '</span>'
+        + '<span class="pill ' + prioClass + '">' + escStr(g.Priority || 'Normal') + ' Priority</span>'
+        + '</div>'
+        + '<div style="display:flex;align-items:center;gap:10px;">'
+        + '<span class="pill ' + statusClass + '">' + statusIcon + ' ' + escStr(g.Status) + '</span>'
+        + '<button class="btn btn-secondary btn-sm" onclick="viewGrievanceDetail(\'' + g.ID + '\')" style="padding:3px 10px;font-size:0.75rem;">Details</button>'
+        + '</div>'
+        + '</div>'
+        + '<div class="grv-title">' + escStr(g.Title) + '</div>'
+        + '<div class="grv-desc">' + escStr(g.Description) + '</div>'
+        + proofHTML
+        + responseHTML
+        + '<div class="grv-footer-info">'
+        + '<span>📚 Course: <strong style="color:var(--white);">' + escStr(g.Course || 'Full Stack Web Development') + '</strong></span>'
+        + '<span>🕒 Raised on: ' + escStr(g.CreatedAt || '') + '</span>'
+        + '</div>'
+        + '</div>';
+    }
+
+    function filterGrievances(status, btn) {
+      CURRENT_GRV_FILTER = status;
+      document.querySelectorAll('.grv-filter-btn').forEach(function (b) { b.classList.remove('active'); });
+      if (btn) btn.classList.add('active');
+      renderGrievances();
+    }
+
+    function searchGrievances(val) {
+      CURRENT_GRV_SEARCH = (val || '').toLowerCase().trim();
+      renderGrievances();
+    }
+
+    function openGrievanceModal(defaultCategory) {
+      if (SESSION && SESSION.course) {
+        var crsInput = document.getElementById('grvCourse');
+        if (crsInput) crsInput.value = SESSION.course;
+      }
+      if (defaultCategory) {
+        var catSelect = document.getElementById('grvCategory');
+        if (catSelect) catSelect.value = defaultCategory;
+      }
+      document.getElementById('grvTitle').value = '';
+      document.getElementById('grvDesc').value = '';
+      document.getElementById('grvLink').value = '';
+      document.getElementById('grvErr').style.display = 'none';
+      openModal('grievanceModal');
+    }
+
+    function doSubmitGrievance() {
+      var cat = document.getElementById('grvCategory').value;
+      var prio = document.getElementById('grvPriority').value;
+      var course = document.getElementById('grvCourse').value.trim();
+      var title = document.getElementById('grvTitle').value.trim();
+      var desc = document.getElementById('grvDesc').value.trim();
+      var link = document.getElementById('grvLink').value.trim();
+      var err = document.getElementById('grvErr');
+      var btn = document.getElementById('grvSubmitBtn');
+
+      err.style.display = 'none';
+
+      if (!title) {
+        err.textContent = 'Please provide a brief subject/title for your query.';
+        err.style.display = 'block';
+        return;
+      }
+      if (!desc || desc.length < 10) {
+        err.textContent = 'Please provide a clear description of the query or discrepancy (min 10 characters).';
+        err.style.display = 'block';
+        return;
+      }
+
+      btn.disabled = true;
+      btn.innerHTML = 'Submitting Ticket...';
+
+      var payload = {
+        category: cat,
+        priority: prio,
+        course: course || (SESSION ? SESSION.course : 'General Track'),
+        title: title,
+        description: desc,
+        link: link
+      };
+
+      call('submitGrievance', [SESSION ? SESSION.token : null, payload],
+        function (res) {
+          btn.disabled = false;
+          btn.innerHTML = '<svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> Submit Ticket';
+          closeModal('grievanceModal');
+          showToast('Ticket submitted successfully! Assigned ID: ' + (res && res.ticket ? res.ticket.ID : 'GRV-NEW') + ' 📨');
+          renderGrievances();
+          showPanel('grievances');
+        },
+        function (msg) {
+          btn.disabled = false;
+          btn.innerHTML = 'Submit Ticket';
+          err.textContent = msg || 'Failed to submit grievance. Please try again.';
+          err.style.display = 'block';
+        }
+      );
+    }
+
+    function viewGrievanceDetail(id) {
+      var ticket = (DATA.grievances || []).find(function (g) { return g.ID === id; });
+      if (!ticket) return;
+
+      document.getElementById('gdmTitle').textContent = ticket.Title;
+      document.getElementById('gdmId').textContent = ticket.ID + ' • ' + (ticket.Category || 'General Query');
+
+      var statusBadge = ticket.Status === 'Resolved'
+        ? '<span class="pill pill-green">✓ Resolved</span>'
+        : ticket.Status === 'In Review'
+          ? '<span class="pill pill-blue">🔄 In Review</span>'
+          : '<span class="pill pill-amber">⏳ Pending</span>';
+
+      var html = '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,0.08);">'
+        + '<div><span class="pill pill-purple">' + escStr(ticket.Priority) + ' Priority</span></div>'
+        + '<div>' + statusBadge + '</div>'
+        + '</div>'
+        + '<div style="margin-bottom:16px;">'
+        + '<div style="font-size:0.75rem;font-weight:700;color:var(--slate-mid);text-transform:uppercase;letter-spacing:0.04em;margin-bottom:6px;">Query Description</div>'
+        + '<div style="font-size:0.9rem;color:var(--white);background:rgba(255,255,255,0.03);padding:14px;border-radius:10px;line-height:1.6;border:1px solid rgba(255,255,255,0.05);">' + escStr(ticket.Description) + '</div>'
+        + '</div>';
+
+      if (ticket.Link) {
+        html += '<div style="margin-bottom:16px;">'
+          + '<div style="font-size:0.75rem;font-weight:700;color:var(--slate-mid);text-transform:uppercase;margin-bottom:6px;">Attachment / Evidence</div>'
+          + '<a href="' + escStr(ticket.Link) + '" target="_blank" rel="noopener noreferrer" style="color:var(--cyan);font-size:0.85rem;word-break:break-all;">' + escStr(ticket.Link) + ' ↗</a>'
+          + '</div>';
+      }
+
+      if (ticket.AdminResponse) {
+        html += '<div style="margin-bottom:16px;">'
+          + '<div style="font-size:0.75rem;font-weight:700;color:var(--green);text-transform:uppercase;margin-bottom:6px;">Mentor / Academic Resolution</div>'
+          + '<div style="font-size:0.88rem;color:#e2e8f0;background:rgba(16,185,129,0.08);border:1px solid rgba(16,185,129,0.25);border-left:3px solid var(--green);padding:14px;border-radius:0 10px 10px 0;line-height:1.6;">'
+          + escStr(ticket.AdminResponse)
+          + (ticket.ResolvedAt ? '<div style="font-size:0.75rem;color:var(--slate-light);margin-top:8px;">Resolved on: ' + escStr(ticket.ResolvedAt) + '</div>' : '')
+          + '</div>'
+          + '</div>';
+      } else {
+        html += '<div style="font-size:0.84rem;color:var(--amber);background:rgba(245,158,11,0.08);border:1px solid rgba(245,158,11,0.2);padding:12px 14px;border-radius:8px;">'
+          + '⏳ This query is currently being investigated by the academic support team. You will see the resolution update here.'
+          + '</div>';
+      }
+
+      html += '<div style="font-size:0.78rem;color:var(--slate-mid);margin-top:16px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px;">'
+        + '<span>Course: ' + escStr(ticket.Course || 'N/A') + '</span>'
+        + '<span>Filed: ' + escStr(ticket.CreatedAt || '') + '</span>'
+        + '</div>';
+
+      document.getElementById('gdmBody').innerHTML = html;
+      openModal('grievanceDetailModal');
+    }
+
+    /* ================================================================
        SUBMIT ASSIGNMENT
     ================================================================ */
     function openSubmitModal(taskId, taskTitle) {
@@ -4228,6 +4959,7 @@
 
       // Re-render calendar when switching to attendance
       if (name === 'attendance') renderCalendar();
+      if (name === 'grievances') renderGrievances();
     }
 
     /* ================================================================

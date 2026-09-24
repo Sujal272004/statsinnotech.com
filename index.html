@@ -265,11 +265,34 @@
       position: relative;
       background-color: var(--navy-primary);
       background-image:
-        radial-gradient(circle at 80% 40%, rgba(21, 94, 239, 0.18) 0%, transparent 60%),
-        radial-gradient(circle at 20% 70%, rgba(6, 182, 212, 0.12) 0%, transparent 50%);
-      padding: 40px 0 45px;
+        linear-gradient(180deg, rgba(11, 31, 58, 0.85) 0%, rgba(11, 31, 58, 0.78) 45%, rgba(11, 31, 58, 0.92) 80%, var(--navy-primary) 100%),
+        url('assets/Hero_Image.png');
+      background-size: cover;
+      background-position: center 20%;
+      background-repeat: no-repeat;
+      padding: 44px 0 36px;
       overflow: hidden;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .cta-banner-section {
+      background-image:
+        linear-gradient(180deg, rgba(11, 31, 58, 0.85) 0%, rgba(11, 31, 58, 0.78) 45%, rgba(11, 31, 58, 0.92) 80%, var(--navy-primary) 100%),
+        url('assets/Hero_Image.png');
+      background-size: cover;
+      background-position: center 20%;
+      background-repeat: no-repeat;
+      border-bottom: none;
+      margin-bottom: 0;
+    }
+
+    .section-divider-strip {
+      background: var(--navy-primary);
+      padding: 18px 0;
+      overflow: hidden;
+      margin-top: 0;
+      border-top: none;
     }
 
     /* Cyber Circuit Background SVG overlay */
@@ -2762,7 +2785,7 @@
       <!-- ==========================================================================
          HERO SECTION (NEW PREMIUM HERO DESIGN)
          ========================================================================== -->
-      <section class="cta-banner-section" id="home">
+      <section class="cta-banner-section hero-section" id="home">
         <div class="cta-banner-glow-left"></div>
         <div class="cta-banner-glow-right"></div>
         <div class="container cta-banner-content">
@@ -4033,6 +4056,11 @@
           📚 Courses &amp; Internships
 
         </button>
+        <button class="menu-btn" onclick="showPage('grievances',this)">
+
+          💬 Grievances &amp; Queries
+
+        </button>
         <!-- ADMIN: intentionally disabled on Student Login -->
 
         <button class="menu-btn" onclick="logoutUser()" style="margin-top:25px;">
@@ -4198,6 +4226,67 @@
             <div class="cards" id="coursesList">
             </div>
           </section>
+          <!-- ================================================= -->
+          <!-- GRIEVANCES & QUERIES -->
+          <!-- ================================================= -->
+          <section class="page hidden" id="page-grievances">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;flex-wrap:wrap;gap:12px;">
+              <div>
+                <h1 class="page-title" style="margin-bottom:4px;">Grievances &amp; Queries</h1>
+                <p style="color:#64748b;font-size:0.88rem;margin:0;">Raise tickets for attendance discrepancies, doubts, or grading issues.</p>
+              </div>
+              <a href="student.html" class="btn btn-primary" style="text-decoration:none;display:inline-flex;align-items:center;gap:6px;padding:8px 16px;border-radius:8px;font-size:0.88rem;">Open Full Modern Portal ↗</a>
+            </div>
+
+            <!-- New Grievance Form Card -->
+            <div class="card" style="margin-bottom:24px;border:1px solid #e2e8f0;background:#ffffff;border-radius:12px;padding:24px;">
+              <h3 style="margin-top:0;color:#0B1F3A;font-size:1.1rem;margin-bottom:8px;">Raise a New Query / Grievance</h3>
+              <p style="color:#64748B;font-size:0.86rem;margin-bottom:18px;">Our academic support team will investigate your discrepancy and respond within 24 hours.</p>
+              <form id="idxGrvForm" onsubmit="submitIndexGrievance(event)">
+                <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(220px, 1fr));gap:14px;margin-bottom:14px;">
+                  <div>
+                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#334155;margin-bottom:6px;">Category *</label>
+                    <select id="idxGrvCategory" style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-family:inherit;background:#fff;font-size:0.88rem;">
+                      <option value="Attendance Discrepancy">Attendance Discrepancy (e.g. marked absent while attended)</option>
+                      <option value="Course Material & Doubt">Course Material &amp; Doubts</option>
+                      <option value="Task & Assignment Grading">Task / Assignment Grading</option>
+                      <option value="Certificate & Verification">Certificate &amp; Verification</option>
+                      <option value="Mentor & Live Session">Mentor &amp; Live Session</option>
+                      <option value="General Inquiry">General Academic Inquiry</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="display:block;font-size:0.82rem;font-weight:600;color:#334155;margin-bottom:6px;">Priority</label>
+                    <select id="idxGrvPriority" style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-family:inherit;background:#fff;font-size:0.88rem;">
+                      <option value="Medium">Medium (Normal)</option>
+                      <option value="High">High (Needs Attention)</option>
+                      <option value="Urgent">Urgent (Time Sensitive)</option>
+                      <option value="Low">Low (General Query)</option>
+                    </select>
+                  </div>
+                </div>
+                <div style="margin-bottom:14px;">
+                  <label style="display:block;font-size:0.82rem;font-weight:600;color:#334155;margin-bottom:6px;">Subject / Title *</label>
+                  <input id="idxGrvTitle" required placeholder="e.g. Attendance marked absent for 18 Sep lecture" style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-family:inherit;font-size:0.88rem;" />
+                </div>
+                <div style="margin-bottom:14px;">
+                  <label style="display:block;font-size:0.82rem;font-weight:600;color:#334155;margin-bottom:6px;">Detailed Description *</label>
+                  <textarea id="idxGrvDesc" required rows="3" placeholder="Provide complete details, dates, session times or discrepancies..." style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-family:inherit;font-size:0.88rem;"></textarea>
+                </div>
+                <div style="margin-bottom:16px;">
+                  <label style="display:block;font-size:0.82rem;font-weight:600;color:#334155;margin-bottom:6px;">Proof / Reference Link (optional)</label>
+                  <input id="idxGrvLink" type="url" placeholder="https://drive.google.com/... or GitHub link" style="width:100%;padding:10px;border:1px solid #cbd5e1;border-radius:8px;font-family:inherit;font-size:0.88rem;" />
+                </div>
+                <div id="idxGrvMsg" style="display:none;padding:10px;border-radius:6px;font-size:0.85rem;margin-bottom:14px;"></div>
+                <button type="submit" class="btn btn-primary" id="idxGrvSubmitBtn" style="padding:10px 22px;border-radius:8px;font-size:0.9rem;">Submit Ticket</button>
+              </form>
+            </div>
+
+            <!-- List of Previous Grievances -->
+            <div class="card" style="border:1px solid #e2e8f0;background:#ffffff;border-radius:12px;padding:24px;">
+              <h3 style="margin-top:0;color:#0B1F3A;font-size:1.1rem;margin-bottom:16px;">My Raised Queries &amp; Grievances</h3>
+              <div id="idxGrievancesList">Loading tickets...</div>
+            </div>
           <!-- ================================================= -->
           <!-- STUDENTS -->
           <!-- ================================================= -->
@@ -4758,6 +4847,9 @@
           courses:
             "Courses & Internships",
 
+          grievances:
+            "Grievances & Queries",
+
           students:
             "Students",
 
@@ -4814,6 +4906,9 @@
 
         if (page === "courses")
           loadCourses();
+
+        if (page === "grievances")
+          renderIndexGrievances();
 
         if (page === "students")
           loadStudents();
@@ -5712,6 +5807,171 @@
 
         }
 
+      }
+
+
+      // ============================================================
+      // GRIEVANCES & QUERIES
+      // ============================================================
+
+      function getIndexGrievancesStorageKey() {
+        return 'sit_student_grv_' + (currentUser && currentUser.email ? currentUser.email.replace(/[^a-zA-Z0-9]/g, '_') : 'guest');
+      }
+
+      function getIndexStoredGrievances() {
+        try {
+          var raw = localStorage.getItem(getIndexGrievancesStorageKey());
+          if (raw) {
+            var parsed = JSON.parse(raw);
+            if (Array.isArray(parsed) && parsed.length) return parsed;
+          }
+        } catch (e) {}
+        return [
+          {
+            ID: 'GRV-2026-042',
+            Category: 'Attendance Discrepancy',
+            Priority: 'High',
+            Course: (currentUser && currentUser.course) || 'Full Stack Web Development',
+            Title: 'Marked absent on 18 Sep session despite attending full live call',
+            Description: 'I attended the entire 2-hour live session on React Hooks & Custom State on 18th September from 7:00 PM to 9:00 PM. However, my attendance log on the portal shows "Absent". Kindly verify with the Zoom attendee report and update.',
+            Link: 'https://drive.google.com/file/d/demo-attendance-proof/view',
+            Status: 'Resolved',
+            CreatedAt: '19 Sep 2026, 10:15 AM',
+            AdminResponse: 'We cross-referenced the Zoom meeting attendee report and confirmed your 118-minute session attendance. Your attendance record for 18 Sep has been updated from Absent to Present. Thank you for notifying us!',
+            ResolvedAt: '19 Sep 2026, 02:30 PM',
+            ResponderName: 'SIT Academic Admin (Sujal)'
+          },
+          {
+            ID: 'GRV-2026-057',
+            Category: 'Course Material & Doubt',
+            Priority: 'Medium',
+            Course: (currentUser && currentUser.course) || 'Full Stack Web Development',
+            Title: 'Node.js REST API starter code GitHub repository giving 404 error',
+            Description: 'The starter repository link provided in Task 5 (Node.js REST API) appears to be private or deleted as it returns a 404 Not Found error. Could the instructor please update the link or provide public access?',
+            Link: 'https://github.com/statsinnotech/starter-nodejs-api',
+            Status: 'In Review',
+            CreatedAt: '23 Sep 2026, 04:20 PM',
+            AdminResponse: 'Our technical mentor has updated the repository permissions to Public. Please refresh and check the link in Task 5 description.',
+            ResolvedAt: '24 Sep 2026, 09:10 AM',
+            ResponderName: 'Mentor Ayushi'
+          }
+        ];
+      }
+
+      function renderIndexGrievances() {
+        var container = document.getElementById('idxGrievancesList');
+        if (!container) return;
+        var list = getIndexStoredGrievances();
+
+        if (!list.length) {
+          container.innerHTML = '<p style="color:#64748b;font-size:0.9rem;text-align:center;padding:24px 0;">No grievances or queries logged yet.</p>';
+          return;
+        }
+
+        var html = list.map(function(item) {
+          var statusBg = item.Status === 'Resolved' ? '#dcfce7' : (item.Status === 'In Review' ? '#dbeafe' : '#fef3c7');
+          var statusColor = item.Status === 'Resolved' ? '#15803d' : (item.Status === 'In Review' ? '#1d4ed8' : '#b45309');
+          var prioColor = item.Priority === 'Urgent' ? '#ef4444' : (item.Priority === 'High' ? '#f59e0b' : '#3b82f6');
+
+          var linkHtml = item.Link ? '<div style="margin-top:8px;font-size:0.83rem;"><span style="color:#64748b;">Attachment:</span> <a href="' + escapeHtml(item.Link) + '" target="_blank" rel="noopener noreferrer" style="color:#0284c7;word-break:break-all;">' + escapeHtml(item.Link) + ' ↗</a></div>' : '';
+
+          var resHtml = item.AdminResponse ? '<div style="margin-top:12px;background:#f8fafc;border-left:3px solid ' + (item.Status === 'Resolved' ? '#10b981' : '#3b82f6') + ';padding:10px 14px;border-radius:0 6px 6px 0;">'
+            + '<div style="font-size:0.75rem;font-weight:700;color:' + (item.Status === 'Resolved' ? '#15803d' : '#1d4ed8') + ';margin-bottom:4px;">Academic Resolution Notes:</div>'
+            + '<div style="font-size:0.86rem;color:#334155;line-height:1.5;">' + escapeHtml(item.AdminResponse) + '</div>'
+            + (item.ResolvedAt ? '<div style="font-size:0.72rem;color:#94a3b8;margin-top:4px;">Resolved: ' + escapeHtml(item.ResolvedAt) + '</div>' : '')
+            + '</div>' : '';
+
+          return '<div style="border:1px solid #e2e8f0;border-radius:10px;padding:16px 18px;margin-bottom:14px;background:#fafbfc;">'
+            + '<div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:8px;">'
+            + '<div><strong style="color:#0B1F3A;font-size:0.95rem;">' + escapeHtml(item.Title) + '</strong> <span style="font-size:0.75rem;color:#64748b;margin-left:6px;">(' + escapeHtml(item.ID) + ')</span></div>'
+            + '<div style="display:flex;gap:6px;align-items:center;">'
+            + '<span style="font-size:0.75rem;padding:2px 8px;border-radius:12px;font-weight:600;color:' + prioColor + ';background:rgba(0,0,0,0.04);">' + escapeHtml(item.Priority) + '</span>'
+            + '<span style="font-size:0.75rem;padding:2px 8px;border-radius:12px;font-weight:600;background:' + statusBg + ';color:' + statusColor + ';">' + escapeHtml(item.Status) + '</span>'
+            + '</div>'
+            + '</div>'
+            + '<p style="color:#475569;font-size:0.88rem;margin:0 0 6px;line-height:1.5;">' + escapeHtml(item.Description) + '</p>'
+            + linkHtml
+            + resHtml
+            + '<div style="display:flex;justify-content:space-between;font-size:0.75rem;color:#94a3b8;margin-top:10px;padding-top:8px;border-top:1px solid #f1f5f9;">'
+            + '<span>Category: <strong style="color:#64748b;">' + escapeHtml(item.Category) + '</strong></span>'
+            + '<span>Logged: ' + escapeHtml(item.CreatedAt) + '</span>'
+            + '</div>'
+            + '</div>';
+        }).join('');
+
+        container.innerHTML = html;
+      }
+
+      async function submitIndexGrievance(event) {
+        event.preventDefault();
+        var cat = document.getElementById('idxGrvCategory').value;
+        var prio = document.getElementById('idxGrvPriority').value;
+        var title = document.getElementById('idxGrvTitle').value.trim();
+        var desc = document.getElementById('idxGrvDesc').value.trim();
+        var link = document.getElementById('idxGrvLink').value.trim();
+        var msg = document.getElementById('idxGrvMsg');
+        var btn = document.getElementById('idxGrvSubmitBtn');
+
+        if (!title || !desc) return;
+
+        btn.disabled = true;
+        btn.textContent = 'Submitting...';
+
+        var newId = 'GRV-2026-' + Math.floor(100 + Math.random() * 900);
+        var nowStr = new Date().toLocaleString('en-IN', { day: '2-digit', month: 'short', year: 'numeric', hour: '2-digit', minute: '2-digit' });
+
+        var newTicket = {
+          ID: newId,
+          Category: cat,
+          Priority: prio,
+          Course: (currentUser && currentUser.course) || 'Full Stack Web Development',
+          Title: title,
+          Description: desc,
+          Link: link,
+          Status: 'Pending',
+          CreatedAt: nowStr,
+          AdminResponse: '',
+          ResolvedAt: null,
+          ResponderName: ''
+        };
+
+        var list = getIndexStoredGrievances();
+        list.unshift(newTicket);
+        try {
+          localStorage.setItem(getIndexGrievancesStorageKey(), JSON.stringify(list));
+        } catch (e) {}
+
+        try {
+          if (typeof callServer === 'function') {
+            await callServer('submitGrievance', sessionToken, {
+              category: cat,
+              priority: prio,
+              course: (currentUser && currentUser.course) || 'Engineering Track',
+              title: title,
+              description: desc,
+              link: link
+            });
+          }
+        } catch (err) {}
+
+        btn.disabled = false;
+        btn.textContent = 'Submit Ticket';
+
+        msg.style.display = 'block';
+        msg.style.background = '#dcfce7';
+        msg.style.color = '#15803d';
+        msg.style.border = '1px solid #bbf7d0';
+        msg.textContent = '✓ Grievance submitted successfully with ID ' + newId + '! Academic team will review it shortly.';
+
+        document.getElementById('idxGrvTitle').value = '';
+        document.getElementById('idxGrvDesc').value = '';
+        document.getElementById('idxGrvLink').value = '';
+
+        renderIndexGrievances();
+
+        setTimeout(function() {
+          if (msg) msg.style.display = 'none';
+        }, 5000);
       }
 
 
